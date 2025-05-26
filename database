@@ -1,0 +1,475 @@
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+--
+-- Host: localhost    Database: gapi
+-- ------------------------------------------------------
+-- Server version	8.0.31
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `alunos`
+--
+
+DROP TABLE IF EXISTS `alunos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `alunos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cpf` varchar(255) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `telefone_residencia` varchar(255) DEFAULT NULL,
+  `telefone_celular` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `cep` varchar(255) DEFAULT NULL,
+  `bairro_id` varchar(255) DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
+  `numero` varchar(255) DEFAULT NULL,
+  `complemento` text,
+  `referencia` text,
+  `rede_social` varchar(255) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alunos`
+--
+
+LOCK TABLES `alunos` WRITE;
+/*!40000 ALTER TABLE `alunos` DISABLE KEYS */;
+INSERT INTO `alunos` VALUES (1,'06255214558','Rafael Frantz Vecchi editar','7188888888','714444444444','teste.editar@teste.com','41000000','1','rua do teste editar','125','outra coisa editando tbem','alguma coisa editando','@teste.teste.editar','fotoAluno_21e9364c5f955692665e643f3a6e6890.jpg','86a725a0091b','2024-10-21 08:47:38','2024-10-21 08:53:49',1,1);
+/*!40000 ALTER TABLE `alunos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `area_atuacao`
+--
+
+DROP TABLE IF EXISTS `area_atuacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `area_atuacao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `area_atuacao` varchar(255) DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `area_atuacao`
+--
+
+LOCK TABLES `area_atuacao` WRITE;
+/*!40000 ALTER TABLE `area_atuacao` DISABLE KEYS */;
+INSERT INTO `area_atuacao` VALUES (1,'Tecnologia',1,'2024-10-20 00:33:58','2024-10-20 00:33:58',1,1),(2,'Cosmeticos',1,'2024-10-20 00:35:04','2024-10-20 00:35:04',1,1);
+/*!40000 ALTER TABLE `area_atuacao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `area_atuacao_professores`
+--
+
+DROP TABLE IF EXISTS `area_atuacao_professores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `area_atuacao_professores` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `professor_id` int DEFAULT NULL,
+  `area_atuacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `area_atuacao_professores`
+--
+
+LOCK TABLES `area_atuacao_professores` WRITE;
+/*!40000 ALTER TABLE `area_atuacao_professores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `area_atuacao_professores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `aulas`
+--
+
+DROP TABLE IF EXISTS `aulas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `aulas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `espaco_id` int DEFAULT NULL,
+  `curso_id` int DEFAULT NULL,
+  `data_inicio` datetime DEFAULT NULL,
+  `data_fim` datetime DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aulas`
+--
+
+LOCK TABLES `aulas` WRITE;
+/*!40000 ALTER TABLE `aulas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aulas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bairros`
+--
+
+DROP TABLE IF EXISTS `bairros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bairros` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `bairro` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bairros`
+--
+
+LOCK TABLES `bairros` WRITE;
+/*!40000 ALTER TABLE `bairros` DISABLE KEYS */;
+INSERT INTO `bairros` VALUES (1,'ACUPE'),(2,'AEROPORTO'),(3,'ÁGUAS CLARAS'),(4,'ALTO DA TEREZINHA'),(5,'ALTO DAS POMBAS'),(6,'ALTO DO CABRITO'),(7,'ALTO DO COQUEIRINHO'),(8,'AMARALINA'),(9,'AREIA BRANCA'),(10,'ARENOSO'),(11,'ARRAIAL DO RETIRO'),(12,'BAIRRO DA PAZ'),(13,'BAIXA DE QUINTAS'),(14,'BARBALHO'),(15,'BARRA'),(16,'BARREIRAS'),(17,'BARRIS'),(18,'BEIRU/TANCREDO NEVES'),(19,'BOA VIAGEM'),(20,'BOA VISTA DE BROTAS'),(21,'BOA VISTA DE SÃO CAETANO'),(22,'BOCA DA MATA'),(23,'BOCA DO RIO'),(24,'BOM JUÁ'),(25,'BONFIM'),(26,'BROTAS'),(27,'CABULA'),(28,'CABULA VI'),(29,'CAIXA D´ÁGUA'),(30,'CAJAZEIRAS II'),(31,'CAJAZEIRAS IV'),(32,'CAJAZEIRAS V'),(33,'CAJAZEIRAS VI'),(34,'CAJAZEIRAS VII'),(35,'CAJAZEIRAS VIII'),(36,'CAJAZEIRAS X'),(37,'CAJAZEIRAS XI'),(38,'CALABAR'),(39,'CALABETÃO'),(40,'CALÇADA'),(41,'CAMINHO DAS ÁRVORES'),(42,'CAMINHO DE AREIA'),(43,'CAMPINAS DE PIRAJÁ'),(44,'CANABRAVA'),(45,'CANDEAL'),(46,'CANELA'),(47,'CAPELINHA'),(48,'CASSANGE'),(49,'CASTELO BRANCO'),(50,'CENTRO'),(51,'CENTRO ADMINISTRATIVO DA BAHIA-CAB'),(52,'CENTRO HISTÓRICO'),(53,'CHAME-CHAME'),(54,'CHAPADA DO RIO VERMELHO'),(55,'CIDADE NOVA'),(56,'COLINAS DE PERIPERI'),(57,'COMÉRCIO'),(58,'COSME DE FARIAS'),(59,'COSTA AZUL'),(60,'COUTOS'),(61,'CURUZU'),(62,'DOIS DE JULHO'),(63,'DOM AVELAR'),(64,'DORON'),(65,'ENGENHO VELHO DA FEDERAÇÃO'),(66,'ENGENHO VELHO DE BROTAS'),(67,'ENGOMADEIRA'),(68,'FAZENDA COUTOS'),(69,'FAZENDA GRANDE DO RETIRO'),(70,'FAZENDA GRANDE I'),(71,'FAZENDA GRANDE II'),(72,'FAZENDA GRANDE III'),(73,'FAZENDA GRANDE IV'),(74,'FEDERAÇÃO'),(75,'GARCIA'),(76,'GRAÇA'),(77,'GRANJAS RURAIS PRESIDENTE VARGAS'),(78,'HORTO FLORESTAL'),(79,'IAPI'),(80,'ILHA AMARELA'),(81,'ILHA DE BOM JESUS DOS PASSOS'),(82,'ILHA DOS FRADES/ILHA DE SANTO ANTÔNIO'),(83,'ILHA DE MARÉ'),(84,'IMBUÍ'),(85,'ITACARANHA'),(86,'ITAIGARA'),(87,'ITAPUÃ'),(88,'ITINGA'),(89,'JAGUARIPE I'),(90,'JARDIM ARMAÇÃO'),(91,'JARDIM CAJAZEIRAS'),(92,'JARDIM DAS MARGARIDAS'),(93,'JARDIM NOVA ESPERANÇA'),(94,'JARDIM SANTO INÁCIO'),(95,'LAPINHA'),(96,'LIBERDADE'),(97,'LOBATO'),(98,'LUIZ ANSELMO'),(99,'MACAÚBAS'),(100,'MANGUEIRA'),(101,'MARECHAL RONDON'),(102,'MARES'),(103,'MASSARANDUBA'),(104,'MATA ESCURA'),(105,'MATATU'),(106,'MIRANTES DE PERIPERI'),(107,'MONTE SERRAT;'),(108,'MORADAS DA LAGOA'),(109,'MUSSURUNGA'),(110,'NARANDIBA'),(111,'NAZARÉ'),(112,'NORDESTE DE AMARALINA'),(113,'NOVA BRASÍLIA'),(114,'NOVA CONSTITUINTE'),(115,'NOVA ESPERANÇA'),(116,'NOVA SUSSUARANA'),(117,'NOVO HORIZONTE'),(118,'NOVO MAROTINHO'),(119,'ONDINA'),(120,'PALESTINA'),(121,'PARIPE'),(122,'PATAMARES'),(123,'PAU DA LIMA'),(124,'PAU MIÚDO'),(125,'PERIPERI'),(126,'PERNAMBUÉS'),(127,'PERO VAZ'),(128,'PIATÃ'),(129,'PIRAJÁ'),(130,'PITUAÇU'),(131,'PITUBA'),(132,'PLATAFORMA'),(133,'PORTO SECO PIRAJÁ'),(134,'PRAIA GRANDE'),(135,'RESGATE'),(136,'RETIRO'),(137,'RIBEIRA'),(138,'RIO SENA'),(139,'RIO VERMELHO'),(140,'ROMA'),(141,'SABOEIRO'),(142,'SANTA CRUZ'),(143,'SANTA LUZIA'),(144,'SANTA MÔNICA'),(145,'SANTO AGOSTINHO'),(146,'SANTO ANTÔNIO'),(147,'SÃO CAETANO'),(148,'SÃO CRISTÓVÃO'),(149,'SÃO GONÇALO'),(150,'SÃO JOÃO DO CABRITO'),(151,'SÃO MARCOS'),(152,'SÃO RAFAEL'),(153,'SÃO TOMÉ'),(154,'SARAMANDAIA'),(155,'SAÚDE'),(156,'SETE DE ABRIL'),(157,'STELLA MARIS'),(158,'STIEP'),(159,'SUSSUARANA'),(160,'TORORÓ'),(161,'TROBOGY'),(162,'URUGUAI'),(163,'VALE DAS PEDRINHAS'),(164,'VALE DOS LAGOS'),(165,'VALÉRIA'),(166,'VILA CANÁRIA'),(167,'VILA LAURA'),(168,'VILA RUY BARBOSA/JARDIM CRUZEIRO'),(169,'VITÓRIA'),(170,'VISTA ALEGRE');
+/*!40000 ALTER TABLE `bairros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cursos`
+--
+
+DROP TABLE IF EXISTS `cursos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cursos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `especializacao_id` int DEFAULT NULL,
+  `entidade_id` int DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `data_inicio_curso` date DEFAULT NULL,
+  `data_fim_curso` date DEFAULT NULL,
+  `hora_inicio` time DEFAULT NULL,
+  `hora_fim` time DEFAULT NULL,
+  `descricao` text,
+  `vagas` int DEFAULT NULL,
+  `fim_inscricao` datetime DEFAULT NULL,
+  `inicio_inscricao` datetime DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cursos`
+--
+
+LOCK TABLES `cursos` WRITE;
+/*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
+INSERT INTO `cursos` VALUES (1,2,3,'Python básico para iniciantes','2024-10-30','2024-11-06','09:00:00','11:00:00','Curso de Python básico para dar inicio a linguagem de programação',30,'2024-10-26 00:00:00','2024-10-23 00:00:00',1,'2024-10-21 09:39:37','2024-10-21 09:46:29',1,1);
+/*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `entidades`
+--
+
+DROP TABLE IF EXISTS `entidades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `entidades` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `contrato` varchar(255) DEFAULT NULL,
+  `cep` varchar(255) DEFAULT NULL,
+  `bairro_id` int DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
+  `numero` varchar(255) DEFAULT NULL,
+  `complemento` text,
+  `referencia` text,
+  `email` varchar(255) DEFAULT NULL,
+  `telefone_entidade` varchar(255) DEFAULT NULL,
+  `nome_responsavel` varchar(255) DEFAULT NULL,
+  `telefone_responsavel` varchar(255) DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entidades`
+--
+
+LOCK TABLES `entidades` WRITE;
+/*!40000 ALTER TABLE `entidades` DISABLE KEYS */;
+INSERT INTO `entidades` VALUES (2,'Entidade 123','logoEntidade_cda16360c0a5c3a42790d90052ef0c9f.jpg','termoCompromisso_63ef1e7478fda7ad93cd6010446bc750.pdf','42000000',2,'rua do aeroporto','12','subindo a ladeira','em frente ao aeroporto','entidade123@gmail.com','7198659865','Fulano Coordenador','7187875487',1,'2009589c6b12','2024-10-11 11:11:53','2024-10-16 12:26:28',1,1),(3,'teste editar','logoEntidade_1fa44382d083df11fad7ed2428f1a457.jpg','termoCompromisso_ad56dfdc15c4f8c664ded3c4ff58450b.pdf','41000000',5,'rua da edicao','25','seguindo em frente pra editar','depois de editar ','editando@gmail.com','7198989898','editando nome','71878787878',1,'3a8bd1dee5cc','2024-10-16 12:12:41','2024-10-16 12:26:37',1,1);
+/*!40000 ALTER TABLE `entidades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `espaco`
+--
+
+DROP TABLE IF EXISTS `espaco`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `espaco` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo_id` int DEFAULT NULL,
+  `numero_sala` varchar(255) DEFAULT NULL,
+  `andar` varchar(255) DEFAULT NULL,
+  `complemento` text,
+  `capacidade` int DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `espaco`
+--
+
+LOCK TABLES `espaco` WRITE;
+/*!40000 ALTER TABLE `espaco` DISABLE KEYS */;
+INSERT INTO `espaco` VALUES (1,4,'20','terceiro andar','alguma coisa aqui editando',45,1,'2024-10-21 02:45:48','2024-10-21 02:48:37',1,1);
+/*!40000 ALTER TABLE `espaco` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `especializacao`
+--
+
+DROP TABLE IF EXISTS `especializacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `especializacao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `area_atuacao_id` int DEFAULT NULL,
+  `especializacao` varchar(255) DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `especializacao`
+--
+
+LOCK TABLES `especializacao` WRITE;
+/*!40000 ALTER TABLE `especializacao` DISABLE KEYS */;
+INSERT INTO `especializacao` VALUES (1,1,'PHP',1,'2024-10-20 00:33:58','2024-10-20 00:33:58',1,1),(2,1,'Python',1,'2024-10-20 00:33:58','2024-10-20 00:33:58',1,1),(3,1,'Front end',1,'2024-10-20 00:33:58','2024-10-20 00:33:58',1,1),(4,1,'Back end',1,'2024-10-20 00:33:58','2024-10-20 00:33:58',1,1),(5,1,'Html',1,'2024-10-20 00:33:58','2024-10-20 00:33:58',1,1),(6,1,'Introdução a informatica',1,'2024-10-20 00:33:58','2024-10-20 00:33:58',1,1),(7,2,'Perfumes Editando',1,'2024-10-20 00:35:04','2024-10-20 17:14:14',1,1),(8,2,'Hidratantes Editando De novo',1,'2024-10-20 00:35:04','2024-10-20 17:14:33',1,1),(9,2,'Algo aqui',1,'2024-10-20 00:35:04','2024-10-20 17:14:14',1,1),(10,2,'Shampoos',1,'2024-10-20 00:35:04','2024-10-20 17:14:14',1,1),(11,2,'Algo mais',1,'2024-10-20 17:10:53','2024-10-20 17:14:14',1,1),(12,2,'Mais um',1,'2024-10-20 17:15:17','2024-10-20 17:15:17',1,1);
+/*!40000 ALTER TABLE `especializacao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `professores`
+--
+
+DROP TABLE IF EXISTS `professores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `professores` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cpf` varchar(255) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `telefone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `cep` varchar(255) DEFAULT NULL,
+  `bairro_id` int DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
+  `numero` varchar(255) DEFAULT NULL,
+  `complemento` varchar(255) DEFAULT NULL,
+  `referencia` varchar(255) DEFAULT NULL,
+  `rede_social` varchar(255) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `professores`
+--
+
+LOCK TABLES `professores` WRITE;
+/*!40000 ALTER TABLE `professores` DISABLE KEYS */;
+INSERT INTO `professores` VALUES (1,'06255214558','RAFAEL FRANTZ VECCHI editar','71993461577','rafael_vecchi@hotmail.com.br','41000000',1,'Rua Das Rosas editar','112','outra ai de novo','uma ai editando','@vecchirafael2editar','fotoProfessor_c03eef2e1f2c45b0210148c850a5cf1d.jpg','5411728ceaa6',1,'2024-10-21 01:02:36','2024-10-21 01:36:36',1,1);
+/*!40000 ALTER TABLE `professores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo_espaco`
+--
+
+DROP TABLE IF EXISTS `tipo_espaco`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tipo_espaco` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo_espaco` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_espaco`
+--
+
+LOCK TABLES `tipo_espaco` WRITE;
+/*!40000 ALTER TABLE `tipo_espaco` DISABLE KEYS */;
+INSERT INTO `tipo_espaco` VALUES (1,'SALA'),(2,'AUDITÓRIO'),(3,'BIBLIOTECA'),(4,'LABORATÓRIO'),(5,'ÁREA EXTERNA');
+/*!40000 ALTER TABLE `tipo_espaco` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo_usuario`
+--
+
+DROP TABLE IF EXISTS `tipo_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tipo_usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo_usuario` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_usuario`
+--
+
+LOCK TABLES `tipo_usuario` WRITE;
+/*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
+INSERT INTO `tipo_usuario` VALUES (1,'ADMINISTRADOR'),(2,'COORDENADOR'),(4,'ATENDENTE');
+/*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `unidades`
+--
+
+DROP TABLE IF EXISTS `unidades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `unidades` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `unidade` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unidades`
+--
+
+LOCK TABLES `unidades` WRITE;
+/*!40000 ALTER TABLE `unidades` DISABLE KEYS */;
+INSERT INTO `unidades` VALUES (1,'UNIDADE COMERCIO'),(2,'CRAS'),(3,'CREAS');
+/*!40000 ALTER TABLE `unidades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(200) NOT NULL,
+  `telefone` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `login` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `status` int DEFAULT NULL,
+  `tipo_usuario_id` int NOT NULL,
+  `unidade_id` int NOT NULL,
+  `data_inicio` datetime DEFAULT NULL,
+  `data_fim` datetime DEFAULT NULL,
+  `ultimo_login` datetime DEFAULT NULL,
+  `flag_primeiro_acesso` int DEFAULT '0',
+  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `usuario_cadastro_id` int DEFAULT NULL,
+  `usuario_modificacao_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `telefone_UNIQUE` (`telefone`),
+  UNIQUE KEY `login_UNIQUE` (`login`),
+  UNIQUE KEY `senha_UNIQUE` (`senha`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Rafael Frantz Vecchi','71993461578','vecchirafael@gmail.com','rafael.vecchi','$2y$10$ALXhORnPeKirXBENE6idQuncjbwkkEQ/QoqBvt8OV5S0imA1bP2DO',1,1,1,'2024-10-01 08:03:16','2024-12-01 08:03:16','2024-10-21 08:39:49',1,'2024-10-01 10:56:18','2024-10-21 08:39:49',1,1),(2,'teste completoo','71993461577','teste@teste.com','teste.teste','$2y$10$unBehklpWkOFMcrFV2VdW.nYtxTRXo..4feiQeINYYSWUPeCD990a',1,2,1,'2024-10-04 00:00:00','2024-10-06 00:00:00',NULL,0,'2024-10-04 14:43:32','2024-10-08 15:10:30',1,1),(3,'teste0122','71993461576','teste@teste.com','teste.01','$2y$10$ihog.FIzqwJzMyyq.0sYV.eU/9FUwHDzHW6RWo6ekB5RRmWjOz8a2',1,4,1,'2024-10-07 00:00:00',NULL,'2024-10-08 11:05:41',1,'2024-10-07 11:23:29','2024-10-08 11:08:08',1,1),(4,'teste02editar2234','71993461571','teste@teste.com','teste.02','$2y$10$aJgjaAjLf8tmLKGhcdHY8.WWaHDq5gvuHUGJM6VcPjlscEaxS8PiK',2,4,1,'2024-10-02 00:00:00','2024-10-15 00:00:00',NULL,0,'2024-10-07 11:55:08','2024-10-08 10:39:58',1,1),(5,'testenovo','684354131','asd@sadf.com','teste.novo','$2y$10$9W2ENzwvOkSdYvSXoiR6GOeEQ49BBvg8jXevFlPTipKNjG3Yp2OJq',1,4,1,'2024-10-08 00:00:00',NULL,'2024-10-14 12:42:28',1,'2024-10-08 09:58:26','2024-10-14 12:42:28',1,1),(6,'testando de novo','32564864','email@email.com','testando.novo','$2y$10$Iv1IIWtQaDhCe13Z8QuB3eBrAGdV3wV9h3dOzyo00hJj7BX5uYrYK',1,4,1,'2024-10-09 00:00:00','2024-10-25 00:00:00',NULL,0,'2024-10-08 09:59:38','2024-10-08 09:59:38',1,1),(7,'Mariana Gonçalves','7198989898','mariana.goncalves@gmail.com','mariana.goncalves','$2y$10$M1j4/zgzaTB1sCYHPRP62OQ3NE3pg3Ksc/uxFLAEWQ.mMnQ3wW.U.',1,1,1,'2024-10-12 00:00:00',NULL,'2024-10-12 12:56:43',1,'2024-10-12 12:23:23','2024-10-12 12:56:43',1,1);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-10-21 10:01:43

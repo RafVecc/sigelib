@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<div class="imgTopo">
+  <img class="imgAcolhimento" src="{{url('templates/admin/assets/img/acolhimento.png')}}" alt="">
+</div>
+
+<div class="p-3">
+
+  <div class="col-md-6 col-sm-6 col-lg-4 mx-auto">
+
+    <div class="boxLogin">
+
+      <div class="card-body">
+
+        {{ flash() }}
+        <div class="alert alert-warning alert-dismissible fade show">A nova senha deve conter ao menos uma letra
+          minúscula, uma letra maiúscula, um número, um caráter especial (.-_) e um mínimo de 6 caracteres.<button
+            type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+        <form action="{{url('redefinirSenha')}}" method="post">
+
+          <label class="labelSenha" for="nova_senha">Nova Senha:</label>
+          <div class="form-floating mb-3">
+            <input type="password" name="nova_senha" id="nova_senha" class="inputLogin" required>
+          </div>
+
+          <label class="labelSenha" for="confirmar_senha">Confirmar Senha:</label>
+          <div class="form-floating mb-3">
+            <input type="password" name="confirmar_senha" id="confirmar_senha" class="inputLogin" required>
+          </div>
+
+          <button class="w-100 btn btn-lg btn-dark mb-5" type="submit">CONFIRMAR</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="imgFundo">
+  <img class="IMGvidanova" src="{{url('templates/admin/assets/img/vidanova.png')}}" alt="">
+  <img class="IMGsempre" src="{{url('templates/admin/assets/img/sempre.png')}}" alt="">
+</div>
+
+{% endblock %}

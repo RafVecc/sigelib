@@ -1,0 +1,91 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Entidades
+        </li>
+    </ol>
+</nav>
+</div>
+</div>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-light border d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge bg-white text-secondary border">
+                <span class="text-dark">{{total.entidades}} Entidades</span><br><br>
+                Ativas: <span class="text-success">{{total.entidadesAtivas}}</span> |
+                Inativas: <span class="text-danger">{{total.entidadesInativas}}</span>
+            </span>
+        </div>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCadastrarEntidade"
+            id="modalCadastrarEntidade">
+            <i class="fa fa-fw fa-plus-circle"></i>Cadastrar
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tabelaEntidades" url="{{url()}}" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone Entidade</th>
+                        <th>Nome Responsável</th>
+                        <th>Telefone Responsável</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entidade in entidades %}
+                    <tr>
+                        <td>{{entidade.nome}}</td>
+                        <td>{{entidade.email}}</td>
+                        <td>{{entidade.telefone_entidade}}</td>
+                        <td>{{entidade.nome_responsavel}}</td>
+                        <td>{{entidade.telefone_responsavel}}</td>
+                        <td>
+                            {% if entidade.status == 1 %}
+                            <i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>
+                            {% else %}
+                            <i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-warning valorizarEditarEntidade" data-bs-toggle="modal"
+                                data-bs-target="#ModalEditarEntidade" data-id="{{entidade.id}}">
+                                <i class="fa-solid fa-pen m-1"></i> Editar
+                            </button>
+                            {% if entidade.status == 1 %}
+                            <button type="button" class="btn btn-danger statusEntidade" data-status="1"
+                                data-id="{{entidade.id}}">
+                                Inativar
+                            </button>
+                            {% else %}
+                            <button type="button" class="btn btn-success statusEntidade" data-status="2"
+                                data-id="{{entidade.id}}">
+                                Ativar
+                            </button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include 'entidades/modalCadastrarEntidade.html' %}
+{% include 'entidades/modalEditarEntidade.html' %}
+
+{% endblock %}

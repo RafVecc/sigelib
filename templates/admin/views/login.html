@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block corpo %}
+
+<div class="imgTopo">
+  <img class="imgAcolhimento" src="{{url('templates/admin/assets/img/acolhimento.png')}}" alt="">
+</div>
+
+<div class="p-3">
+
+  <div class="col-md-6 col-sm-6 col-lg-4 mx-auto">
+
+    <div class="boxLogin">
+
+      <div class="card-body">
+
+        {{ flash() }}
+          <form action="{{url('admin/login')}}" method="post">
+
+            <label class="labelLogin" for="login">Usuário:</label>
+            <div class="mb-3">
+              <input type="login" name="login" id="login" class="inputLogin" required>
+            </div>
+
+            <label class="labelSenha" for="senha">Senha:</label>
+            <div class="form-floating mb-3">
+              <input type="password" name="senha" id="senha" class="inputLogin">
+            </div>
+
+            <button class="w-100 btn btn-lg btn-dark mb-5" type="submit">ACESSAR</button>
+          </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="imgFundo">
+  <img class="IMGvidanova" src="{{url('templates/admin/assets/img/vidanova.png')}}" alt="">
+  <img class="IMGsempre" src="{{url('templates/admin/assets/img/sempre.png')}}" alt="">
+</div>
+
+{% endblock %}

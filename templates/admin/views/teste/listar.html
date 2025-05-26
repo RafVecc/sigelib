@@ -1,0 +1,81 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Teste
+        </li>
+    </ol>
+</nav>
+</div>
+</div>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-light border d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge bg-white text-secondary border">
+                <span class="text-dark">{{total.espacos}} Espaços</span><br><br>
+                Ativos: <span class="text-success">{{total.espacosAtivos}}</span> |
+                Inativos: <span class="text-danger">{{total.espacosInativos}}</span>
+            </span>
+        </div>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCadastrarEspaco"
+            id="modalCadastrarEspaco">
+            <i class="fa fa-fw fa-plus-circle"></i>Cadastrar
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <form method="post" action="{{url('admin/teste/cadastrar')}}">
+                <table id="tabelaTeste" url="{{url()}}" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Andar</th>
+                            <th>Capacidade</th>
+                            <th>Tipo de Espaço</th>
+                            <th>Complemento</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for espaco in espacos %}
+                        <tr>
+                            <td>{{espaco.numero_sala}}</td>
+                            <td>{{espaco.andar}}</td>
+                            <td>{{espaco.capacidade}}</td>
+                            <td>{{espaco.tipoEspaco.tipo_espaco}}</td>
+                            <td>{{espaco.complemento}}</td>
+                            <td>
+                                {% if espaco.status == 1 %}
+                                <i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>
+                                {% else %}
+                                <i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>
+                                {% endif %}
+                            </td>
+                            <input type="hidden" name="numero[]" value="{{espaco.numero_sala}}">
+                            <td>
+                                <input type="checkbox" name="teste[]" value="{{espaco.id}}">
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-dark me-2" value="">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% include 'espacos/modalCadastrarEspaco.html' %}
+{% include 'espacos/modalEditarEspaco.html' %}
+
+{% endblock %}

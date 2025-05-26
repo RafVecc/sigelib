@@ -1,0 +1,133 @@
+<!-- Modal -->
+<div class="modal fade modal-xl" id="ModalEditarCurso" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal_maior">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Curso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <form method="post" action="{{url('admin/cursos/editar')}}" id="editarCurso" enctype="multipart/form-data">
+              <input type="hidden" name="curso_id" id="curso_id" class="form-control">
+              <h5 class="modal-title fw-bold" id="exampleModalLabel">Editar Curso</h5>
+              <div class="row">
+                <div class="col-lg-11-3qtr card border-2 shadow-sm mt-2 mb-3 me-4 ms-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label for="entidade_id_editar" class="form-label">Entidade Responsável</label>
+                          <select id="entidade_id_editar" name="entidade_id_editar" class="form-control" required>
+                            <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                            </option>
+                            {% for entidade in entidades %}
+                            <option value="{{entidade.id}}" {% if entidade.id==cursos.entidade_id %} selected {%endif%}>
+                              {{entidade.nome }}
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label for="especializacao_id_editar" class="form-label">Especialização</label>
+                          <select id="especializacao_id_editar" name="especializacao_id_editar" class="form-control"
+                            required>
+                            <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                            </option>
+                            {% for especializacao in especializacoes %}
+                            <option value="{{especializacao.id}}" {% if especializacao.id==cursos.especializacao_id %}
+                              selected {%endif%}>
+                              {{especializacao.especializacao }}
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="nome_editar" class="form-label">Nome</label>
+                          <input type="text" name="nome_editar" id="nome_editar" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="mb-3">
+                          <label for="data_inicio_curso_editar" class="form-label">Data Inicio do Curso</label>
+                          <input type="date" name="data_inicio_curso_editar" id="data_inicio_curso_editar"
+                            class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="mb-3">
+                          <label for="data_fim_curso_editar" class="form-label">Data Final do Curso</label>
+                          <input type="date" name="data_fim_curso_editar" id="data_fim_curso_editar"
+                            class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label for="hora_inicio_editar" class="form-label">Horário de Inicio</label>
+                          <input type="time" name="hora_inicio_editar" id="hora_inicio_editar" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label for="hora_fim_editar" class="form-label">Horário de Termino</label>
+                          <input type="time" name="hora_fim_editar" id="hora_fim_editar" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label for="vagas_editar" class="form-label">Vagas</label>
+                          <input type="number" name="vagas_editar" id="vagas_editar" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label for="inicio_inscricao_editar" class="form-label">Data Inicio de Inscrição</label>
+                          <input type="date" name="inicio_inscricao_editar" id="inicio_inscricao_editar"
+                            class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label for="fim_inscricao_editar" class="form-label">Data Final de Inscrição</label>
+                          <input type="date" name="fim_inscricao_editar" id="fim_inscricao_editar" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="mb-3">
+                          <label for="descricao_editar" class="form-label">Descrição</label>
+                          <textarea id="descricao_editar" name="descricao_editar" class="form-control"
+                            rows="3"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-dark me-2" value="">Cadastrar</button><button type="button"
+                      class="btn btn-warning" onClick="window.location.reload();">
+                      Cancelar </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

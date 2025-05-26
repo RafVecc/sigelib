@@ -1,0 +1,37 @@
+{
+    "name": "sistema/gapi",
+    "description": "Sistema de Gerenciamento de Atividades da Pessoa Idosa",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "sistema\\": "sistema/"
+        },
+        "files":[
+            "sistema/configuracao.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Rafael Frantz Vecchi",
+            "email": "vecchirafael@gmail.com",
+            "homepage": "https://rafaelvecchi.com.br",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "rafael.vecchi@salvador.ba.gov.br"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0",
+        "pecee/simple-router": "dev-master",
+        "twig/twig": "^3.0",
+        "digitalnature/php-ref": "dev-master",
+        "verot/class.upload.php": "dev-master",
+        "phpmailer/phpmailer": "dev-master",
+        "tecnickcom/tcpdf": "^6.7.4",
+        "dompdf/dompdf": "dev-master",
+        "foroco/php-browser-detection": "dev-master"
+        
+    }
+}

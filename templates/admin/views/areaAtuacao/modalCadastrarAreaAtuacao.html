@@ -1,0 +1,85 @@
+<!-- Modal -->
+<div class="modal fade modal-xl" id="ModalCadastrarAreaAtuacao" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal_maior">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Área de Atuação</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <form method="post" action="{{url('admin/areaAtuacao/cadastrar')}}" id="cadastrarAreaAtuacao"
+              enctype="multipart/form-data">
+              <h5 class="modal-title fw-bold" id="exampleModalLabel">Cadastrar Área de Atuação</h5>
+              <div class="row">
+                <div class="col-lg-11-3qtr card border-2 shadow-sm mt-2 mb-3 me-4 ms-4">
+                  <div class="card-body">
+                    <div class="row mb-3">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="mb-3">
+                            <label for="area_atuacao" class="form-label">Área de Atuação</label>
+                            <input type="text" name="area_atuacao" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-sm-1 align-self-center">
+                          <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-danger"
+                              title="Acrescentar mais uma especialização" id="acrescentar_especializacao"
+                              onclick="adicionarEspecializacao()">
+                              +1 </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-2">
+                          <h5>ESPECIALIZAÇÕES</h5>
+                        </div>
+                        <div class="col-sm-10">
+                          <hr>
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                      <div id="especializacao" class="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-dark me-2" value="">Cadastrar</button><button type="button"
+                      class="btn btn-warning" onClick="window.location.reload();">
+                      Cancelar </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+  function adicionarEspecializacao() {
+    var html = `<div>
+                  <div class="row mb-2">
+                    <div class="col-md-5">
+                      <div class="mb-3">
+                        <input type="text" name="especializacao[]" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-xs btn-default remover_especializacao" value=""
+                          title="Remover Especialização"><i class="fa fa-minus-circle" style="color: red"></i></button>
+                    </div>
+                  </div>
+                </div>`;
+    $("#especializacao").append(html);
+  }
+
+</script>

@@ -1,0 +1,65 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Área de Atuação
+        </li>
+    </ol>
+</nav>
+</div>
+</div>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-light border d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge bg-white text-secondary border">
+                <span class="text-dark">{{total.areaAtuacao}} Áreas de Atuação</span><br><br>
+                Ativas: <span class="text-success">{{total.areaAtuacaoAtivas}}</span> |
+                Inativas: <span class="text-danger">{{total.areaAtuacaoInativas}}</span>
+            </span>
+        </div>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCadastrarAreaAtuacao"
+            id="modalCadastrarAreaAtuacao">
+            <i class="fa fa-fw fa-plus-circle"></i>Cadastrar
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tabelaAreaAtuacao" url="{{url()}}" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Área de Atuação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for areaAtuacao in areaAtuacoes %}
+                    <tr>
+                        <td>{{areaAtuacao.area_atuacao}}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning valorizarAreaAtuacao"
+                                data-bs-toggle="modal" data-bs-target="#ModalEditarAreaAtuacao"
+                                data-id="{{areaAtuacao.id}}">
+                                <i class="fa-solid fa-pen m-1"></i> Especializações
+                            </button>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include 'areaAtuacao/modalCadastrarAreaAtuacao.html' %}
+{% include 'areaAtuacao/modalEditarAreaAtuacao.html' %}
+
+{% endblock %}

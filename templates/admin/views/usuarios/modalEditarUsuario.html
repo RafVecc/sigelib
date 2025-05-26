@@ -1,0 +1,116 @@
+<!-- Modal -->
+<div class="modal fade modal-xl" id="ModalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal_maior">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Usuário</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <form method="post" action="{{url('admin/usuarios/editar')}}" id="editarUsuario"
+              enctype="multipart/form-data">
+              <input type="hidden" id="usuario_id" name="id">
+              <h5 class="modal-title fw-bold" id="exampleModalLabel">Editar Usuário</h5>
+              <div class="row">
+                <div class="col-lg-11-3qtr card border-2 shadow-sm mt-2 mb-3 me-4 ms-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <div class="mb-3">
+                          <label for="nome" class="form-label fw-bold">Nome Completo*</label>
+                          <input class="form-control" type="text" id="nome_editar" name="nome" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="mb-3">
+                          <label for="telefone" class="form-label fw-bold">Telefone*</label>
+                          <input class="form-control" type="text" id="telefone_editar" name="telefone" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <label for="email" class="form-label fw-bold">E-mail</label>
+                          <input class="form-control" type="text" id="email_editar" name="email">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <div class="mb-3">
+                          <label for="login" class="form-label fw-bold">Login*</label>
+                          <input class="form-control" type="text" id="login_editar" name="login" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="mb-3">
+                          <label for="senha" class="form-label fw-bold">Senha</label>
+                          <input class="form-control" type="text" value="*******" readonly>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <div class="mb-3">
+                          <label for="tipo_usuario_id" class="form-label fw-bold">Perfil do Usuário*</label>
+                          <select id="tipo_usuario_id_editar" name="tipo_usuario_id" class="form-control" required>
+                            <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                            </option>
+                            {% for tipo_usuario in tipo_usuarios %}
+                            <option value="{{tipo_usuario.id}}" {% if tipo_usuario.id==usuarios.tipo_usuario_id %}
+                              selected {%endif%}>
+                              {{tipo_usuario.tipo_usuario }}
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-5">
+                        <div class="mb-3">
+                          <label for="unidade_id" class="form-label fw-bold">Unidade*</label>
+                          <select id="unidade_id_editar" name="unidade_id" class="form-control" required>
+                            <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                            </option>
+                            {% for unidade in unidades %}
+                            <option value="{{unidade.id}}" {% if unidade.id==usuarios.unidade_id %} selected {%endif%}>
+                              {{unidade.unidade }}
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <label for="data_inicio" class="form-label fw-bold">Data Início</label>
+                          <input class="form-control" type="date" id="data_inicio_editar" name="data_inicio">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <label for="data_fim" class="form-label fw-bold">Data Fim</label>
+                          <input class="form-control" type="date" id="data_fim_editar" name="data_fim">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-dark me-2" value="">Editar</button><button type="button"
+                      class="btn btn-success me-2 resetarSenha" data-id="">Resetar Senha</button><button type="button" class="btn btn-warning"
+                      onClick="window.location.reload();">
+                      Cancelar </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

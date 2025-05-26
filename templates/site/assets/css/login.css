@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+body {
+  font-family: "Inter", "Helvetica Neue", Arial;
+  background-image: url('../img/background1.png') no-repeat fixed center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+
+.imgAcolhimento {
+  width: 68vh;
+  height: 19vh;
+  margin-top: 4%;
+}
+
+.imgTopo {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgFundo {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.IMGvidanova {
+  width: 13vw;
+  height: 5vw;
+  margin: 3.1em 3.1em;
+}
+
+.IMGsempre {
+  width: 25vw;
+  height: 5vw;
+  margin: 3.1em 3.1em;
+}
+
+.labelLogin {
+  color: white;
+  padding-left: 1vh;
+  font-size: 2.2vh;
+  font-weight: bold;
+}
+
+.inputLogin {
+  padding: 1rem .75rem;
+  display: block;
+  width: 100%;
+  height: calc(3.5rem + 2px);
+  line-height: 1.25;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: #fff;
+  color: #075da7;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: .375rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.labelSenha {
+  color: white;
+  padding-left: 1vh;
+  font-size: 2.2vh;
+  font-weight: bold;
+}
+
+.boxLogin {
+  margin-top: 5rem;
+}
+
+/* Responsivo para tela com largura de 600px */
+@media only screen and (max-width: 600px) {
+  .p-3 {
+    padding: 0rem 1rem 0rem !important;
+  }
+
+  form {
+    margin-top: -36px;
+  }
+
+  .imgAcolhimento {
+    width: 47vh;
+    height: 14.5vh;
+    margin-top: 10%;
+  }
+
+  .imgFundo {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .IMGvidanova {
+    width: 31vw;
+    height: 13vw;
+    margin: auto;
+  }
+
+  .IMGsempre {
+    width: 58vw;
+    height: 13vw;
+    margin: 1.6em;
+  }
+}
+
+/* Responsivo para tela com largura de 600px ate 900px */
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+
+  .imgAcolhimento {
+    width: 47vh;
+    height: 14.5vh;
+    margin-top: 10%;
+  }
+
+  .imgFundo {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .IMGvidanova {
+    width: 31vw;
+    height: 13vw;
+    margin: auto;
+  }
+
+  .IMGsempre {
+    width: 58vw;
+    height: 13vw;
+    margin: 1.6em;
+  }
+}
+
+/* Responsivo para tela com largura de 900px ate 1300px */
+@media only screen and (min-width: 900px) and (max-width: 1300px) {
+  .imgAcolhimento {
+    width: 47vh;
+    height: 14.5vh;
+    margin-top: 4%;
+  }
+
+  .IMGvidanova {
+    width: 25vw;
+    height: 13vw;
+  }
+
+  .IMGsempre {
+    width: 58vw;
+    height: 13vw;
+    margin: 1.6em;
+  }
+
+}
+
+

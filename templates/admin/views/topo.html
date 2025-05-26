@@ -1,0 +1,127 @@
+<div class="menu-img">
+  <img class="acolhimentoTOPO" src="{{url('templates/admin/assets/img/acolhimento.png')}}" alt="">
+  <!-- <div class="img600"> -->
+  <img class="vidanovaTOPO" src="{{url('templates/admin/assets/img/vidanova.png')}}" alt="">
+  <img class="sempreTOPO" src="{{url('templates/admin/assets/img/sempre.png')}}" alt="">
+  <!-- </div> -->
+</div>
+
+<div class="menu-navegacao">
+  <div class="">
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+      <span></span>
+    </label>
+    <ul class="ul-principal">
+      <li class="active li-principal"><a class="a-principal" href="{{url('admin/dashboard')}}">PAINEL DE GESTÃO</a>
+      </li>
+      <li class="li-principal btn-group">
+        <button type="button" class="btn dropdown-toggle btn-principal" data-bs-toggle="dropdown"
+          data-bs-display="static" aria-expanded="false">
+          CADASTROS
+        </button>
+        <ul class="dropdown-menu ul-secundaria">
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/livros/listar')}}" tooltip="tooltip" title="Cadastrar Alunos">
+              LIVROS
+            </a>
+          </li>
+          {# <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/professores/listar')}}" tooltip="tooltip" title="Cadastrar Professores">
+              PROFESSORES
+            </a>
+          </li>
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/entidades/listar')}}" tooltip="tooltip" title="Cadastrar Entidades">
+              ENTIDADES
+            </a>
+          </li>
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/espacos/listar')}}" tooltip="tooltip" title="Cadastrar Espaços">
+              ESPAÇOS
+            </a>
+          </li>
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/teste/listar')}}" tooltip="tooltip" title="Cadastrar Espaços">
+              TESTE
+            </a>
+          </li>
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/areaAtuacao/listar')}}" tooltip="tooltip" title="Cadastrar Áreas de Atuações e Especializações">
+              ÁREA DE ATUAÇÃO E ESPECIALIZAÇÕES
+            </a>
+          </li> #}
+        </ul>
+      </li>
+      {# {% if usuario().tipo_de_usuario_id != 3 %}
+      <li class="li-principal btn-group">
+        <button type="button" class="btn dropdown-toggle btn-principal" data-bs-toggle="dropdown"
+          data-bs-display="static" aria-expanded="false">
+          ATIVIDADES
+        </button>
+
+        <ul class="dropdown-menu ul-secundaria">
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/cursos/listar')}}" tooltip="tooltip" title="Cadastrar Cursos">
+              CURSOS
+            </a>
+          </li>
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="#" tooltip="tooltip" title="Solicitações Finalizadas">
+              SOLICITAÇÕES FINALIZADAS
+            </a>
+          </li>
+        </ul>
+      </li>
+      {% endif %} #}
+      {# <li class="li-principal btn-group">
+        <button type="button" class="btn dropdown-toggle btn-principal" data-bs-toggle="dropdown"
+          data-bs-display="static" aria-expanded="false">
+          UNIDADES DE <br>ACOLHIMENTO
+        </button>
+        <ul class="dropdown-menu ul-secundaria">
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="#" tooltip="tooltip" title="Cadastrar Instituições">
+              SOLICITAÇÕES DE ACOLHIMENTO
+            </a>
+          </li>
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="#" tooltip="tooltip" title="Cadastrar Pessoas">
+              PESSOAS ACOLHIDAS
+            </a>
+          </li>
+          {% if usuario().tipo_de_usuario_id == 3 %}
+          <li class="li-secundaria">
+            <a class="dropdown-item" class="a-secundaria" href="#">SOLICITAÇÕES DE REGULAÇÃO</a>
+          </li>
+          {% endif %}
+        </ul>
+      </li> #}
+      <li class="li-principal"><a class="a-principal" href="#">VISTORIA</a></li>
+      <li class="li-principal"><a class="a-principal" href="#">CONSULTAS</a></li>
+      <li class="li-principal"><a class="a-principal" href="#">INDICADORES</a></li>
+      <li class="li-principal btn-group">
+        <button type="button" class="btn dropdown-toggle btn-principal" data-bs-toggle="dropdown"
+          data-bs-display="static" aria-expanded="false" style="padding-left: 17%;">
+          USUÁRIOS
+        </button>
+        <ul class="dropdown-menu ul-secundaria">
+          {% if usuario().tipo_usuario_id == 1 %}
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/usuarios/listar')}}" tooltip="tooltip"
+              title="Perfil ">
+              LISTA DE USUÁRIOS
+            </a>
+          </li>
+          {% endif %}
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria text-danger" href="{{url('admin/sair')}}" tooltip="tooltip"
+              title="Sair do Sistema">
+              SAIR
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

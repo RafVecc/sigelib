@@ -1,0 +1,123 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Cursos
+        </li>
+    </ol>
+</nav>
+</div>
+</div>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-light border d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge bg-white text-secondary border">
+                <span class="text-dark">{{total.atividades}} Cursos</span><br><br>
+                Ativos: <span class="text-success">{{total.atividadesAtivas}}</span>
+                Inativos: <span class="text-danger">{{total.atividadesInativas}}</span>
+            </span>
+        </div>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCadastrarCurso"
+            id="modalCadastrarCurso">
+            <i class="fa fa-fw fa-plus-circle"></i>Cadastrar
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tabelaCursos" url="{{url()}}" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Entidade Responsável</th>
+                        <th>Especialização</th>
+                        <th>Período do Curso</th>
+                        <th>Período de Inscrição</th>
+                        <th>Vagas</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for atividade in atividades %}
+                    <tr>
+                        <td>{{atividade.atividadeCurso.nome}}</td>
+                        <td>{{atividade.atividadeCurso.entidadeCurso.nome}}</td>
+                        <td>{{atividade.atividadeCurso.especializacaoCurso.especializacao}}</td>
+                        <td>Data: {{atividade.atividadeCurso.data_inicio_curso|date("d/m/Y")}} -
+                            {{atividade.atividadeCurso.data_fim_curso|date("d/m/Y")}}<br>
+                            Horário: {{atividade.atividadeCurso.hora_inicio|date("H:i")}} -
+                            {{atividade.atividadeCurso.hora_fim|date("H:i")}}</td>
+                        <td>Data: {{atividade.atividadeCurso.inicio_inscricao|date("d/m/Y")}} -
+                            {{atividade.atividadeCurso.fim_inscricao|date("d/m/Y")}}</td>
+                        <td>{{atividade.atividadeCurso.vagas}}</td>
+                        <td>{{atividade.atividadeCurso.descricao}}</td>
+                        <td class="fw-bold">
+
+
+                            {% if atividade.status == 1 %}
+                            {% if (atividade.espaco_id is null or atividade.professor_id is null) %}
+                            <strong style="color: rgb(192, 192, 23);">
+                                PENDENTE
+                            </strong>
+                            {% else %}
+                            {% if date(atividade.atividadeCurso.data_inicio_curso) <= date() and
+                                date(atividade.atividadeCurso.data_fim_curso)> date() %}
+                                <strong style="color: rgb(14, 26, 184);">
+                                    EM ANDAMENTO
+                                </strong>
+                                {% else %}
+                                {% if date(atividade.atividadeCurso.data_inicio_curso) > date() %}
+                                <strong style="color: rgb(184, 91, 14);">
+                                    AGUARDANDO INÍCIO
+                                </strong>
+                                {% else %}
+                                <strong style="color: green;">
+                                    CONCLUÍDO
+                                </strong>
+                                {% endif %}
+                                {% endif %}
+                                {% endif %}
+                                {% else %}
+                                <strong style="color: red;">
+                                    INATIVO
+                                </strong>
+                                {% endif %}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-warning valorizarCurso" data-bs-toggle="modal"
+                                data-bs-target="#ModalEditarCurso" data-id="{{atividade.atividadeCurso.id}}">
+                                <i class="fa-solid fa-pen m-1" tooltip="tooltip" title="EDITAR CURSO"></i>
+                            </button>
+                            <button type="button" class="btn btn-info valorizarAtividade" data-bs-toggle="modal"
+                                data-bs-target="#ModalTrocarProfessorSala" data-id="{{atividade.id}}">
+                                <i class="fa-solid fa-chalkboard-user m-1" tooltip="tooltip"
+                                    title="TROCAR PROFESSOR/SALA"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger cancelarCurso"
+                                data-id="{{atividade.atividadeCurso.id}}">
+                                <i class="fa-solid fa-trash m-1" tooltip="tooltip" title="CANCELAR"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include 'cursos/modalCadastrarCurso.html' %}
+{% include 'cursos/modalEditarCurso.html' %}
+{% include 'cursos/modalTrocarProfessorSala.html' %}
+
+{% endblock %}

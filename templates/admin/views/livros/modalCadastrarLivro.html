@@ -1,0 +1,178 @@
+<!-- Modal -->
+<div class="modal fade modal-xl" id="ModalCadastrarLivro" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal_maior">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Livro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <form method="post" action="{{url('admin/livros/cadastrar')}}" id="cadastrarLivro"
+              enctype="multipart/form-data">
+
+              <h5 class="modal-title fw-bold" id="exampleModalLabel">Cadastrar Livro</h5>
+              <div class="row">
+                <div class="col-lg-11-3qtr card border-2 shadow-sm mt-2 mb-3 me-4 ms-4">
+                  <div class="card-body">
+                    <div class="row mb-3">
+                      <div class="col-sm-3 card border-2 me-4">
+                        <div class="card-body">
+                          <div class="row mb-2">
+                            <div class="col-sm-12 card border-2">
+                              <div class="card-body">
+                                <img src='' alt="" id="imgLogo">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="mb-3">
+                                <label for="foto_capa_livro" class="form-label">Foto Capa</label>
+                                <input type="file" name="foto_capa_livro" class="form-control"
+                                  onchange="previewCadastro()">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-8-3qtr card border-2">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="mb-3">
+                                <label for="titulo_livro" class="form-label">Titulo</label>
+                                <input type="text" name="titulo_livro" id="titulo_livro" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-5">
+                              <div class="mb-3">
+                                <label for="genero_livro_id" class="form-label">Gênero do Livro</label>
+                                <select id="genero_livro_id" name="genero_livro_id" class="form-control" required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for genero_livro in generos_livro %}
+                                  <option value="{{genero_livro.id}}">
+                                    {{genero_livro.genero_livro }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-7">
+                              <div class="mb-3">
+                                <label for="editora_livro" class="form-label">Editora</label>
+                                <input type="text" name="editora_livro" class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="ano_livro" class="form-label">Ano</label>
+                                <input type="text" name="ano_livro" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="pais_livro" class="form-label">País</label>
+                                <input type="text" name="pais_livro" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="idioma_livro" class="form-label">Idioma</label>
+                                <input type="text" name="idioma_livro" class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-8">
+                              <div class="mb-3">
+                                <label for="editora_livro" class="form-label">Autor</label>
+                                <input type="text" name="editora_livro" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="numero" class="form-label">Quantidade</label>
+                                <input type="text" name="numero" class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 card border-2">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <div class="mb-3">
+                                <label for="tipo_procedencia_livro_id" class="form-label">Tipo de Procedência</label>
+                                <select id="tipo_procedencia_livro_id" name="tipo_procedencia_livro_id"
+                                  class="form-control" required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for tipo_procedencia_livro in tipos_procedencia_livro %}
+                                  <option value="{{tipo_procedencia_livro.id}}">
+                                    {{tipo_procedencia_livro.tipo_procedencia_livro }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-7">
+                              <div class="mb-3">
+                                <label for="procedencia_livro" class="form-label">Local de Procedência</label>
+                                <input type="text" name="procedencia_livro" class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="mb-3">
+                                <label for="localizacao_livro" class="form-label">Prateleira</label>
+                                <input type="text" name="localizacao_livro" class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="mb-3">
+                                <label for="sinopse_livro" class="form-label">Sinopse</label>
+                                <textarea id="sinopse_livro" name="sinopse_livro" class="form-control"
+                                  rows="3"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-dark me-2" value="">Cadastrar</button><button type="button"
+                      class="btn btn-warning" onClick="window.location.reload();">
+                      Cancelar </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function previewCadastro() {
+    imgLogo.src = URL.createObjectURL(event.target.files[0]);
+
+  }
+</script>

@@ -1,0 +1,21 @@
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    .rodape-img {
+        ul {
+            li {
+                img {
+                    height: 7.5vw;
+                }
+            }
+        }
+    }
+
+    main {
+        margin-top: 22vw;
+        min-height: 87vh;
+        .bloco_conteudo{
+            max-height: 81vh;
+        }
+    }
+
+}

@@ -1,0 +1,585 @@
+{% extends "base.html" %}
+{% block corpo %}
+
+{# include 'menu.html' #}
+
+<div class="conteudo">
+  {% include 'topo.html' %}
+  <main>
+    <div class="bloco_conteudo">
+      {% if dashboard %}
+      <div class="d-flex justify-content-end ">
+
+        <strong>
+          Usuário:ﾠ
+        </strong>
+        {{usuario().nome}}ﾠ
+        {% if usuario().tipo_usuario_id == 3 %}
+        <strong>
+          Unidade:ﾠ
+        </strong>
+        {{usuario().unidade.nome_unidade}}
+        {% else %}
+        <strong>
+          Usuário Interno:ﾠ
+        </strong>
+        {{usuario().tipoUsuario.tipo_usuario}}
+        {% endif %}
+      </div>
+      {% else %}
+      <div class="d-flex flex-row-reverse justify-content-between ">
+        <div class="userdiv">
+
+          <strong>
+            Usuário:ﾠ
+          </strong>
+          {{usuario().nome}}ﾠ
+          {% if usuario().tipo_usuario_id == 3 %}
+          <strong>
+            Unidade:ﾠ
+          </strong>
+          {{usuario().unidade.nome_unidade}}
+          {% else %}
+          <strong>
+            Usuário Interno:ﾠ
+          </strong>
+          {{usuario().tipoUsuario.tipo_usuario}}
+          {% endif %}
+        </div>
+        <div class="userdiv2">
+          {% endif %}
+          {% block conteudo %}
+
+          {# <h5 class="mb-3">Dashboard <small class="saudacao text-muted"> - {{saudacao()}},
+              {{usuario().nome}}.
+              Seu
+              último login foi em {{usuario().ultimo_login |date('d/m/Y')}} às {{usuario().ultimo_login
+              |date('H:i')}}</small></h5> #}
+
+
+          {{ flash() }}
+
+          {# <div class="row">
+            <div class="col-xl-12 col-xxl-12 mb-4 d-flex">
+              <div class="w-100">
+
+                <!-- INICIO POR TOTAL DE VAGAS -->
+                <!-- <h1 class="text-center">TOTAL DE VAGAS</h1> -->
+                <section class="section teste menu-lateral"> <!--teste  -->
+                  {% if totalDeVagas %}
+                  {% for total_de_vagas in totalDeVagas %}
+                  <div class="divDashboard">
+                    <div class="text-center-total">
+                      <h6 class="text-center-total">{{total_de_vagas.total}}</h6>
+                      <h1 class="text-center">
+                        {% if total_de_vagas.vagas_disponiveis is empty %}0{% else
+                        %}{{total_de_vagas.vagas_disponiveis}}{% endif %} Vagas
+                      </h1>
+                      <div class="box-center">
+                        <span class="badge text-bg-success bg-opacity-10">
+                          <span class="text-success fw-bold">
+                            {% if
+                            total_de_vagas.vagas is empty
+                            %}0{% else %}{{total_de_vagas.vagas}}{% endif %}
+                          </span>
+                          <span class="badge text-secondary">Capacidade</span>
+                        </span>
+                        <span class="badge text-bg-warning bg-opacity-10">
+                          <span class="fw-bold">
+                            {% if
+                            total_de_vagas.vagas_ocupadas is empty
+                            %}0{% else %}{{total_de_vagas.vagas_ocupadas}}{% endif %}
+                          </span>
+                          <span class="badge text-secondary">Acolhidos</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                  <!-- INICIO POR CATEGORIA -->
+                  <section class="section menu-lateral">
+                    {% if vagasPorCategoria %}
+                    <h2 class="text-center nome">POR CATEGORIA</h2>
+                    {% for vagas_por_categoria in vagasPorCategoria %}
+                    <div class="divDashboardCategoria box">
+                      <h6 class="text-center ">{{ vagas_por_categoria.nome_categoria }}</h6>
+                      <div class="categoria">
+                        <img class="imgCategoria w3-hover-opacity"
+                          src="{{url('templates/admin/assets/img/icons/'~ vagas_por_categoria.icone)}}"
+                          alt="{{ vagas_por_categoria.nome_categoria }}">
+                        <h1 class="text-center">
+                          {% if vagas_por_categoria.vagas_disponiveis is empty %}
+                          0
+                          {% else %}
+                          {{ vagas_por_categoria.vagas_disponiveis }}
+                          {% endif %}
+                          Vagas
+                        </h1>
+                      </div>
+                      <div class="box-center">
+                        <span class="badge text-bg-success bg-opacity-10">
+                          <span class="text-success fw-bold">
+
+                            {% if vagas_por_categoria.vagas is empty %}
+                            0
+                            {% else %}
+                            {{ vagas_por_categoria.vagas }}
+                            {% endif %}
+                          </span>
+                          <span class="badge text-secondary">Capacidade</span>
+                        </span>
+                        <span class="badge text-bg-warning bg-opacity-10">
+                          <span class="fw-bold">
+                            {% if vagas_por_categoria.vagas_ocupadas is empty %}
+                            0
+                            {% else %}
+                            {{ vagas_por_categoria.vagas_ocupadas }}
+                            {% endif %}
+                          </span>
+                          <span class="badge text-secondary">Acolhidos</span>
+                        </span>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </section>
+                  <!-- FIM POR CATEGORIA -->
+                </section>
+                <!-- FIM POR TOTAL DE VAGAS -->
+
+
+
+                <!-- INICIO POR TIPO DE VAGA -->
+                {% if vagasPorTipoDeVaga %}
+                <h1 class="text-center">POR PERFIL DE VAGA</h1>
+                {% endif %}
+                <section class="section">
+                  {% if vagasPorTipoDeVaga %}
+                  {% for vaga_por_tipo in vagasPorTipoDeVaga %}
+                  <div class="divDashboard">
+                    <h6 class="text-center">{{vaga_por_tipo.tipo_de_vaga}}</h6>
+                    <h1 class="text-center">{% if vaga_por_tipo.vagas_disponiveis is empty %}0{% else
+                      %}{{vaga_por_tipo.vagas_disponiveis}}{% endif %} Vagas
+                    </h1>
+                    <div class="box-center">
+                      <span class="badge text-bg-success bg-opacity-10">
+                        <span class="text-success fw-bold">
+                          {% if vaga_por_tipo.vagas is empty
+                          %}0{% else %}{{vaga_por_tipo.vagas}}{% endif %}
+                        </span>
+                        <span class="badge text-secondary">Capacidade</span>
+                      </span>
+                      <span class="badge text-bg-warning bg-opacity-10">
+                        <span class="fw-bold">
+                          {% if vaga_por_tipo.vagas_ocupadas is empty
+                          %}0{% else %}{{vaga_por_tipo.vagas_ocupadas}}{% endif %}
+                        </span>
+                        <span class="badge text-secondary">Acolhidos</span>
+                      </span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                </section>
+                <!-- FIM POR TIPO DE VAGA -->
+
+                <!-- INICIO POR UNIDADE -->
+                {% if unidades.vagasUnidades %}
+                <h1 class="text-center">POR UNIDADE</h1>
+                {% endif %}
+                <section class="section">
+                  {% if unidades.vagasUnidades %}
+                  {% for unidade in unidades.vagasUnidades %}
+                  <div class="divDashboard">
+                    <h6 class="text-center">{{unidade.nome_unidade}}</h6>
+                    <h1 class="text-center">{% if unidade.vagas_disponiveis is empty %}0{% else
+                      %}{{unidade.vagas_disponiveis}}{% endif %} Vagas
+                    </h1>
+                    <div class="box-center">
+                      <span class="badge text-bg-success bg-opacity-10">
+                        <span class="text-success fw-bold">{% if unidade.vagas is empty %}0{%
+                          else %}{{unidade.vagas}}{% endif %}
+                        </span>
+                        <span class="badge text-secondary">Capacidade</span>
+                      </span>
+                      <a href="{{url('admin/acolhimento/listar/'~unidade.id)}}">
+                        <span class="badge text-bg-warning bg-opacity-10">
+                          <span class="fw-bold">
+                            {% if unidade.vagas_ocupadas is empty %}0{% else
+                            %}{{unidade.vagas_ocupadas}}{% endif %}
+                          </span>
+                          <span class="badge text-secondary">Acolhidos</span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                </section>
+                <!-- FIM POR UNIDADE -->
+
+                <!-- INICIO POR UNIDADE TIPOS DE VAGAS -->
+                {% if vagasPorTipoDeVagaUnidade %}
+                <h1 class="text-center">POR UNIDADE PERFIL DE VAGAS</h1>
+                {% endif %}
+                <section class="section">
+                  {% if vagasPorTipoDeVagaUnidade %}
+                  {% for vagas_tipo_vaga_unidade in vagasPorTipoDeVagaUnidade %}
+                  <div class="divDashboard">
+                    <h6 class="text-center">{{vagas_tipo_vaga_unidade.nome_unidade}}</h6>
+                    <h1 class="text-center">{% if vagas_tipo_vaga_unidade.vagas_disponiveis is empty
+                      %}0{% else %}{{vagas_tipo_vaga_unidade.vagas_disponiveis}}{% endif %} Vagas
+                    </h1>
+                    <div class="box-center">
+                      <span class="badge text-bg-success bg-opacity-10"> <span class="text-success fw-bold">{% if
+                          vagas_tipo_vaga_unidade.vagas
+                          is empty %}0{% else %}{{vagas_tipo_vaga_unidade.vagas}}{% endif
+                          %}</span> <span class="badge text-secondary">{{vagas_tipo_vaga_unidade.tipo_de_vaga}}</span>
+                      </span>
+
+                      <span class="badge text-bg-warning bg-opacity-10"> <span class="fw-bold">{% if
+                          vagas_tipo_vaga_unidade.vagas_ocupadas is
+                          empty %}0{% else %}{{vagas_tipo_vaga_unidade.vagas_ocupadas}}{%
+                          endif %}</span> <span class="badge text-secondary">Acolhidos</span> </span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                </section>
+                <!-- FIM POR UNIDADE TIPOS DE VAGAS -->
+
+                {#
+                <div class="row">
+                  <div class="col-xl-12 col-xxl-12 mb-4">
+                    <!--INICIO POSTS-->
+                    <div class="col-sm-3">
+                      <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col">
+                              <h6 class="fw-bold text-secondary">Unidades</h6>
+                            </div>
+
+                            <div class="col-auto text-secondary">
+                              <a href="{{url('admin/unidades/cadastrar')}}" tooltip="tooltip" title="Cadastrar Unidade">
+                                <i class="fa-solid fa-file-pen"></i>
+                              </a>
+                            </div>
+                          </div>
+                          <h1 class="mt-1 mb-3">{{formatarNumero(unidades.total)}}</h1>
+
+                          <div class="row">
+                            <div class="col-auto">
+                              <span class="badge text-bg-success bg-opacity-10"> <span
+                                  class="text-success fw-bold">{{formatarNumero(unidades.ativo)}}</span>
+                                <span class="badge text-secondary">Ativo</span> </span>
+                            </div>
+                            <div class="col-auto">
+                              <span class="badge text-bg-danger bg-opacity-10"> <span
+                                  class="text-danger fw-bold">{{formatarNumero(unidades.inativo)}}</span>
+                                <span class="badge text-secondary">Inativo</span> </span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIM POSTS-->
+
+                    <!--INICIO CATEGORIAS-->
+                    <div class="col-sm-3">
+                      <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col">
+                              <h6 class="fw-bold text-secondary">Categorias</h6>
+                            </div>
+
+                            <div class="col-auto text-secondary">
+                              <i class="fa-solid fa-list"></i>
+                            </div>
+                          </div>
+                          <h1 class="mt-1 mb-3">{{categorias.total}}</h1>
+
+                          <div class="row">
+                            <div class="col-auto">
+                              <span class="badge text-bg-success bg-opacity-10"> <span
+                                  class="text-success fw-bold">{{categorias.categoriasAtiva}}</span>
+                                <span class="badge text-secondary">Ativo</span> </span>
+                            </div>
+                            <div class="col-auto">
+                              <span class="badge text-bg-danger bg-opacity-10"> <span
+                                  class="text-danger fw-bold">{{categorias.categoriasInativa}}</span>
+                                <span class="badge text-secondary">Inativo</span> </span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIM CATEGORIAS-->
+
+                    <!--INICIO USUARIOS-->
+                    <div class="col-sm-3">
+                      <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col">
+                              <h6 class="fw-bold text-secondary">Usuários</h6>
+                            </div>
+
+                            <div class="col-auto text-secondary">
+                              <i class="fas fa-users"></i>
+                            </div>
+                          </div>
+                          <h1 class="mt-1 mb-3">{{usuarios.usuarios}}</h1>
+
+                          <div class="row">
+                            <div class="col-auto">
+                              <span class="badge text-bg-success bg-opacity-10"> <span
+                                  class="text-success fw-bold">{{usuarios.usuariosAtivo}}</span>
+                                <span class="badge text-secondary">Ativo</span> </span>
+                            </div>
+                            <div class="col-auto">
+                              <span class="badge text-bg-danger bg-opacity-10"> <span
+                                  class="text-danger fw-bold">{{usuarios.usuariosInativo}}</span>
+                                <span class="badge text-secondary">Inativo</span> </span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIM USUARIOS-->
+
+                    <!--INICIO ADMIN-->
+                    <div class="col-sm-3">
+                      <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col">
+                              <h6 class="fw-bold text-secondary">Admin</h6>
+                            </div>
+
+                            <div class="col-auto text-secondary">
+                              <i class="fa-solid fa-screwdriver-wrench"></i>
+                            </div>
+                          </div>
+                          <h1 class="mt-1 mb-3">{{usuarios.admin}}</h1>
+
+                          <div class="row">
+                            <div class="col-auto">
+                              <span class="badge text-bg-success bg-opacity-10"> <span
+                                  class="text-success fw-bold">{{usuarios.adminAtivo}}</span>
+                                <span class="badge text-secondary">Ativo</span> </span>
+                            </div>
+                            <div class="col-auto">
+                              <span class="badge text-bg-danger bg-opacity-10"> <span
+                                  class="text-danger fw-bold">{{usuarios.adminInativo}}</span>
+                                <span class="badge text-secondary">Inativo</span> </span>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIM ADMIN-->
+                  </div>
+                </div>
+                #}
+                {#
+                <div class="row">
+                  <div class="col-xl-12 col-xxl-7 mb-4">
+                    <div class="card border-0 shadow-sm">
+                      <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center mt-2">
+                        <div>
+                          <h6 class="fw-bold text-secondary">
+                            Últimas Unidades
+                          </h6>
+                        </div>
+                        <a href="{{url('admin/unidades/cadastrar')}}" class="fs-5" tooltip="tooltip"
+                          title="Cadastrar Unidade">
+                          <i class="fa-solid fa-circle-plus"></i>
+                        </a>
+                      </div>
+                      <div class="card-body">
+                        {% if unidades.unidades %}
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Título</th>
+                                <th class="text-center">Visitas</th>
+                                <th class="text-center">Ação</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for unidade in unidades.unidades %}
+                              <tr>
+                                <th>
+
+                                  <div>
+                                    <span>
+                                      {% if unidade.status == 1 %}
+                                      <i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>
+                                      {% else %}
+                                      <i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>
+                                      {% endif %}
+                                    </span>
+                                    {{resumirTexto(unidade.nome_unidade, 100)}}
+                                  </div>
+                                  <small class="text-muted fw-normal">
+                                    Escrito por {{unidade.usuario.nome}} {{
+                                    contarTempo(unidade.cadastrado_em) }}
+                                    {{unidade.categoria.titulo}}
+                                  </small>
+                                </th>
+                                <td class="text-center">
+
+                                  <a href="{{ url('admin/unidades/editar/'~unidade.id) }}" tooltip="tooltip"
+                                    title="Editar">
+                                    <i class="fa-solid fa-pen m-1"></i>
+                                  </a>
+                                  <a href="{{ url('admin/unidades/deletar/'~unidade.id) }}" tooltip="tooltip"
+                                    title="Deletar">
+                                    <i class="fa-solid fa-trash m-1"></i>
+                                  </a>
+
+                                </td>
+                              </tr>
+                              {%endfor%}
+                            </tbody>
+                          </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-warning" role="alert">
+                          Nenhum unidade cadastrado para exibir!
+                        </div>
+                        {% endif %}
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12 col-md-6 col-xl-4 mb-4">
+                    <div class="card border-0 shadow-sm  h-100">
+                      <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center mt-2">
+                        <h6 class="fw-bold text-secondary">
+                          Últimas Categorias
+                        </h6>
+
+                        <a href="{{url('admin/categorias/cadastrar')}}" class="fs-5" tooltip="tooltip"
+                          title="Cadastrar Categoria">
+                          <i class="fa-solid fa-circle-plus"></i>
+                        </a>
+                      </div>
+                      <div class="card-body">
+                        {% if categorias.categorias %}
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+
+                                <th>Título</th>
+                                <th class="text-center">Visitas</th>
+                                <th class="text-center">Ação</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for categoria in categorias.categorias %}
+                              <tr>
+
+                                <td>
+                                  <span>
+                                    {% if categoria.status == 1 %}
+                                    <i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>
+                                    {% else %}
+                                    <i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>
+                                    {% endif %}
+                                  </span>
+                                  {{categoria.titulo}}
+                                </td>
+                                <td class="text-center">
+                                  {{formatarNumero(categoria.visitas)}}
+                                </td>
+                                <td class="text-center">
+                                  <a href="{{ url('admin/categorias/editar/'~categoria.id) }}" tooltip="tooltip"
+                                    title="Editar">
+                                    <i class="fa-solid fa-pen m-1"></i>
+                                  </a>
+                                  <a href="{{ url('admin/categorias/deletar/'~categoria.id) }}" tooltip="tooltip"
+                                    title="Deletar">
+                                    <i class="fa-solid fa-trash m-1"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                              {%endfor%}
+                            </tbody>
+                          </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-warning" role="alert">
+                          Nenhuma categoria cadastrada para exibir!
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--INICIO ULTIMOS LOGIN-->
+                  <div class="col-sm-6 col-md-6 col-xl-4 mb-4">
+                    <div class="card border-0 shadow-sm  h-100">
+                      <div class="card-header bg-white border-0 mt-2">
+                        <h6 class="fw-bold text-secondary">
+                          Últimos Logins
+                        </h6>
+                      </div>
+                      <div class="card-body">
+                        {% if usuarios %}
+                        <ul class="list-group list-group-flush">
+                          {% for usuario in usuarios.logins %}
+                          <li class="list-group-item">
+                            <p>
+                              <i class="fa-solid fa-user me-2"></i>
+                              <span class="fw-bold">{{usuario.nome}}</span>
+                            </p>
+                            <small class="text-muted">{{ contarTempo(usuario.cadastrado_em) }} em {{
+                              usuario.cadastrado_em|date("d/m/Y") }} às {{
+                              usuario.ultimo_login|date("H:i")
+                              }}</small>
+                          </li>
+                          {%endfor%}
+                        </ul>
+                        {% else %}
+                        <div class="alert alert-warning" role="alert">
+                          Nenhum login para exibir!
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  <!--FIM ULTIMOS LOGIN-->
+
+                  <div class="col-sm-6 col-md-12 col-xl-4 mb-4">
+                    <div class="card border-0 shadow-sm  h-100">
+                      <div class="card-header bg-white border-0 mt-2">
+                        <h6 class="fw-bold text-secondary">
+                          Em desenvolvimento
+                        </h6>
+                      </div>
+                      <div class="card-body">
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                #} 
+                {% endblock %}
+              </div>
+  </main>
+  {% include 'rodape.html' %}
+</div>
+
+{% endblock %}

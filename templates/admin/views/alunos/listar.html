@@ -1,0 +1,84 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Alunos
+        </li>
+    </ol>
+</nav>
+</div>
+</div>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-light border d-flex justify-content-end align-items-center">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCadastrarAluno"
+            id="modalCadastrarAluno">
+            <i class="fa fa-fw fa-plus-circle"></i>Cadastrar
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tabelaAlunos" url="{{url()}}" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>CPF</th>
+                        <th>Nome</th>
+                        <th>Telefone Residencial</th>
+                        <th>Telefone Celular</th>
+                        <th>E-mail</th>
+                        {# <th>Status</th> #}
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aluno in alunos %}
+                    <tr>
+                        <td>{{aluno.cpf}}</td>
+                        <td>{{aluno.nome}}</td>
+                        <td>{{aluno.telefone_residencia}}</td>
+                        <td>{{aluno.telefone_celular}}</td>
+                        <td>{{aluno.email}}</td>
+                        {# <td>
+                            {% if aluno.status == 1 %}
+                            <i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>
+                            {% else %}
+                            <i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>
+                            {% endif %}
+                        </td> #}
+                        <td>
+                            <button type="button" class="btn btn-warning valorizarAluno" data-bs-toggle="modal"
+                                data-bs-target="#ModalEditarAluno" data-id="{{aluno.id}}">
+                                <i class="fa-solid fa-pen m-1"></i> Editar
+                            </button>
+                            {# {% if aluno.status == 1 %}
+                            <button type="button" class="btn btn-danger statusAluno" data-status="1"
+                                data-id="{{aluno.id}}">
+                                Inativar
+                            </button>
+                            {% else %}
+                            <button type="button" class="btn btn-success statusAluno" data-status="2"
+                                data-id="{{aluno.id}}">
+                                Ativar
+                            </button>
+                            {% endif %} #}
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include 'alunos/modalCadastrarAluno.html' %}
+{% include 'alunos/modalEditarAluno.html' %}
+
+{% endblock %}

@@ -1,0 +1,39 @@
+AREA DE ATUAÇAO/ESPECIALIZAÇÃO
+- cadastrar area de atuação e campos gerados automaticamente para especialização (fácil) OK
+- datatable com area de atuacao e botao chamado "especialização" (fácil) OK
+- botão conterá a área de atuação e todas as especializações podendo editar, adicionar novas e inativar (tudo no mesmo modal) (médio) OK PARCIAL [Falta inativar]
+* Avisar sobre as consequencias de realizar tais modificações.
+
+PROFESSORES
+- Cadastrar (fácil) OK
+- Editar (fácil) OK
+- Datatable com informações básicas (fácil) OK
+- Indicar quantos cursos esse professor está participando e futuramente um link para uma lista dos mesmos (histórico de cursos concluídos também) (médio) [Opcional no momento]
+- Inativar (fácil) OK
+- Buscar por Cpf antes de cadastrar e verificar se permitido modificar o Cpf (fácil) [Opcional no momento]
+
+ESPAÇO
+- Cadastrar (fácil) OK
+- Editar (fácil) OK
+- Inativar indicando o motivo (fácil) OK [Verificar se precisa do motivo]
+- Datatable com informações básicas (fácil) OK
+
+ALUNOS
+- Cadastrar (fácil) OK
+- Editar (fácil) OK
+- Datatable com informações básicas (fácil) OK
+- Buscar por Cpf antes de cadastrar e verificar se permitido modificar o Cpf (fácil) [Opcional no momento]
+- Adicionar o campo foto no banco de dados (fácil) OK
+
+CURSOS
+- Cadastrar (fácil) OK
+- Editar (fácil) OK
+- Datatable com informações básicas (fácil) OK
+- Inativar/Cancelar (Verificar condições que permitam a inativação ou cancelamento) (medio) [Inativamento básico] OK
+- Verificar a melhor utilidade para as datas e horas do período do curso (fácil)
+- Verificar a possibilidade de cadastrar fazendo um import de um excel (difícil) [Opcional no momento]
+
+AULAS
+- Cadastro automático juntamente com os cursos (fácil)
+- Utilizar tabela como histórico para manter log das salas utilizadas pelos cursos (fácil)
+- Deixar campo de data_fim em aberto até uma transferência ser realizada ou o curso chegar ao fim (fácil)
