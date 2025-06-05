@@ -14,7 +14,7 @@ define('SITE_DESCRICAO', 'Sistema Integrado de Gestão de Livros e Bibliotecas')
 
 //urls do sistema
 define('URL_PRODUCAO', 'https://sigelib-homologa.salvador.ba.gov.br');
-define('URL_DESENVOLVIMENTO', 'http://localhost:8080/sigelib');
+define('URL_DESENVOLVIMENTO', 'http://localhost:80805/sigelib');
 
 
 
