@@ -22,16 +22,16 @@
                           <div class="row mb-2">
                             <div class="col-sm-12 card border-2">
                               <div class="card-body">
-                                <img src='' alt="" id="imgLogoEditar">
+                                <img src='' alt="" id="foto_capa_livro_editar">
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="foto_editar" class="form-label">Foto Livro</label>
-                                <input type="file" name="foto_editar" id="foto_editar" class="form-control"
-                                  onchange="previewEditar()">
+                                <label for="foto_capa_livro_editar" class="form-label">Foto Capa</label>
+                                <input type="file" name="foto_capa_livro_editar" id="img_capa_livro_editar"
+                                  class="form-control" onchange="previewCadastroEditar()">
                               </div>
                             </div>
                           </div>
@@ -40,46 +40,88 @@
                       <div class="col-sm-8-3qtr card border-2">
                         <div class="card-body">
                           <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="cpf_editar" class="form-label">CPF</label>
-                                <input type="text" name="cpf_editar" id="cpf_editar" class="form-control">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="mb-3">
-                                <label for="nome_editar" class="form-label">Nome Completo</label>
-                                <input type="text" name="nome_editar" id="nome_editar" class="form-control">
-                              </div>
-                            </div>
-                            <div class="col-md-3">
-                              <div class="mb-3">
-                                <label for="telefone_residencia_editar" class="form-label">Telefone Residencial</label>
-                                <input type="text" name="telefone_residencia_editar" id="telefone_residencia_editar"
-                                  class="form-control">
-                              </div>
-                            </div>
-                            <div class="col-md-3">
-                              <div class="mb-3">
-                                <label for="telefone_celular_editar" class="form-label">Telefone Celular</label>
-                                <input type="text" name="telefone_celular_editar" id="telefone_celular_editar"
-                                  class="form-control">
+                                <label for="titulo_livro_editar" class="form-label">Titulo</label>
+                                <input type="text" name="titulo_livro_editar" id="titulo_livro_editar"
+                                  class="form-control" required>
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-5">
                               <div class="mb-3">
-                                <label for="email_editar" class="form-label">E-mail</label>
-                                <input type="text" name="email_editar" id="email_editar" class="form-control">
+                                <label for="genero_livro_editar_id" class="form-label">Gênero do Livro</label>
+                                <select id="genero_livro_editar_id" name="genero_livro_editar_id" class="form-control"
+                                  required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for genero_livro in generos_livro %}
+                                  <option value="{{genero_livro.id}}">
+                                    {{genero_livro.genero_livro }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
                               </div>
                             </div>
                             <div class="col-md-7">
                               <div class="mb-3">
-                                <label for="rede_social_editar" class="form-label">Rede Social</label>
-                                <input type="text" name="rede_social_editar" id="rede_social_editar"
+                                <label for="editora_livro_editar" class="form-label">Editora</label>
+                                <input type="text" name="editora_livro_editar" id="editora_livro_editar"
+                                  class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="ano_livro_editar" class="form-label">Ano</label>
+                                <input type="text" name="ano_livro_editar" id="ano_livro_editar" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="pais_livro_editar_id" class="form-label">País</label>
+                                <select id="pais_livro_editar_id" name="pais_livro_editar_id" class="form-control"
+                                  required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for pais_livro in paises_livro %}
+                                  <option value="{{pais_livro.id}}">
+                                    {{pais_livro.pais_livro }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="idioma_livro_editar_id" class="form-label">Idioma</label>
+                                <select id="idioma_livro_editar_id" name="idioma_livro_editar_id" class="form-control"
+                                  required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for idioma_livro in idiomas_livro %}
+                                  <option value="{{idioma_livro.id}}">
+                                    {{idioma_livro.idioma_livro }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-8">
+                              <div class="mb-3">
+                                <label for="autor_livro_editar" class="form-label">Autor</label>
+                                <input type="text" name="autor_livro_editar" id="autor_livro_editar"
+                                  class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="quantidade_livro_editar" class="form-label">Quantidade</label>
+                                <input type="text" name="quantidade_livro_editar" id="quantidade_livro_editar"
                                   class="form-control">
                               </div>
                             </div>
@@ -91,56 +133,44 @@
                       <div class="col-sm-12 card border-2">
                         <div class="card-body">
                           <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                               <div class="mb-3">
-                                <label for="cep_editar" class="form-label">CEP</label>
-                                <input type="text" name="cep_editar" id="cep_editar" class="form-control">
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="mb-3">
-                                <label for="bairro_id_editar" class="form-label">Bairro</label>
-                                <select id="bairro_id_editar" name="bairro_id_editar" class="form-control" required>
+                                <label for="tipo_procedencia_livro_editar_id" class="form-label">Tipo de
+                                  Procedência</label>
+                                <select id="tipo_procedencia_livro_editar_id" name="tipo_procedencia_livro_editar_id"
+                                  class="form-control" required>
                                   <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
                                   </option>
-                                  {% for bairro in bairros %}
-                                  <option value="{{bairro.id}}" {% if bairro.id==livros.bairro_id %} selected
-                                    {%endif%}>
-                                    {{bairro.bairro }}
+                                  {% for tipo_procedencia_livro in tipos_procedencia_livro %}
+                                  <option value="{{tipo_procedencia_livro.id}}">
+                                    {{tipo_procedencia_livro.tipo_procedencia_livro }}
                                   </option>
                                   {% endfor %}
                                 </select>
                               </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                               <div class="mb-3">
-                                <label for="numero_editar" class="form-label">Número</label>
-                                <input type="text" name="numero_editar" id="numero_editar" class="form-control">
+                                <label for="procedencia_livro_editar" class="form-label">Local de Procedência</label>
+                                <input type="text" name="procedencia_livro_editar" id="procedencia_livro_editar"
+                                  class="form-control">
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="endereco_editar" class="form-label">Endereço</label>
-                                <input type="text" name="endereco_editar" id="endereco_editar" class="form-control">
+                                <label for="localizacao_livro_editar" class="form-label">Prateleira</label>
+                                <input type="text" name="localizacao_livro_editar" id="localizacao_livro_editar"
+                                  class="form-control">
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="referencia_editar" class="form-label">Referência</label>
-                                <textarea id="referencia_editar" name="referencia_editar" class="form-control"
-                                  rows="3"></textarea>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <div class="mb-3">
-                                <label for="complemento_editar" class="form-label">Complemento</label>
-                                <textarea id="complemento_editar" name="complemento_editar" class="form-control"
+                                <label for="sinopse_livro_editar" class="form-label">Sinopse</label>
+                                <textarea id="sinopse_livro_editar" name="sinopse_livro_editar" class="form-control"
                                   rows="3"></textarea>
                               </div>
                             </div>
@@ -152,8 +182,8 @@
                 </div>
                 <div class="row">
                   <div class="mb-3">
-                    <button type="submit" class="btn btn-dark me-2" value="">Cadastrar</button><button type="button"
-                      class="btn btn-warning" onClick="window.location.reload();">
+                    <button type="button" class="btn btn-dark me-2 editarLivro" value="">Editar</button><button
+                      type="button" class="btn btn-warning" onClick="window.location.reload();">
                       Cancelar </button>
                   </div>
                 </div>
@@ -166,8 +196,20 @@
   </div>
 </div>
 <script>
-  function previewEditar() {
-    imgLogoEditar.src = URL.createObjectURL(event.target.files[0]);
+  function previewCadastroEditar() {
+
+    var uploadField = document.getElementById("img_capa_livro_editar");
+    if (uploadField.files[0].size > 8097152) {
+      Swal.fire({
+        title: "Alerta!",
+        text: "A imagem escolhida está acima do limite permitido (8Mb)!",
+        icon: "warning"
+      });
+      uploadField.value = "";
+    } else {
+      foto_capa_livro_editar.src = URL.createObjectURL(event.target.files[0]);
+    }
+
 
   }
 </script>

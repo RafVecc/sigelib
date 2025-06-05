@@ -31,7 +31,7 @@
                             <div class="col-md-12">
                               <div class="mb-3">
                                 <label for="foto_capa_livro" class="form-label">Foto Capa</label>
-                                <input type="file" name="foto_capa_livro" class="form-control"
+                                <input type="file" name="foto_capa_livro" id="foto_capa_livro" class="form-control"
                                   onchange="previewCadastro()">
                               </div>
                             </div>
@@ -188,7 +188,21 @@
 </div>
 <script>
   function previewCadastro() {
-    imgLogo.src = URL.createObjectURL(event.target.files[0]);
+
+    var uploadField = document.getElementById("foto_capa_livro");
+    console.log(uploadField)
+    if (uploadField.files[0].size > 8097152) {
+      // alert("File is too big!");
+      Swal.fire({
+        title: "Alerta!",
+        text: "A imagem escolhida está acima do limite permitido (8Mb)!",
+        icon: "warning"
+      });
+      uploadField.value = "";
+    } else {
+      imgLogo.src = URL.createObjectURL(event.target.files[0]);
+    }
+
 
   }
 </script>

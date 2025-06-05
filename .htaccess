@@ -7,7 +7,9 @@ RewriteEngine On
 #Define a url base
 RewriteBase /sigelib
 
-php_value upload_max_filesize 25M
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
+php_value memory_limit 200M
 
 #Define a condição sob a qual a reescrita ocorrera
 RewriteCond %{SCRIPT_FILENAME} !-f
