@@ -32,35 +32,35 @@ try {
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'usuarios/statusUsuario', 'AdminUsuarios@statusUsuario');
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'usuarios/resetarSenha', 'AdminUsuarios@resetarSenha');
 
-        //ADMIN ENTIDADES
-        SimpleRouter::get(URL_ADMIN . 'entidades/listar', 'AdminEntidades@listar');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/cadastrar', 'AdminEntidades@cadastrar');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/editar', 'AdminEntidades@editar');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/valorizarEntidade', 'AdminEntidades@valorizarEntidade');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/statusEntidade', 'AdminEntidades@statusEntidade');
+        // //ADMIN ENTIDADES
+        // SimpleRouter::get(URL_ADMIN . 'entidades/listar', 'AdminEntidades@listar');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/cadastrar', 'AdminEntidades@cadastrar');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/editar', 'AdminEntidades@editar');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/valorizarEntidade', 'AdminEntidades@valorizarEntidade');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'entidades/statusEntidade', 'AdminEntidades@statusEntidade');
 
-        //ADMIN AREA ATUACAO
-        SimpleRouter::get(URL_ADMIN . 'areaAtuacao/listar', 'AdminAreaAtuacao@listar');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/cadastrar', 'AdminAreaAtuacao@cadastrar');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/editar', 'AdminAreaAtuacao@editar');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/valorizarAreaAtuacao', 'AdminAreaAtuacao@valorizarAreaAtuacao');
-        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/statusAreaAtuacao', 'AdminAreaAtuacao@statusAreaAtuacao');
+        // //ADMIN AREA ATUACAO
+        // SimpleRouter::get(URL_ADMIN . 'areaAtuacao/listar', 'AdminAreaAtuacao@listar');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/cadastrar', 'AdminAreaAtuacao@cadastrar');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/editar', 'AdminAreaAtuacao@editar');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/valorizarAreaAtuacao', 'AdminAreaAtuacao@valorizarAreaAtuacao');
+        // SimpleRouter::match(['get', 'post'], URL_ADMIN . 'areaAtuacao/statusAreaAtuacao', 'AdminAreaAtuacao@statusAreaAtuacao');
 
-         //ADMIN PROFESSORES
-         SimpleRouter::get(URL_ADMIN . 'professores/listar', 'AdminProfessores@listar');
-         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/cadastrar', 'AdminProfessores@cadastrar');
-         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/editar', 'AdminProfessores@editar');
-         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/valorizarProfessor', 'AdminProfessores@valorizarProfessor');
-         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/statusProfessor', 'AdminProfessores@statusProfessor');
-         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/checarCpf', 'AdminProfessores@checarCpf');
+        //  //ADMIN PROFESSORES
+        //  SimpleRouter::get(URL_ADMIN . 'professores/listar', 'AdminProfessores@listar');
+        //  SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/cadastrar', 'AdminProfessores@cadastrar');
+        //  SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/editar', 'AdminProfessores@editar');
+        //  SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/valorizarProfessor', 'AdminProfessores@valorizarProfessor');
+        //  SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/statusProfessor', 'AdminProfessores@statusProfessor');
+        //  SimpleRouter::match(['get', 'post'], URL_ADMIN . 'professores/checarCpf', 'AdminProfessores@checarCpf');
 
 
-          //ADMIN ESPAÇOS
-          SimpleRouter::get(URL_ADMIN . 'espacos/listar', 'AdminEspacos@listar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/cadastrar', 'AdminEspacos@cadastrar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/editar', 'AdminEspacos@editar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/valorizarEspaco', 'AdminEspacos@valorizarEspaco');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/statusEspaco', 'AdminEspacos@statusEspaco');
+        //   //ADMIN ESPAÇOS
+        //   SimpleRouter::get(URL_ADMIN . 'espacos/listar', 'AdminEspacos@listar');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/cadastrar', 'AdminEspacos@cadastrar');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/editar', 'AdminEspacos@editar');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/valorizarEspaco', 'AdminEspacos@valorizarEspaco');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/statusEspaco', 'AdminEspacos@statusEspaco');
 
           //ADMIN LIVROS
           SimpleRouter::get(URL_ADMIN . 'livros/listar', 'AdminLivros@listar');
@@ -69,20 +69,20 @@ try {
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/valorizarLivro', 'AdminLivros@valorizarLivro');
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/statusLivro', 'AdminLivros@statusLivro');
 
-          //ADMIN CURSOS
-          SimpleRouter::get(URL_ADMIN . 'cursos/listar', 'AdminCursos@listar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/cadastrar', 'AdminCursos@cadastrar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/editar', 'AdminCursos@editar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/editarAtividade', 'AdminCursos@editarAtividade');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/valorizarCurso', 'AdminCursos@valorizarCurso');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/valorizarAtividade', 'AdminCursos@valorizarAtividade');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/buscarEspaco', 'AdminCursos@buscarEspaco');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/cancelarCurso', 'AdminCursos@cancelarCurso');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/statusCurso', 'AdminCursos@statusCurso');
+        //   //ADMIN CURSOS
+        //   SimpleRouter::get(URL_ADMIN . 'cursos/listar', 'AdminCursos@listar');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/cadastrar', 'AdminCursos@cadastrar');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/editar', 'AdminCursos@editar');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/editarAtividade', 'AdminCursos@editarAtividade');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/valorizarCurso', 'AdminCursos@valorizarCurso');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/valorizarAtividade', 'AdminCursos@valorizarAtividade');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/buscarEspaco', 'AdminCursos@buscarEspaco');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/cancelarCurso', 'AdminCursos@cancelarCurso');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'cursos/statusCurso', 'AdminCursos@statusCurso');
 
-          //ADMIN ESPAÇOS
-          SimpleRouter::get(URL_ADMIN . 'teste/listar', 'AdminTeste@listar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/cadastrar', 'AdminTeste@cadastrar');
+        //   //ADMIN ESPAÇOS
+        //   SimpleRouter::get(URL_ADMIN . 'teste/listar', 'AdminTeste@listar');
+        //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/cadastrar', 'AdminTeste@cadastrar');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/editar', 'AdminTeste@editar');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/valorizarEspaco', 'AdminTeste@valorizarEspaco');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/statusEspaco', 'AdminTeste@statusEspaco');

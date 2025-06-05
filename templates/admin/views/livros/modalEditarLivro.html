@@ -1,18 +1,18 @@
 <!-- Modal -->
-<div class="modal fade modal-xl" id="ModalEditarAluno" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade modal-xl" id="ModalEditarLivro" tabindex="-1" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal_maior">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Aluno</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Livro</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="card border-0 shadow-sm">
           <div class="card-body">
-            <form method="post" action="{{url('admin/alunos/editar')}}" id="editarAluno" enctype="multipart/form-data">
-              <input type="hidden" name="aluno_id" id="aluno_id" class="form-control">
-              <h5 class="modal-title fw-bold" id="exampleModalLabel">Editar Aluno</h5>
+            <form method="post" action="{{url('admin/livros/editar')}}" id="editarLivro" enctype="multipart/form-data">
+              <input type="hidden" name="livro_id" id="livro_id" class="form-control">
+              <h5 class="modal-title fw-bold" id="exampleModalLabel">Editar Livro</h5>
               <div class="row">
                 <div class="col-lg-11-3qtr card border-2 shadow-sm mt-2 mb-3 me-4 ms-4">
                   <div class="card-body">
@@ -29,7 +29,7 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="foto_editar" class="form-label">Foto Aluno</label>
+                                <label for="foto_editar" class="form-label">Foto Livro</label>
                                 <input type="file" name="foto_editar" id="foto_editar" class="form-control"
                                   onchange="previewEditar()">
                               </div>
@@ -104,7 +104,7 @@
                                   <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
                                   </option>
                                   {% for bairro in bairros %}
-                                  <option value="{{bairro.id}}" {% if bairro.id==alunos.bairro_id %} selected
+                                  <option value="{{bairro.id}}" {% if bairro.id==livros.bairro_id %} selected
                                     {%endif%}>
                                     {{bairro.bairro }}
                                   </option>
