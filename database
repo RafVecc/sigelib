@@ -27,7 +27,7 @@ CREATE TABLE `genero_livro` (
   `genero_livro` varchar(255) DEFAULT NULL,
   `subgenero_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +36,7 @@ CREATE TABLE `genero_livro` (
 
 LOCK TABLES `genero_livro` WRITE;
 /*!40000 ALTER TABLE `genero_livro` DISABLE KEYS */;
+INSERT INTO `genero_livro` VALUES (1,'ROMANCE',NULL),(2,'TERROR',NULL),(3,'MISTÉRIO',NULL),(4,'DRAMA',NULL),(5,'FICÇÃO',NULL);
 /*!40000 ALTER TABLE `genero_livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,7 +51,7 @@ CREATE TABLE `idioma_livro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idioma_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,6 +60,7 @@ CREATE TABLE `idioma_livro` (
 
 LOCK TABLES `idioma_livro` WRITE;
 /*!40000 ALTER TABLE `idioma_livro` DISABLE KEYS */;
+INSERT INTO `idioma_livro` VALUES (1,'PORTUGUÊS'),(2,'INGLÊS'),(3,'ALEMÃO'),(4,'CHINÊS'),(5,'ITALIANO'),(6,'ESPANHOL'),(7,'JAPONÊS');
 /*!40000 ALTER TABLE `idioma_livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +91,7 @@ CREATE TABLE `livros` (
   `usuario_cadastro_id` int DEFAULT NULL,
   `usuario_modificacao_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +100,7 @@ CREATE TABLE `livros` (
 
 LOCK TABLES `livros` WRITE;
 /*!40000 ALTER TABLE `livros` DISABLE KEYS */;
+INSERT INTO `livros` VALUES (1,'titulo teste','autor teste',2,'algo sobre o livro','editora teste',2025,1,1,2,'Sempre',3,'terceira de cima para baixo','fotoLivro_4d51c3576465768c4d22798747af4647.jpg','2025-06-04 17:57:42','2025-06-04 18:00:36',6,6);
 /*!40000 ALTER TABLE `livros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +115,7 @@ CREATE TABLE `pais_livro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pais_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +124,7 @@ CREATE TABLE `pais_livro` (
 
 LOCK TABLES `pais_livro` WRITE;
 /*!40000 ALTER TABLE `pais_livro` DISABLE KEYS */;
+INSERT INTO `pais_livro` VALUES (1,'BRASIL'),(2,'EUA'),(3,'CANADÁ'),(4,'MÉXICO'),(5,'ITÁLIA'),(6,'ALEMANHA'),(7,'PORTUGAL'),(8,'ESPANHA'),(9,'ARGENTINA'),(10,'COLOMBIA');
 /*!40000 ALTER TABLE `pais_livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +139,7 @@ CREATE TABLE `tipo_procedencia_livro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `tipo_procedencia_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +148,7 @@ CREATE TABLE `tipo_procedencia_livro` (
 
 LOCK TABLES `tipo_procedencia_livro` WRITE;
 /*!40000 ALTER TABLE `tipo_procedencia_livro` DISABLE KEYS */;
+INSERT INTO `tipo_procedencia_livro` VALUES (1,'DOAÇÃO'),(2,'COMPRA INTERNA');
 /*!40000 ALTER TABLE `tipo_procedencia_livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,7 +214,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (6,'testando de novo','32564864','email@email.com','testando.novo','$2y$10$oSjRM6TVbaOKuBQE5EndX.jns0oqdsDeb1aG6v9/aAGSgQbzgoEWK',1,1,1,'2024-10-09 00:00:00','2026-10-25 00:00:00','2025-05-26 01:45:45',1,'2024-10-08 09:59:38','2025-05-26 01:45:45',1,1);
+INSERT INTO `usuarios` VALUES (6,'testando de novo','32564864','email@email.com','testando.novo','$2y$10$oSjRM6TVbaOKuBQE5EndX.jns0oqdsDeb1aG6v9/aAGSgQbzgoEWK',1,1,1,'2024-10-09 00:00:00','2026-10-25 00:00:00','2025-06-04 11:11:34',1,'2024-10-08 09:59:38','2025-06-04 11:11:34',1,1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -222,5 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-26  3:25:04
-
+-- Dump completed on 2025-06-04 23:05:42
