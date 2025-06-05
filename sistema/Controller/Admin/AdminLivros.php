@@ -2,7 +2,11 @@
 
 namespace sistema\Controller\Admin;
 
+use sistema\Modelo\GeneroLivroModelo;
+use sistema\Modelo\IdiomaLivroModelo;
 use sistema\Modelo\LivroModelo;
+use sistema\Modelo\PaisLivroModelo;
+use sistema\Modelo\TipoProcedenciaLivro;
 use Verot\Upload\Upload;
 use sistema\Nucleo\Helpers;
 use sistema\Nucleo\Conexao;
@@ -22,15 +26,23 @@ class AdminLivros extends AdminController
             Helpers::redirecionar('admin/');
         }
         $livros = new LivroModelo();
+        $generos_livro = new GeneroLivroModelo();
+        $idiomas_livro = new IdiomaLivroModelo();
+        $paises_livro = new PaisLivroModelo();
+        $tipos_procedencia_livro = new TipoProcedenciaLivro();
 
         echo $this->template->renderizar('livros/listar.html', [
-            'livros' => $livros->busca()->resultado(true)
+            'livros' => $livros->busca()->resultado(true),
+            'generos_livro' => $generos_livro->busca()->resultado(true),
+            'idiomas_livro' => $idiomas_livro->busca()->resultado(true),
+            'paises_livro' => $paises_livro->busca()->resultado(true),
+            'tipos_procedencia_livro' => $tipos_procedencia_livro->busca()->resultado(true),
         ]);
     }
 
     public function cadastrar(): void
     {
-        //Só permitir que Administrador entren na tela de cadastrar usuarios
+        //Só permitir que Administrador entren na tela de cadastrar livros
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
@@ -41,73 +53,64 @@ class AdminLivros extends AdminController
             //checa os dados 
             if ($this->validarDados($dados)) {
 
-                $aluno = new AlunoModelo();
+                $livro = new LivroModelo();
 
-                $token = Helpers::gerarToken(6);
-                $check = $aluno->busca("token = '{$token}'")->total();
-
-                while ($check > 0) {
-                    $token = Helpers::gerarToken(6);
-                    $check = $aluno->busca("token = '{$token}'")->total();
-                }
-
-                $aluno->usuario_cadastro_id = $this->usuario->id;
-                $aluno->usuario_modificacao_id = $this->usuario->id;
-                $aluno->cpf = isset($dados['cpf']) && !empty($dados['cpf']) ? Helpers::limparNumero($dados['cpf']) : NULL;
-                $aluno->nome = isset($dados['nome']) && !empty($dados['nome']) ? $dados['nome'] : NULL;
-                $aluno->telefone_residencia = isset($dados['telefone_residencia']) && !empty($dados['telefone_residencia']) ? $dados['telefone_residencia'] : NULL;
-                $aluno->telefone_celular = isset($dados['telefone_celular']) && !empty($dados['telefone_celular']) ? $dados['telefone_celular'] : NULL;
-                $aluno->email = isset($dados['email']) && !empty($dados['email']) ? $dados['email'] : NULL;
-                $aluno->rede_social = isset($dados['rede_social']) && !empty($dados['rede_social']) ? $dados['rede_social'] : NULL;
-                $aluno->cep = isset($dados['cep']) && !empty($dados['cep']) ? $dados['cep'] : NULL;
-                $aluno->bairro_id = isset($dados['bairro_id']) && !empty($dados['bairro_id']) ? $dados['bairro_id'] : NULL;
-                $aluno->endereco = isset($dados['endereco']) && !empty($dados['endereco']) ? $dados['endereco'] : NULL;
-                $aluno->numero = isset($dados['numero']) && !empty($dados['numero']) ? $dados['numero'] : NULL;
-                $aluno->complemento = isset($dados['complemento']) && !empty($dados['complemento']) ? $dados['complemento'] : NULL;
-                $aluno->referencia = isset($dados['referencia']) && !empty($dados['referencia']) ? $dados['referencia'] : NULL;
-                $aluno->token = $token;
-
-                if ($_FILES['foto']['error'] == 0) {
-                    $upload = new Upload($_FILES['foto'], 'pt_BR');
+                $livro->usuario_cadastro_id = $this->usuario->id;
+                $livro->usuario_modificacao_id = $this->usuario->id;
+                $livro->titulo_livro = isset($dados['titulo_livro']) && !empty($dados['titulo_livro']) ? $dados['titulo_livro'] : NULL;
+                $livro->genero_livro_id = isset($dados['genero_livro_id']) && !empty($dados['genero_livro_id']) ? $dados['genero_livro_id'] : NULL;
+                $livro->editora_livro = isset($dados['editora_livro']) && !empty($dados['editora_livro']) ? $dados['editora_livro'] : NULL;
+                $livro->autor_livro = isset($dados['autor_livro']) && !empty($dados['autor_livro']) ? $dados['autor_livro'] : NULL;
+                $livro->ano_livro = isset($dados['ano_livro']) && !empty($dados['ano_livro']) ? $dados['ano_livro'] : NULL;
+                $livro->pais_livro_id = isset($dados['pais_livro_id']) && !empty($dados['pais_livro_id']) ? $dados['pais_livro_id'] : NULL;
+                $livro->idioma_livro_id = isset($dados['idioma_livro_id']) && !empty($dados['idioma_livro_id']) ? $dados['idioma_livro_id'] : NULL;
+                $livro->quantidade_livro = isset($dados['quantidade_livro']) && !empty($dados['quantidade_livro']) ? $dados['quantidade_livro'] : NULL;
+                $livro->tipo_procedencia_livro_id = isset($dados['tipo_procedencia_livro_id']) && !empty($dados['tipo_procedencia_livro_id']) ? $dados['tipo_procedencia_livro_id'] : NULL;
+                $livro->procedencia_livro = isset($dados['procedencia_livro']) && !empty($dados['procedencia_livro']) ? $dados['procedencia_livro'] : NULL;
+                $livro->localizacao_livro = isset($dados['localizacao_livro']) && !empty($dados['localizacao_livro']) ? $dados['localizacao_livro'] : NULL;
+                $livro->sinopse_livro = isset($dados['sinopse_livro']) && !empty($dados['sinopse_livro']) ? $dados['sinopse_livro'] : NULL;
+                
+                if ($_FILES['foto_capa_livro']['error'] == 0) {
+                    $upload = new Upload($_FILES['foto_capa_livro'], 'pt_BR');
                     if ($upload->uploaded) {
                         if (in_array($upload->file_src_name_ext, ['png', 'jpg', 'jpeg'])) {
 
                             $foto_token = Helpers::gerarToken();
-                            $titulo = $upload->file_new_name_body = 'fotoAluno_' . $foto_token;
+                            $titulo = $upload->file_new_name_body = 'fotoLivro_' . $foto_token;
                             $upload->jpeg_quality = 80;
                             $upload->image_convert = 'jpg';
-                            $upload->process('uploads/alunos/' . $token . '/');
-                            $aluno->foto = $titulo . '.jpg';
+                            $upload->process('uploads/livros/');
+                            $livro->foto_capa_livro = $titulo . '.jpg';
                             if (!$upload->processed) {
                                 Conexao::getInstancia()->rollBack();
                                 $this->mensagem->alerta('Erro de Processamento!')->flash();
-                                Helpers::redirecionar('admin/alunos/listar');
+                                Helpers::redirecionar('admin/livros/listar');
                             }
                         } else {
                             Conexao::getInstancia()->rollBack();
                             $this->mensagem->alerta('Formato de imagem não permitido!')->flash();
-                            Helpers::redirecionar('admin/alunos/listar');
+                            Helpers::redirecionar('admin/livros/listar');
                         }
                     } else {
                         Conexao::getInstancia()->rollBack();
                         $this->mensagem->alerta('Erro de Upload!')->flash();
-                        Helpers::redirecionar('admin/alunos/listar');
+                        Helpers::redirecionar('admin/livros/listar');
                     }
                 }
 
-                if ($aluno->salvar()) {
+                if ($livro->salvar()) {
                     Conexao::getInstancia()->commit();
-                    $this->mensagem->sucesso('Aluno cadastrado com sucesso')->flash();
-                    Helpers::redirecionar('admin/alunos/listar');
+                    $this->mensagem->sucesso('Livro cadastrado com sucesso')->flash();
+                    Helpers::redirecionar('admin/livros/listar');
                 } else {
                     Conexao::getInstancia()->rollBack();
-                    $this->mensagem->erro($aluno->erro())->flash();
-                    Helpers::redirecionar('admin/alunos/listar');
+                    $this->mensagem->erro($livro->erro())->flash();
+                    Helpers::redirecionar('admin/livros/listar');
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
                 $this->mensagem->erro($this->validarDados($dados))->flash();
-                Helpers::redirecionar('admin/alunos/listar');
+                Helpers::redirecionar('admin/livros/listar');
             }
         }
     }
