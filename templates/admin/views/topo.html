@@ -22,32 +22,38 @@
         </button>
         <ul class="dropdown-menu ul-secundaria">
           <li class="li-secundaria">
-            <a class="dropdown-item a-secundaria" href="{{url('admin/livros/listar')}}" tooltip="tooltip" title="Cadastrar Alunos">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/livros/listar')}}" tooltip="tooltip"
+              title="Cadastrar Livros">
               LIVROS
             </a>
           </li>
           {# <li class="li-secundaria">
-            <a class="dropdown-item a-secundaria" href="{{url('admin/professores/listar')}}" tooltip="tooltip" title="Cadastrar Professores">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/professores/listar')}}" tooltip="tooltip"
+              title="Cadastrar Professores">
               PROFESSORES
             </a>
           </li>
           <li class="li-secundaria">
-            <a class="dropdown-item a-secundaria" href="{{url('admin/entidades/listar')}}" tooltip="tooltip" title="Cadastrar Entidades">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/entidades/listar')}}" tooltip="tooltip"
+              title="Cadastrar Entidades">
               ENTIDADES
             </a>
           </li>
           <li class="li-secundaria">
-            <a class="dropdown-item a-secundaria" href="{{url('admin/espacos/listar')}}" tooltip="tooltip" title="Cadastrar Espaços">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/espacos/listar')}}" tooltip="tooltip"
+              title="Cadastrar Espaços">
               ESPAÇOS
             </a>
           </li>
           <li class="li-secundaria">
-            <a class="dropdown-item a-secundaria" href="{{url('admin/teste/listar')}}" tooltip="tooltip" title="Cadastrar Espaços">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/teste/listar')}}" tooltip="tooltip"
+              title="Cadastrar Espaços">
               TESTE
             </a>
           </li>
           <li class="li-secundaria">
-            <a class="dropdown-item a-secundaria" href="{{url('admin/areaAtuacao/listar')}}" tooltip="tooltip" title="Cadastrar Áreas de Atuações e Especializações">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/areaAtuacao/listar')}}" tooltip="tooltip"
+              title="Cadastrar Áreas de Atuações e Especializações">
               ÁREA DE ATUAÇÃO E ESPECIALIZAÇÕES
             </a>
           </li> #}
@@ -62,7 +68,8 @@
 
         <ul class="dropdown-menu ul-secundaria">
           <li class="li-secundaria">
-            <a class="dropdown-item a-secundaria" href="{{url('admin/cursos/listar')}}" tooltip="tooltip" title="Cadastrar Cursos">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/cursos/listar')}}" tooltip="tooltip"
+              title="Cadastrar Cursos">
               CURSOS
             </a>
           </li>
@@ -97,7 +104,7 @@
           {% endif %}
         </ul>
       </li> #}
-      <li class="li-principal"><a class="a-principal" href="#">VISTORIA</a></li>
+      <li class="li-principal"><a class="a-principal" href="{{url('admin/leitores/pesquisaLeitor')}}">PESQUISAR LEITOR</a></li>
       <li class="li-principal"><a class="a-principal" href="#">CONSULTAS</a></li>
       <li class="li-principal"><a class="a-principal" href="#">INDICADORES</a></li>
       <li class="li-principal btn-group">
