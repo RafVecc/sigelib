@@ -1,0 +1,22 @@
+CREATE TABLE `leitores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cpf_leitor` varchar(255) DEFAULT NULL,
+  `nome_leitor` varchar(255) DEFAULT NULL,
+  `data_nascimento_leitor` date DEFAULT NULL,
+  `telefone_leitor` varchar(20) DEFAULT NULL,
+  `sexo_leitor` int(11) DEFAULT NULL,
+  `cor_leitor_id` int(11) DEFAULT NULL,
+  `escolaridade_leitor_id` int(11) DEFAULT NULL,
+  `cep_leitor` varchar(10) DEFAULT NULL,
+  `rua_leitor` varchar(255) DEFAULT NULL,
+  `numero_leitor` varchar(255) DEFAULT NULL,
+  `bairro_leitor` varchar(255) DEFAULT NULL,
+  `ponto_de_referencia_leitor` text DEFAULT NULL,
+  `email_leitor` varchar(255) DEFAULT NULL,
+  `rede_social_leitor` varchar(255) DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `usuario_cadastro_id` int(11) DEFAULT NULL,
+  `usuario_modificacao_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
