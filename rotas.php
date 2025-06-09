@@ -75,7 +75,8 @@ try {
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/editar', 'AdminLeitores@editar');
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/valorizarLivro', 'AdminLeitores@valorizarLivro');
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/statusLivro', 'AdminLeitores@statusLivro');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/pesquisaLeitor', 'AdminLeitores@pesquisaLeitor');
+          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/checarCpf', 'AdminLeitores@checarCpf');
+          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/fichaLeitor', 'AdminLeitores@fichaLeitor');
 
         //   //ADMIN CURSOS
         //   SimpleRouter::get(URL_ADMIN . 'cursos/listar', 'AdminCursos@listar');

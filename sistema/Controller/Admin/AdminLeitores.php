@@ -2,8 +2,11 @@
 
 namespace sistema\Controller\Admin;
 
+use sistema\Modelo\CorRacaModelo;
+use sistema\Modelo\EscolaridadeModelo;
 use sistema\Modelo\GeneroLivroModelo;
 use sistema\Modelo\IdiomaLivroModelo;
+use sistema\Modelo\LeitorModelo;
 use sistema\Modelo\LivroModelo;
 use sistema\Modelo\PaisLivroModelo;
 use sistema\Modelo\TipoProcedenciaLivro;
@@ -14,8 +17,7 @@ use sistema\Modelo\UsuarioModelo;
 use sistema\Modelo\TipoUsuarioModelo;
 
 
-
-class AdminLivros extends AdminController
+class AdminLeitores extends AdminController
 {
 
     public function listar(): void
@@ -25,24 +27,27 @@ class AdminLivros extends AdminController
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
         }
-        $livros = new LivroModelo();
-        $generos_livro = new GeneroLivroModelo();
-        $idiomas_livro = new IdiomaLivroModelo();
-        $paises_livro = new PaisLivroModelo();
-        $tipos_procedencia_livro = new TipoProcedenciaLivro();
+        $cor_racas = new CorRacaModelo();
+        $escolaridades = new EscolaridadeModelo();
+        echo $this->template->renderizar('leitores/listar.html', [
+        'cor_racas' => $cor_racas->busca()->resultado(true),
+        'escolaridades' => $escolaridades->busca()->resultado(true),
+        ]);
+    }
 
-        echo $this->template->renderizar('livros/listar.html', [
-            'livros' => $livros->busca()->resultado(true),
-            'generos_livro' => $generos_livro->busca()->resultado(true),
-            'idiomas_livro' => $idiomas_livro->busca()->resultado(true),
-            'paises_livro' => $paises_livro->busca()->resultado(true),
-            'tipos_procedencia_livro' => $tipos_procedencia_livro->busca()->resultado(true),
+    public function fichaLeitor(): void
+    {
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        $leitor = (new LeitorModelo())->busca("cpf_leitor = {$dados['cpf_leitor']}")->resultado();
+        echo $this->template->renderizar('leitores/fichaLeitor.html', [
+            'leitor' => $leitor
         ]);
     }
 
     public function cadastrar(): void
     {
-        //Só permitir que Administrador entren na tela de cadastrar livros
+        //Só permitir que Administrador entren na tela de cadastrar leitores
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
@@ -52,71 +57,60 @@ class AdminLivros extends AdminController
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
             Conexao::getInstancia()->beginTransaction();
-            //checa os dados 
+            //checa os dados
             if ($this->validarDados($dados)) {
 
-                $livro = new LivroModelo();
+                $leitor = new LeitorModelo();
 
-                $livro->usuario_cadastro_id = $this->usuario->id;
-                $livro->usuario_modificacao_id = $this->usuario->id;
-                $livro->titulo_livro = isset($dados['titulo_livro']) && !empty($dados['titulo_livro']) ? $dados['titulo_livro'] : NULL;
-                $livro->genero_livro_id = isset($dados['genero_livro_id']) && !empty($dados['genero_livro_id']) ? $dados['genero_livro_id'] : NULL;
-                $livro->editora_livro = isset($dados['editora_livro']) && !empty($dados['editora_livro']) ? $dados['editora_livro'] : NULL;
-                $livro->autor_livro = isset($dados['autor_livro']) && !empty($dados['autor_livro']) ? $dados['autor_livro'] : NULL;
-                $livro->ano_livro = isset($dados['ano_livro']) && !empty($dados['ano_livro']) ? $dados['ano_livro'] : NULL;
-                $livro->pais_livro_id = isset($dados['pais_livro_id']) && !empty($dados['pais_livro_id']) ? $dados['pais_livro_id'] : NULL;
-                $livro->idioma_livro_id = isset($dados['idioma_livro_id']) && !empty($dados['idioma_livro_id']) ? $dados['idioma_livro_id'] : NULL;
-                $livro->quantidade_livro = isset($dados['quantidade_livro']) && !empty($dados['quantidade_livro']) ? $dados['quantidade_livro'] : NULL;
-                $livro->tipo_procedencia_livro_id = isset($dados['tipo_procedencia_livro_id']) && !empty($dados['tipo_procedencia_livro_id']) ? $dados['tipo_procedencia_livro_id'] : NULL;
-                $livro->procedencia_livro = isset($dados['procedencia_livro']) && !empty($dados['procedencia_livro']) ? $dados['procedencia_livro'] : NULL;
-                $livro->localizacao_livro = isset($dados['localizacao_livro']) && !empty($dados['localizacao_livro']) ? $dados['localizacao_livro'] : NULL;
-                $livro->sinopse_livro = isset($dados['sinopse_livro']) && !empty($dados['sinopse_livro']) ? $dados['sinopse_livro'] : NULL;
-                
-                if ($_FILES['foto_capa_livro']['error'] == 0) {
-                    $upload = new Upload($_FILES['foto_capa_livro'], 'pt_BR');
+                $leitor->usuario_cadastro_id = $this->usuario->id;
+                $leitor->usuario_modificacao_id = $this->usuario->id;
+                $leitor->titulo_leitor = isset($dados['titulo_leitor']) && !empty($dados['titulo_leitor']) ? $dados['titulo_leitor'] : NULL;
+
+                if ($_FILES['foto_leitor']['error'] == 0) {
+                    $upload = new Upload($_FILES['foto_leitor'], 'pt_BR');
                     if ($upload->uploaded) {
                         if (in_array($upload->file_src_name_ext, ['png', 'jpg', 'jpeg'])) {
 
                             $foto_token = Helpers::gerarToken();
-                            $titulo = $upload->file_new_name_body = 'fotoLivro_' . $foto_token;
+                            $titulo = $upload->file_new_name_body = 'fotoLeitor_' . $foto_token;
                             // $upload->jpeg_quality = 80;
                             $upload->jpeg_size = 2500000;
                             $upload->image_convert = 'jpg';
                             // $upload->image_resize = true;
                             // $upload->image_ratio = true;
                             // $upload->image_x = 300;
-                            $upload->process('uploads/livros/');
-                            $livro->foto_capa_livro = $titulo . '.jpg';
+                            $upload->process('uploads/leitores/');
+                            $leitor->foto_leitor = $titulo . '.jpg';
                             if (!$upload->processed) {
                                 Conexao::getInstancia()->rollBack();
                                 $this->mensagem->alerta('Erro de Processamento!')->flash();
-                                Helpers::redirecionar('admin/livros/listar');
+                                Helpers::redirecionar('admin/leitores/listar');
                             }
                         } else {
                             Conexao::getInstancia()->rollBack();
                             $this->mensagem->alerta('Formato de imagem não permitido!')->flash();
-                            Helpers::redirecionar('admin/livros/listar');
+                            Helpers::redirecionar('admin/leitores/listar');
                         }
                     } else {
                         Conexao::getInstancia()->rollBack();
                         $this->mensagem->alerta('Erro de Upload!')->flash();
-                        Helpers::redirecionar('admin/livros/listar');
+                        Helpers::redirecionar('admin/leitores/listar');
                     }
                 }
 
-                if ($livro->salvar()) {
+                if ($leitor->salvar()) {
                     Conexao::getInstancia()->commit();
-                    $this->mensagem->sucesso('Livro cadastrado com sucesso')->flash();
-                    Helpers::redirecionar('admin/livros/listar');
+                    $this->mensagem->sucesso('Leitor cadastrado com sucesso')->flash();
+                    Helpers::redirecionar('admin/leitores/listar');
                 } else {
                     Conexao::getInstancia()->rollBack();
-                    $this->mensagem->erro($livro->erro())->flash();
-                    Helpers::redirecionar('admin/livros/listar');
+                    $this->mensagem->erro($leitor->erro())->flash();
+                    Helpers::redirecionar('admin/leitores/listar');
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
                 $this->mensagem->erro($this->validarDados($dados))->flash();
-                Helpers::redirecionar('admin/livros/listar');
+                Helpers::redirecionar('admin/leitores/listar');
             }
         }
     }
@@ -263,12 +257,11 @@ class AdminLivros extends AdminController
     public function checarCpf()
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        
-        $aluno_cpf = (new AlunoModelo())->busca("cpf = {$dados['cpf']}","","id")->resultado();
+        $leitor_cpf = (new LeitorModelo())->busca("cpf_leitor = {$dados['cpf']}", "", "id")->resultado();
 
-        if(isset($aluno_cpf)){
-            return $aluno_cpf->id;
-        }else{
+        if (isset($leitor_cpf)) {
+            return $leitor_cpf->id;
+        } else {
             return null;
         }
     }
