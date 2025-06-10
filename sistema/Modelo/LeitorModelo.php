@@ -59,6 +59,22 @@ class LeitorModelo extends Modelo
         return null;
     }
 
+    public function cor_raca(): ?CorRacaModelo
+    {
+        if ($this->cor_leitor_id) {
+            return (new CorRacaModelo())->buscaPorId($this->cor_leitor_id);
+        }
+        return null;
+    }
+
+    public function escolaridade(): ?EscolaridadeModelo
+    {
+        if ($this->escolaridade_leitor_id) {
+            return (new EscolaridadeModelo())->buscaPorId($this->escolaridade_leitor_id);
+        }
+        return null;
+    }
+
     public function salvar(): bool
     {
         return parent::salvar();

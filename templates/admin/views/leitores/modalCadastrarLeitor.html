@@ -58,7 +58,7 @@
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="data_nascimento_leitor" class="form-label">Data Nascimento</label>
-                                <input type="text" name="data_nascimento_leitor" class="form-control" required>
+                                <input type="date" name="data_nascimento_leitor" class="form-control" required>
                               </div>
                             </div>
                           </div>
@@ -192,8 +192,7 @@
 <script>
   function previewCadastro() {
 
-    var uploadField = document.getElementById("foto_capa_leitor");
-    console.log(uploadField)
+    var uploadField = document.getElementById("foto_leitor");
     if (uploadField.files[0].size > 8097152) {
       // alert("File is too big!");
       Swal.fire({

@@ -71,7 +71,7 @@ class AdminLivros extends AdminController
                 $livro->procedencia_livro = isset($dados['procedencia_livro']) && !empty($dados['procedencia_livro']) ? $dados['procedencia_livro'] : NULL;
                 $livro->localizacao_livro = isset($dados['localizacao_livro']) && !empty($dados['localizacao_livro']) ? $dados['localizacao_livro'] : NULL;
                 $livro->sinopse_livro = isset($dados['sinopse_livro']) && !empty($dados['sinopse_livro']) ? $dados['sinopse_livro'] : NULL;
-                
+
                 if ($_FILES['foto_capa_livro']['error'] == 0) {
                     $upload = new Upload($_FILES['foto_capa_livro'], 'pt_BR');
                     if ($upload->uploaded) {
@@ -80,11 +80,11 @@ class AdminLivros extends AdminController
                             $foto_token = Helpers::gerarToken();
                             $titulo = $upload->file_new_name_body = 'fotoLivro_' . $foto_token;
                             // $upload->jpeg_quality = 80;
-                            $upload->jpeg_size = 2500000;
+                            // $upload->jpeg_size = 2500000;
                             $upload->image_convert = 'jpg';
-                            // $upload->image_resize = true;
-                            // $upload->image_ratio = true;
-                            // $upload->image_x = 300;
+                            $upload->image_resize = true;
+                            $upload->image_x = 500;
+                            $upload->image_ratio_y = true;
                             $upload->process('uploads/livros/');
                             $livro->foto_capa_livro = $titulo . '.jpg';
                             if (!$upload->processed) {
@@ -263,12 +263,12 @@ class AdminLivros extends AdminController
     public function checarCpf()
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        
-        $aluno_cpf = (new AlunoModelo())->busca("cpf = {$dados['cpf']}","","id")->resultado();
 
-        if(isset($aluno_cpf)){
+        $aluno_cpf = (new AlunoModelo())->busca("cpf = {$dados['cpf']}", "", "id")->resultado();
+
+        if (isset($aluno_cpf)) {
             return $aluno_cpf->id;
-        }else{
+        } else {
             return null;
         }
     }

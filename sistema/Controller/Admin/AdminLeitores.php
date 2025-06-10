@@ -30,8 +30,8 @@ class AdminLeitores extends AdminController
         $cor_racas = new CorRacaModelo();
         $escolaridades = new EscolaridadeModelo();
         echo $this->template->renderizar('leitores/listar.html', [
-        'cor_racas' => $cor_racas->busca()->resultado(true),
-        'escolaridades' => $escolaridades->busca()->resultado(true),
+            'cor_racas' => $cor_racas->busca()->resultado(true),
+            'escolaridades' => $escolaridades->busca()->resultado(true),
         ]);
     }
 
@@ -64,7 +64,20 @@ class AdminLeitores extends AdminController
 
                 $leitor->usuario_cadastro_id = $this->usuario->id;
                 $leitor->usuario_modificacao_id = $this->usuario->id;
-                $leitor->titulo_leitor = isset($dados['titulo_leitor']) && !empty($dados['titulo_leitor']) ? $dados['titulo_leitor'] : NULL;
+                $leitor->cpf_leitor = isset($dados['cpf_leitor']) && !empty($dados['cpf_leitor']) ? $dados['cpf_leitor'] : NULL;
+                $leitor->nome_leitor = isset($dados['nome_leitor']) && !empty($dados['nome_leitor']) ? $dados['nome_leitor'] : NULL;
+                $leitor->data_nascimento_leitor = isset($dados['data_nascimento_leitor']) && !empty($dados['data_nascimento_leitor']) ? $dados['data_nascimento_leitor'] : NULL;
+                $leitor->telefone_leitor = isset($dados['telefone_leitor']) && !empty($dados['telefone_leitor']) ? $dados['telefone_leitor'] : NULL;
+                $leitor->sexo_leitor_id = isset($dados['sexo_leitor_id']) && !empty($dados['sexo_leitor_id']) ? $dados['sexo_leitor_id'] : NULL;
+                $leitor->cor_leitor_id = isset($dados['cor_leitor_id']) && !empty($dados['cor_leitor_id']) ? $dados['cor_leitor_id'] : NULL;
+                $leitor->escolaridade_leitor_id = isset($dados['escolaridade_leitor_id']) && !empty($dados['escolaridade_leitor_id']) ? $dados['escolaridade_leitor_id'] : NULL;
+                $leitor->cep_leitor = isset($dados['cep_leitor']) && !empty($dados['cep_leitor']) ? $dados['cep_leitor'] : NULL;
+                $leitor->rua_leitor = isset($dados['rua_leitor']) && !empty($dados['rua_leitor']) ? $dados['rua_leitor'] : NULL;
+                $leitor->numero_leitor = isset($dados['numero_leitor']) && !empty($dados['numero_leitor']) ? $dados['numero_leitor'] : NULL;
+                $leitor->bairro_leitor = isset($dados['bairro_leitor']) && !empty($dados['bairro_leitor']) ? $dados['bairro_leitor'] : NULL;
+                $leitor->ponto_de_referencia_leitor = isset($dados['ponto_de_referencia_leitor']) && !empty($dados['ponto_de_referencia_leitor']) ? $dados['ponto_de_referencia_leitor'] : NULL;
+                $leitor->email_leitor = isset($dados['email_leitor']) && !empty($dados['email_leitor']) ? $dados['email_leitor'] : NULL;
+                $leitor->rede_social_leitor = isset($dados['rede_social_leitor']) && !empty($dados['rede_social_leitor']) ? $dados['rede_social_leitor'] : NULL;
 
                 if ($_FILES['foto_leitor']['error'] == 0) {
                     $upload = new Upload($_FILES['foto_leitor'], 'pt_BR');
@@ -74,11 +87,11 @@ class AdminLeitores extends AdminController
                             $foto_token = Helpers::gerarToken();
                             $titulo = $upload->file_new_name_body = 'fotoLeitor_' . $foto_token;
                             // $upload->jpeg_quality = 80;
-                            $upload->jpeg_size = 2500000;
+                            // $upload->jpeg_size = 2000000;
                             $upload->image_convert = 'jpg';
-                            // $upload->image_resize = true;
-                            // $upload->image_ratio = true;
-                            // $upload->image_x = 300;
+                            $upload->image_resize         = true;
+                            $upload->image_x              = 500;
+                            $upload->image_ratio_y        = true;
                             $upload->process('uploads/leitores/');
                             $leitor->foto_leitor = $titulo . '.jpg';
                             if (!$upload->processed) {

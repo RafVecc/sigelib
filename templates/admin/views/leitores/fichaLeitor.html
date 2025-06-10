@@ -7,13 +7,8 @@
                 Dashboard
             </a>
         </li>
-        <li class="breadcrumb-item">
-            <a href="{{url('admin/pessoas/pesquisaPessoa')}}">
-                pessoas
-            </a>
-        </li>
         <li class="breadcrumb-item active" aria-current="page">
-            Ficha da Pessoa
+            Ficha do Leitor
         </li>
     </ol>
 </nav>
@@ -26,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12 card border-2 shadow-sm mb-3">
                     <div class="card-body">
-                        <img src='{{url("uploads/pessoas/"~pessoa.matricula~"/"~pessoa.foto)}}' alt="" id="imgPhoto">
+                        <img src='{{url("uploads/leitores/"~leitor.foto_leitor)}}' alt="" id="imgPhoto">
                     </div>
                 </div>
             </div>
@@ -34,61 +29,100 @@
     </div>
     <div class="col-lg-7-half card border-2 shadow-sm mb-1 ms-4">
         <div class="card-body">
+
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <div class="mb-3">
-                        <label for="cpf" class="form-label">CPF</label>
-                        <input class="form-control cpf" id="cpf" type="text" value="{{pessoa.cpf}}" name="cpf" readonly>
+                        <label for="cpf_leitor" class="form-label">CPF</label>
+                        <input class="form-control cpf_leitor" id="cpf_leitor" type="text" value="{{leitor.cpf_leitor}}"
+                            readonly>
                     </div>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                     <div class="mb-9">
-                        <label for="nome" class="form-label">Nome Completo</label>
-                        <input class="form-control" type="text" id="nome" name="nome" value="{{pessoa.nome}}" readonly>
+                        <label for="nome_leitor" class="form-label">Nome Completo</label>
+                        <input class="form-control" type="text" id="nome_leitor" value="{{leitor.nome_leitor}}"
+                            readonly>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-3">
+                    <div class="mb-3">
+                        <label for="data_nascimento_leitor" class="form-label">Data De Nascimento</label>
+                        <input class="form-control" type="date" value="{{leitor.data_nascimento_leitor}}"
+                            id="data_nascimento_leitor" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label for="sexo_leitor_id" class="form-label">Sexo</label>
+                        <input class="form-control sexo_leitor_id" type="text"
+                            value="{% if leitor.sexo_leitor_id=='1' %}MASCULINO{%else%}FEMININO{%endif%}"
+                            id="sexo_leitor_id" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="mb-3">
+                        <label for="cor_leitor_id" class="form-label">Cor/Raça</label>
+                        <input class="form-control" type="text" value="{{leitor.cor_raca.cor_raca}}" id="cor_leitor_id"
+                            readonly>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3">
                     <div class="mb-3">
-                        <label for="nascimento" class="form-label">Data De Nascimento</label>
-                        <input class="form-control" type="date" value="{{pessoa.nascimento}}" id="nascimento"
-                            name="nascimento" readonly>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="mb-3">
-                        <label for="idade" class="form-label">Idade</label>
-                        <input class="form-control" type="text" id="idade" value="{{pessoa.idade}}" name="idade"
+                        <label for="telefone_leitor" class="form-label">Contato Pessoal</label>
+                        <input class="form-control" type="text" value="{{leitor.telefone_leitor}}" id="telefone_leitor"
                             readonly>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-8">
                     <div class="mb-3">
-                        <label for="sexo" class="form-label">Sexo</label>
-                        <input class="form-control sexo" type="text"
-                            value="{% if pessoa.sexo=='1' %}MASCULINO{%else%}FEMININO{%endif%}" id="sexo" name="sexo"
+                        <label for="email_leitor" class="form-label">E-mail</label>
+                        <input class="form-control" type="text" value="{{leitor.email_leitor}}" id="email_leitor"
                             readonly>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="mb-3">
-                        <label for="telefone_pessoal" class="form-label">Contato Pessoal</label>
-                        <input class="form-control" type="text" value="{{pessoa.telefone_pessoal}}"
-                            id="telefone_pessoal" name="telefone_pessoal" readonly>
-                    </div>
-                </div>
-                <div class="d-grid gap-2 mb-3 d-md-flex justify-content-md-end">
+                <!-- <div class="d-grid gap-2 mb-3 d-md-flex justify-content-md-end">
 
                     <button type="button" class="btn btn-info" data-bs-toggle="modal"
                         data-bs-target="#ModalDadosPessoaisCompletos">
                         <i class="fa fa-edit"></i> Completar Dados Pessoais
                     </button>
                     
+                </div> -->
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label for="escolaridade_leitor_id" class="form-label">Escolaridade</label>
+                        <input class="form-control" type="text" value="{{leitor.escolaridade.escolaridade}}"
+                            id="escolaridade_leitor_id" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label for="rede_social_leitor" class="form-label">Rede Social</label>
+                        <input class="form-control" type="text" value="{{leitor.rede_social_leitor}}"
+                            id="rede_social_leitor" readonly>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="d-grid my-3 d-md-flex justify-content-md-end"></div>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#ModalDadosPessoaisCompletos">
+                        <i class="fa fa-edit"></i> Editar Leitor
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </br>
 {{ flash() }}
@@ -96,69 +130,19 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Dados Pessoais</button>
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Endereço</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="nav-historico-complementar-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-historico-complementar" type="button" role="tab"
-                aria-controls="nav-historico-complementar" aria-selected="false">Histórico de Acolhimento</button>
+            <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+                role="tab" aria-controls="nav-home" aria-selected="true">Histórico de Emprestimo</button>
         </li>
-        {#
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="nav-historico-ocorrencia-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-historico-ocorrencia" type="button" role="tab"
-                aria-controls="nav-historico-ocorrencia" aria-selected="false">Histórico de Ocorrências</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="nav-historico-evolucao-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-historico-evolucao" type="button" role="tab" aria-controls="nav-historico-evolucao"
-                aria-selected="false">Histórico de Evolução</button>
-        </li>
-        #}
-        {# <li class="nav-item" role="presentation">
-            <button class="nav-link" id="nav-historico-pia-tab" data-bs-toggle="tab" data-bs-target="#nav-historico-pia"
-                type="button" role="tab" aria-controls="nav-historico-pia" aria-selected="false">PIA</button>
-        </li> #}
-        {% if pessoa.unidadeAcolhimento.id_acolhimento and usuario().tipo_de_usuario_id == 3 %}
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="nav-diagnostico-familiar-tab" data-bs-toggle="tab"
-                data-bs-target="#nav-diagnostico-familiar" type="button" role="tab"
-                aria-controls="nav-diagnostico-familiar" aria-selected="false">Diagnóstico Familiar</button>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                aria-expanded="false">Social</a>
-            <ul class="dropdown-menu">
-                <li class="nav-item" role="presentation"><button class="nav-link" id="nav-relato-social-tab"
-                        data-bs-toggle="tab" data-bs-target="#nav-relato-social" type="button" role="tab"
-                        aria-controls="nav-relato-social" aria-selected="true">Relatos Sociais</button>
-                </li>
-                <li class="nav-item" role="presentation"><button class="nav-link" id="nav-estrategia-acao-social-tab"
-                        data-bs-toggle="tab" data-bs-target="#nav-estrategia-acao-social" type="button" role="tab"
-                        aria-controls="nav-estrategia-acao-social" aria-selected="true">Estratégias e Ações</button>
-                </li>
-                
-            </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                aria-expanded="false">Psicológico</a>
-            <ul class="dropdown-menu">
-                <li class="nav-item" role="presentation"><button class="nav-link" id="nav-relato-psicologico-tab"
-                        data-bs-toggle="tab" data-bs-target="#nav-relato-psicologico" type="button" role="tab"
-                        aria-controls="nav-relato-psicologico" aria-selected="true">Relatos Psicológicos</button>
-                </li>
-                <li class="nav-item" role="presentation"><button class="nav-link"
-                        id="nav-estrategia-acao-psicologico-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-estrategia-acao-psicologico" type="button" role="tab"
-                        aria-controls="nav-estrategia-acao-psicologico" aria-selected="true">Estratégias e
-                        Ações</button>
-                </li>
-            </ul>
-        </li>
-        {% endif %}
     </ul>
 </nav>
-
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">{% include
+        'leitores/dadosEndereco.html' %}</div>
+    <!-- <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">{% include
+        'leitores/dadosEndereco.html' %}</div> -->
+</div>
 
 {% endblock %}

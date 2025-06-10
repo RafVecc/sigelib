@@ -1,9 +1,9 @@
-$('.cadastrarLivro').on("click", function (event) {
+$('.cadastrarLeitor').on("click", function (event) {
 
     event.preventDefault();
 
     Swal.fire({
-        title: "Deseja finalizar o cadastro desse livro?",
+        title: "Deseja finalizar o cadastro desse leitor?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -11,19 +11,19 @@ $('.cadastrarLivro').on("click", function (event) {
         confirmButtonText: "Sim, cadastrar!"
     }).then((result) => {
         if (result.isConfirmed) {
-            $('#cadastrarLivro').submit()
+            $('#cadastrarLeitor').submit()
         }
     });
 
 
 });
 
-$('.editarLivro').on("click", function (event) {
+$('.editarLeitor').on("click", function (event) {
 
     event.preventDefault();
 
     Swal.fire({
-        title: "Deseja finalizar a edição desse livro?",
+        title: "Deseja finalizar a edição desse leitor?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -31,7 +31,7 @@ $('.editarLivro').on("click", function (event) {
         confirmButtonText: "Sim, editar!"
     }).then((result) => {
         if (result.isConfirmed) {
-            $('#editarLivro').submit()
+            $('#editarLeitor').submit()
         }
     });
 
