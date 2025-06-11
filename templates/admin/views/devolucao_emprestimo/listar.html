@@ -24,13 +24,13 @@
         <hr />
     </div>
     <div class="card-body">
-        <form id="" autocomplete="off" method="post" action="{{url('admin/leitores/fichaLeitor')}}"
+        <form id="pesquisaLeitor" autocomplete="off" method="post" action=""
             enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-5">
                     <div class="mb-3">
                         <label for="cpf" class="form-label">CPF</label>
-                        <input class="form-control" type="text" name="cpf_leitor"
+                        <input class="form-control" type="text" name="cpf_leitor" id="cpf"
                             maxlength="15">
                     </div>
                 </div>
@@ -38,13 +38,13 @@
             <div class="d-grid">
                 <div class="col-md-5">
                     <div class="mb-3">
-                        <input type="button" class="btn btn-dark " value="Pesquisar">
+                        <input type="button" class="btn btn-dark pesquisaLeitor" value="Pesquisar">
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-{% include 'leitores/modalCadastrarLeitor.html' %}
+{% include 'devolucao_emprestimo/modalPesquisaLeitor.html' %}
 
 {% endblock %}
