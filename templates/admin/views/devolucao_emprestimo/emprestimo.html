@@ -30,40 +30,30 @@
             <table id="tabelaLivros" url="{{url()}}" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
+                        <th>Capa</th>
                         <th>Titulo</th>
                         <th>Autor</th>
-                        <th>Prateleira</th>
-                        <th>Quantidade</th>
-                        <th>Ano</th>
+                        <th>Genero</th>
                         <th>Idioma</th>
+                        <th>Quantidade</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for livro in livros %}
                     <tr>
+                        <td>colocar foto aqui</td>
                         <td>{{livro.titulo_livro}}</td>
                         <td>{{livro.autor_livro}}</td>
-                        <td>{{livro.localizacao_livro}}</td>
-                        <td>{{livro.quantidade_livro}}</td>
-                        <td>{{livro.ano_livro}}</td>
+                        <td>{{livro.genero_livro.genero_livro}}</td>
                         <td>{{livro.idioma_livro.idioma_livro}}</td>
+                        <td>{{livro.quantidade_livro}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning valorizarLivro" data-bs-toggle="modal"
-                                data-bs-target="#ModalEditarLivro" data-id="{{livro.id}}">
-                                <i class="fa-solid fa-pen m-1"></i> Editar
+                            <button type="button" class="btn btn-success valorizarLivro" data-bs-toggle="modal"
+                                data-bs-target="#ModalEditarLivro" data-livro_id="{{livro.id}}"
+                                data-leitor_id="{{leitor}}">
+                                Selecionar
                             </button>
-                            {# {% if livro.status == 1 %}
-                            <button type="button" class="btn btn-danger statusLivro" data-status="1"
-                                data-id="{{livro.id}}">
-                                Inativar
-                            </button>
-                            {% else %}
-                            <button type="button" class="btn btn-success statusLivro" data-status="2"
-                                data-id="{{livro.id}}">
-                                Ativar
-                            </button>
-                            {% endif %} #}
                         </td>
                     </tr>
                     {%endfor%}

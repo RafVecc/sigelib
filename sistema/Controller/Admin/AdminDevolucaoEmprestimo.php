@@ -44,12 +44,11 @@ class AdminDevolucaoEmprestimo extends AdminController
             Helpers::redirecionar('admin/');
         }
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $livros = new LivroModelo();
 
-        $cor_racas = new CorRacaModelo();
-        $escolaridades = new EscolaridadeModelo();
         echo $this->template->renderizar('devolucao_emprestimo/emprestimo.html', [
-            'cor_racas' => $cor_racas->busca()->resultado(true),
-            'escolaridades' => $escolaridades->busca()->resultado(true),
+            'livros' => $livros->busca()->resultado(true),
+            'leitor' => $dados['leitor_id']
         ]);
     }
 
@@ -298,32 +297,7 @@ class AdminDevolucaoEmprestimo extends AdminController
             }
             return json_encode($leitor_cpf);
         } else {
-            return null;
+            return json_encode(null);;
         }
     }
-
-    // public function statusAluno()
-    // {
-    //     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-    //     $mudar_status = (new AlunoModelo())->buscaPorId($dados['id']);
-
-    //     if (isset($mudar_status)) {
-    //         Conexao::getInstancia()->beginTransaction();
-    //         $mudar_status->usuario_modificacao_id = $this->usuario->id;
-    //         if ($mudar_status->status == 1) {
-    //             $mudar_status->status = 2;
-    //         } else {
-    //             $mudar_status->status = 1;
-    //         }
-    //         if ($mudar_status->salvar()) {
-    //             Conexao::getInstancia()->commit();
-    //             return true;
-    //         } else {
-    //             Conexao::getInstancia()->rollBack();
-    //             return 'false';
-    //         }
-    //     } else {
-    //         return 'false';
-    //     }
-    // }
 }

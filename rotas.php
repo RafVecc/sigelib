@@ -84,6 +84,7 @@ try {
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/editar', 'AdminDevolucaoEmprestimo@editar');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/valorizarLivro', 'AdminDevolucaoEmprestimo@valorizarLivro');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/statusLivro', 'AdminDevolucaoEmprestimo@statusLivro');
+          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/emprestimo', 'AdminDevolucaoEmprestimo@emprestimo');
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/checarCpf', 'AdminDevolucaoEmprestimo@checarCpf');
           SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/fichaLeitor', 'AdminDevolucaoEmprestimo@fichaLeitor');
 
