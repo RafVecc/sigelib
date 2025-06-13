@@ -45,10 +45,19 @@ class AdminDevolucaoEmprestimo extends AdminController
         }
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $livros = new LivroModelo();
+        $leitor = new LeitorModelo();
+        $generos_livro = new GeneroLivroModelo();
+        $idiomas_livro = new IdiomaLivroModelo();
+        $paises_livro = new PaisLivroModelo();
+        $tipos_procedencia_livro = new TipoProcedenciaLivro();
 
         echo $this->template->renderizar('devolucao_emprestimo/emprestimo.html', [
             'livros' => $livros->busca()->resultado(true),
-            'leitor' => $dados['leitor_id']
+            'leitor' => $leitor->buscaPorId($dados['leitor_id']),
+            'generos_livro' => $generos_livro->busca()->resultado(true),
+            'idiomas_livro' => $idiomas_livro->busca()->resultado(true),
+            'paises_livro' => $paises_livro->busca()->resultado(true),
+            'tipos_procedencia_livro' => $tipos_procedencia_livro->busca()->resultado(true),
         ]);
     }
 
@@ -64,83 +73,42 @@ class AdminDevolucaoEmprestimo extends AdminController
 
     public function cadastrar(): void
     {
-        //Só permitir que Administrador entren na tela de cadastrar leitores
+        //Só permitir que Administrador entren na tela de cadastrar emprestimos
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
         }
-        // phpinfo();
-        // die;
+
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        
         if (isset($dados)) {
             Conexao::getInstancia()->beginTransaction();
             //checa os dados
             if ($this->validarDados($dados)) {
 
-                $leitor = new LeitorModelo();
+                $emprestimo = new ControleLivroModelo();
 
-                $leitor->usuario_cadastro_id = $this->usuario->id;
-                $leitor->usuario_modificacao_id = $this->usuario->id;
-                $leitor->cpf_leitor = isset($dados['cpf_leitor']) && !empty($dados['cpf_leitor']) ? $dados['cpf_leitor'] : NULL;
-                $leitor->nome_leitor = isset($dados['nome_leitor']) && !empty($dados['nome_leitor']) ? $dados['nome_leitor'] : NULL;
-                $leitor->data_nascimento_leitor = isset($dados['data_nascimento_leitor']) && !empty($dados['data_nascimento_leitor']) ? $dados['data_nascimento_leitor'] : NULL;
-                $leitor->telefone_leitor = isset($dados['telefone_leitor']) && !empty($dados['telefone_leitor']) ? $dados['telefone_leitor'] : NULL;
-                $leitor->sexo_leitor_id = isset($dados['sexo_leitor_id']) && !empty($dados['sexo_leitor_id']) ? $dados['sexo_leitor_id'] : NULL;
-                $leitor->cor_leitor_id = isset($dados['cor_leitor_id']) && !empty($dados['cor_leitor_id']) ? $dados['cor_leitor_id'] : NULL;
-                $leitor->escolaridade_leitor_id = isset($dados['escolaridade_leitor_id']) && !empty($dados['escolaridade_leitor_id']) ? $dados['escolaridade_leitor_id'] : NULL;
-                $leitor->cep_leitor = isset($dados['cep_leitor']) && !empty($dados['cep_leitor']) ? $dados['cep_leitor'] : NULL;
-                $leitor->rua_leitor = isset($dados['rua_leitor']) && !empty($dados['rua_leitor']) ? $dados['rua_leitor'] : NULL;
-                $leitor->numero_leitor = isset($dados['numero_leitor']) && !empty($dados['numero_leitor']) ? $dados['numero_leitor'] : NULL;
-                $leitor->bairro_leitor = isset($dados['bairro_leitor']) && !empty($dados['bairro_leitor']) ? $dados['bairro_leitor'] : NULL;
-                $leitor->ponto_de_referencia_leitor = isset($dados['ponto_de_referencia_leitor']) && !empty($dados['ponto_de_referencia_leitor']) ? $dados['ponto_de_referencia_leitor'] : NULL;
-                $leitor->email_leitor = isset($dados['email_leitor']) && !empty($dados['email_leitor']) ? $dados['email_leitor'] : NULL;
-                $leitor->rede_social_leitor = isset($dados['rede_social_leitor']) && !empty($dados['rede_social_leitor']) ? $dados['rede_social_leitor'] : NULL;
+                $emprestimo->usuario_cadastro_id = $this->usuario->id;
+                $emprestimo->usuario_modificacao_id = $this->usuario->id;
+                $emprestimo->livro_id = isset($dados['livro_id_emprestimo']) && !empty($dados['livro_id_emprestimo']) ? $dados['livro_id_emprestimo'] : NULL;
+                $emprestimo->leitor_id = isset($dados['leitor_id_emprestimo']) && !empty($dados['leitor_id_emprestimo']) ? $dados['leitor_id_emprestimo'] : NULL;
+                $emprestimo->data_emprestimo = isset($dados['data_emprestimo']) && !empty($dados['data_emprestimo']) ? $dados['data_emprestimo'] : NULL;
+                $emprestimo->data_prevista = isset($dados['data_prevista']) && !empty($dados['data_prevista']) ? $dados['data_prevista'] : NULL;
+                $emprestimo->observacao_emprestimo = isset($dados['observacao_emprestimo']) && !empty($dados['observacao_emprestimo']) ? $dados['observacao_emprestimo'] : NULL;
 
-                if ($_FILES['foto_leitor']['error'] == 0) {
-                    $upload = new Upload($_FILES['foto_leitor'], 'pt_BR');
-                    if ($upload->uploaded) {
-                        if (in_array($upload->file_src_name_ext, ['png', 'jpg', 'jpeg'])) {
-
-                            $foto_token = Helpers::gerarToken();
-                            $titulo = $upload->file_new_name_body = 'fotoLeitor_' . $foto_token;
-                            // $upload->jpeg_quality = 80;
-                            // $upload->jpeg_size = 2000000;
-                            $upload->image_convert = 'jpg';
-                            $upload->image_resize         = true;
-                            $upload->image_x              = 500;
-                            $upload->image_ratio_y        = true;
-                            $upload->process('uploads/leitores/');
-                            $leitor->foto_leitor = $titulo . '.jpg';
-                            if (!$upload->processed) {
-                                Conexao::getInstancia()->rollBack();
-                                $this->mensagem->alerta('Erro de Processamento!')->flash();
-                                Helpers::redirecionar('admin/leitores/listar');
-                            }
-                        } else {
-                            Conexao::getInstancia()->rollBack();
-                            $this->mensagem->alerta('Formato de imagem não permitido!')->flash();
-                            Helpers::redirecionar('admin/leitores/listar');
-                        }
-                    } else {
-                        Conexao::getInstancia()->rollBack();
-                        $this->mensagem->alerta('Erro de Upload!')->flash();
-                        Helpers::redirecionar('admin/leitores/listar');
-                    }
-                }
-
-                if ($leitor->salvar()) {
+                if ($emprestimo->salvar()) {
                     Conexao::getInstancia()->commit();
-                    $this->mensagem->sucesso('Leitor cadastrado com sucesso')->flash();
-                    Helpers::redirecionar('admin/leitores/listar');
+                    $this->mensagem->sucesso('Empréstimo realizado com sucesso')->flash();
+                    Helpers::redirecionar('admin/devolucao_emprestimo/listar');
                 } else {
                     Conexao::getInstancia()->rollBack();
-                    $this->mensagem->erro($leitor->erro())->flash();
-                    Helpers::redirecionar('admin/leitores/listar');
+                    $this->mensagem->erro($emprestimo->erro())->flash();
+                    Helpers::redirecionar('admin/devolucao_emprestimo/listar');
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
                 $this->mensagem->erro($this->validarDados($dados))->flash();
-                Helpers::redirecionar('admin/leitores/listar');
+                Helpers::redirecionar('admin/devolucao_emprestimo/listar');
             }
         }
     }

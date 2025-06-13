@@ -19,15 +19,15 @@
 {{ flash() }}
 
 <div class="card border-0 shadow-sm">
-    <div class="card-header bg-light border d-flex justify-content-end align-items-center">
+    <!-- <div class="card-header bg-light border d-flex justify-content-end align-items-center">
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCadastrarLivro"
             id="modalCadastrarLivro">
             <i class="fa fa-fw fa-plus-circle"></i>Cadastrar
         </button>
-    </div>
+    </div> -->
     <div class="card-body">
         <div class="table-responsive">
-            <table id="tabelaLivros" url="{{url()}}" class="table table-striped" style="width:100%">
+            <table id="tabelaEmprestimos" url="{{url()}}" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
                         <th>Capa</th>
@@ -47,11 +47,11 @@
                         <td>{{livro.autor_livro}}</td>
                         <td>{{livro.genero_livro.genero_livro}}</td>
                         <td>{{livro.idioma_livro.idioma_livro}}</td>
-                        <td>{{livro.quantidade_livro}}</td>
+                        <td>{{livro.quantidade_livro - livro.quantidade_emprestada}} de {{livro.quantidade_livro}}
+                            disponíveis</td>
                         <td>
-                            <button type="button" class="btn btn-success valorizarLivro" data-bs-toggle="modal"
-                                data-bs-target="#ModalEditarLivro" data-livro_id="{{livro.id}}"
-                                data-leitor_id="{{leitor}}">
+                            <button type="button" class="btn btn-success valorizarEmprestimo" data-bs-toggle="modal"
+                                data-bs-target="#ModalEmprestimo" data-livro_id="{{livro.id}}">
                                 Selecionar
                             </button>
                         </td>
@@ -62,7 +62,6 @@
         </div>
     </div>
 </div>
-{% include 'livros/modalCadastrarLivro.html' %}
-{% include 'livros/modalEditarLivro.html' %}
+{% include 'devolucao_emprestimo/modalEmprestimo.html' %}
 
 {% endblock %}

@@ -1,17 +1,17 @@
-$('.cadastrarLeitor').on("click", function (event) {
+$('.emprestarLivro').on("click", function (event) {
 
     event.preventDefault();
 
     Swal.fire({
-        title: "Deseja finalizar o cadastro desse leitor?",
+        title: "Deseja finalizar o empréstimo desse livro?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, cadastrar!"
+        confirmButtonText: "Sim, emprestar!"
     }).then((result) => {
         if (result.isConfirmed) {
-            $('#cadastrarLeitor').submit()
+            $('#emprestarLivro').submit()
         }
     });
 
@@ -147,3 +147,33 @@ $(".pesquisaLeitor").on("click", function (e) {
     executar_pesquisa_leitor(variavel, e)
 }
 );
+
+$('.valorizarEmprestimo').on("click", function () {
+    var url = $('#url').val();
+    var id = $(this).attr('data-livro_id')
+
+    $.ajax({
+        type: 'POST',
+        url: url + 'admin/livros/valorizarLivro',
+        data: { id: id },
+        dataType: 'json',
+
+        success: function (data) {
+            var imagem = url + 'uploads/livros/' + data[0]['foto_capa_livro']
+            $('#livro_id_emprestimo').val(data[0]['id'])
+            $('#foto_capa_livro_emprestimo').attr('src', imagem)
+            $('#titulo_livro_emprestimo').val(data[0]['titulo_livro'])
+            $('#genero_livro_emprestimo_id').val(data[0]['genero_livro_id'])
+            $('#editora_livro_emprestimo').val(data[0]['editora_livro'])
+            $('#ano_livro_emprestimo').val(data[0]['ano_livro'])
+            $('#pais_livro_emprestimo_id').val(data[0]['pais_livro_id'])
+            $('#idioma_livro_emprestimo_id').val(data[0]['idioma_livro_id'])
+            $('#autor_livro_emprestimo').val(data[0]['autor_livro'])
+            $('#quantidade_livro_emprestimo').val(data[0]['quantidade_livro'])
+            $('#tipo_procedencia_livro_emprestimo_id').val(data[0]['tipo_procedencia_livro_id'])
+            $('#procedencia_livro_emprestimo').val(data[0]['procedencia_livro'])
+            $('#localizacao_livro_emprestimo').val(data[0]['localizacao_livro'])
+            $('#sinopse_livro_emprestimo').val(data[0]['sinopse_livro'])
+        }
+    })
+})

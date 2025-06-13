@@ -59,6 +59,14 @@ class LivroModelo extends Modelo
         return null;
     }
 
+    public function quantidade_emprestada()
+    {
+        if ($this->id) {
+            return (new ControleLivroModelo())->busca("livro_id = {$this->id} and data_efetiva is null")->total();
+        }
+        return null;
+    }
+
     public function salvar(): bool
     {
         return parent::salvar();

@@ -1,22 +1,32 @@
-CREATE TABLE `leitores` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cpf_leitor` varchar(255) DEFAULT NULL,
-  `nome_leitor` varchar(255) DEFAULT NULL,
-  `data_nascimento_leitor` date DEFAULT NULL,
-  `telefone_leitor` varchar(20) DEFAULT NULL,
-  `sexo_leitor` int(11) DEFAULT NULL,
-  `cor_leitor_id` int(11) DEFAULT NULL,
-  `escolaridade_leitor_id` int(11) DEFAULT NULL,
-  `cep_leitor` varchar(10) DEFAULT NULL,
-  `rua_leitor` varchar(255) DEFAULT NULL,
-  `numero_leitor` varchar(255) DEFAULT NULL,
-  `bairro_leitor` varchar(255) DEFAULT NULL,
-  `ponto_de_referencia_leitor` text DEFAULT NULL,
-  `email_leitor` varchar(255) DEFAULT NULL,
-  `rede_social_leitor` varchar(255) DEFAULT NULL,
-  `cadastrado_em` datetime DEFAULT current_timestamp(),
-  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `usuario_cadastro_id` int(11) DEFAULT NULL,
-  `usuario_modificacao_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+Tarefas a fazer!!
+
+* Finalizar a devolução
+  - Usar o id do leitor para verificar na table controle_livros
+  - Receber o id e editar a informação adicionando a data efetiva e obs de devolução
+  - Na tela oferecer informações sobre possíveis atrasos, destacar obs de emprestimo junto ao campo obs de devolução,
+   foto e nome do leitor apenas e informações que identifiquem o livro
+  - As datas devem ser automáticas
+
+* Consertar o required nos envios usando Ajax
+  - Puxar o form e percorrer usando o each para checar a existência de um attr required, se sim checar se existe value
+
+* Adicionar mini foto
+  - Adicionar na rotina de imagem uma mini foto que utiliza o mesmo campo e gera uma versão reduzida
+  - Verificar e excluir fotos não utilizadas quando editando e caso ocorra um erro no cadastro
+
+* Suspensão de leitores
+  - Verificar como essa rotina deve ser feita
+
+* Verificar campos no back-end
+  - Verificar cpf apenas numeros e checar existência
+  - Verificar requireds
+  - Verificar data nascimento se maior de idade
+  - Verificar editar na quantidade para não ser menor do que livros já emprestados
+  - Verificar campos que aceitam apenas números e os que aceitam apenas letras
+
+* Fazer a pesquisa de leitores
+  - Pesquisar por cpf, nome e adicionar na lista botão para a ficha do leitor
+  - Adicionar histórico de empréstimos/devoluções
+  - Adicionar Eventualmente suspensões
+
+* Pensar em possíveis relatórios futuramente
