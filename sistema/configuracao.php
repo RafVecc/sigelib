@@ -13,7 +13,7 @@ define('SITE_NOME', 'Sigelib');
 define('SITE_DESCRICAO', 'Sistema Integrado de Gestão de Livros e Bibliotecas');
 
 //urls do sistema
-define('URL_PRODUCAO', 'https://sigelib-homologa.salvador.ba.gov.br');
+define('URL_PRODUCAO', 'https://sigelib-homologa.salvador.ba.gov.br/');
 define('URL_DESENVOLVIMENTO', 'http://localhost:8080/sigelib');
 
 
@@ -38,9 +38,9 @@ if (Helpers::localhost()) {
     //dados de acesso ao banco de dados na hospedagem
     define('DB_HOST', '177.20.4.234');
     define('DB_PORTA', '3306');
-    define('DB_NOME', 'bd_sigelib');
+    define('DB_NOME', 'sigelib');
     define('DB_USUARIO', 'usr_sigelib');
-    define('DB_SENHA', 'C2u&hEL?9do2');
+    define('DB_SENHA', 'D8i^r7tR!*3#sb!');
 
     define('DB_HOST_SIGEBE', '177.20.4.61');
     define('DB_PORTA_SIGEBE', '3306');
