@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 9.3.0, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sigelib
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	11.5.2-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,117 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `controle_livros`
+--
+
+DROP TABLE IF EXISTS `controle_livros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `controle_livros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `livro_id` int(11) DEFAULT NULL,
+  `leitor_id` int(11) DEFAULT NULL,
+  `data_emprestimo` date DEFAULT NULL,
+  `data_prevista` date DEFAULT NULL,
+  `data_efetiva` date DEFAULT NULL,
+  `observacao_emprestimo` text DEFAULT NULL,
+  `observacao_devolucao` text DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `usuario_cadastro_id` int(11) DEFAULT NULL,
+  `usuario_modificacao_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `controle_livros`
+--
+
+LOCK TABLES `controle_livros` WRITE;
+/*!40000 ALTER TABLE `controle_livros` DISABLE KEYS */;
+INSERT INTO `controle_livros` VALUES (1,2,1,'2025-06-11','2025-06-26',NULL,'algo aqui',NULL,'2025-06-11 13:29:37','2025-06-11 13:29:37',NULL,NULL),(2,1,3,'2025-06-13','2025-06-28',NULL,'algo aqui',NULL,'2025-06-13 11:18:37','2025-06-13 11:18:37',6,6);
+/*!40000 ALTER TABLE `controle_livros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cor_raca`
+--
+
+DROP TABLE IF EXISTS `cor_raca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cor_raca` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cor_raca` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cor_raca`
+--
+
+LOCK TABLES `cor_raca` WRITE;
+/*!40000 ALTER TABLE `cor_raca` DISABLE KEYS */;
+INSERT INTO `cor_raca` VALUES (1,'BRANCA'),(2,'PRETA'),(3,'PARDA'),(4,'AMARELA'),(5,'INDÍGENA');
+/*!40000 ALTER TABLE `cor_raca` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `editora_livro`
+--
+
+DROP TABLE IF EXISTS `editora_livro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `editora_livro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `editora_livro` varchar(255) DEFAULT NULL,
+  `pais_editora_livro_id` int(11) DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `usuario_cadastro_id` int(11) DEFAULT NULL,
+  `usuario_modificacao_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `editora_livro`
+--
+
+LOCK TABLES `editora_livro` WRITE;
+/*!40000 ALTER TABLE `editora_livro` DISABLE KEYS */;
+INSERT INTO `editora_livro` VALUES (1,'7 LETRAS EDITORA',1,'2025-06-16 12:07:18','2025-06-16 12:07:18',6,6),(2,'ALAMEDA EDITORA',1,'2025-06-16 12:16:20','2025-06-16 12:16:20',6,6),(3,'ALETRIA EDITORA',1,'2025-06-16 12:16:20','2025-06-16 12:16:20',6,6),(4,'ANDREA JAKOBSSON ESTÚDIO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(5,'ARMAZÉM DA CULTURA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(6,'AZIZA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(7,'BAMBOOZINHO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(8,'BAMBUAL EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(9,'BANDEIROLA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(10,'BAZAR DO TEMPO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(11,'BENNU EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(12,'BIENAL EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(13,'BINAH ESPAÇO DE ARTE',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(14,'CÁLIDA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(15,'CÂMARA PERIFÉRICA DO LIVRO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(16,'CARAMBOLA PRODUÇÕES LITERÁRIAS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(17,'CARAMURÊ PRODUÇÕES',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(18,'CASA OITO EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(19,'COM.TATO COMUNICAÇÃO LTDA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(20,'CONTRA CAPA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(21,'CONTRAPONTO EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(22,'DARKSIDE BOOKS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(23,'DELPHIS EDITORAÇÃO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(24,'DUBLINENSE',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(25,'DUNA DUETO EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(26,'EDIÇÕES BARBATANA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(27,'EDIÇÕES ME PARIÓ REVOLUÇÃO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(28,'EDIÇÕES OLHO DE VIDRO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(29,'EDIÇÕES TERRA VIRGEM',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(30,'EDITORA JOVEM',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(31,'EDITORA 17/REVISTA CULT',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(32,'EDITORA 34',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(33,'EDITORA ALEPH',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(34,'EDITORA ALMA REVOLUCIONÁRIA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(35,'EDITORA ANITA GARIBALDI',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(36,'EDITORA ARPILLERA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(37,'EDITORA ARUANDA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(38,'EDITORA AUTÊNTICA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(39,'EDITORA BARBANTE LTDA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(40,'EDITORA BEM-TE-VI',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(41,'EDITORA BIRUTA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(42,'EDITORA BRASILIENSE',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(43,'EDITORA CAIXOTE',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(44,'EDITORA CAMBUCÁ',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(45,'EDITORA CAMPOS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(46,'EDITORA CANGURU',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(47,'EDITORA CAPIVARA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(48,'EDITORA CARAMINHOCA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(49,'EDITORA CASA DO LOBO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(50,'EDITORA CASARÃO DO VERBO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(51,'EDITORA CINTRA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(52,'EDITORA COBOGÓ',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(53,'EDITORA CUCA FRESCA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(54,"EDITORA D'NIRO",1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(55,'EDITORA DEVIRES',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(56,'EDITORA DRACO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(57,'EDITORA ELEFANTE',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(58,'EDITORA ERCOLANO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(59,'EDITORA FEMINAS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(60,'EDITORA FILOCZAR',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(61,'EDITORA FORMAR',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(62,'EDITORA FRANCESINHA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(63,'EDITORA INCOMPLETA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(64,'EDITORA INSTANTE',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(65,'EDITORA JAGUATIRICA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(66,'EDITORA JANDAÍRA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(67,'EDITORA LETRA A',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(68,'EDITORA LETRA SELVAGEM',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(69,'EDITORA LIMIAR',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(70,'EDITORA MAPALAB',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(71,'EDITORA MEIA AZUL/ÍMÃ EDITORIAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(72,'EDITORA MIGUILIM',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(73,'EDITORA MIL CARAMIOLAS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(74,'EDITORA MIREVEJA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(75,'EDITORA MOINHOS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(76,'EDITORA MONDRONGO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(77,'EDITORA MOSTARDA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(78,'EDITORA MOURTHÉ',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(79,'EDITORA MUNDARÉU',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(80,'EDITORA OPALA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(81,'EDITORA PAPAGAIO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(82,'EDITORA PASSARINHO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(83,'EDITORA PATUÁ',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(84,'EDITORA PÉ DE PALAVRA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(85,'EDITORA PEIXOTO NETO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(86,'EDITORA PINGO DE LUZ',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(87,'EDITORA PIU',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(88,'EDITORA POLYTHEAMA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(89,'EDITORA PORTAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(90,'EDITORA PROJETO EDUCANDO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(91,'EDITORA REVAN',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(92,'EDITORA ROÇA NOVA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(93,'EDITORA SIANO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(94,'EDITORA SUNDERMANN',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(95,'EDITORA TANTA TINTA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(96,'EDITORA VALENTINA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(97,'EDITORA VIAJANTE DO TEMPO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(98,'EDITORA VOO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(99,'EDITORIAL MAUAD X',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(100,'EIS EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(101,'EDITORA TIGRITO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(102,'ELEMENTAR EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(103,'EMÓ EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(104,'EREGINGA EDUCAÇÃO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(105,'EVOLUIR CULTURAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(106,'FADA MADRINHA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(107,'FÓLIO DIGITAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(108,'GAROTA FM BOOKS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(109,'GATO LEITOR',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(110,'GRACIOSA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(111,'GRAPHIA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(112,'JARDIM DOS LIVROS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(113,'JUJUBA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(114,'KINORUSS EDIÇÕES E CULTURA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(115,'KRAUSS EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(116,'LAGO DE HISTÓRIAS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(117,'LETRAMENTO EDITORIAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(118,'LIVROS DA MATRIZ EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(119,'MALÊ EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(120,'MARIA MORINGA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(121,'MB EQUIDADE EDUCACIONAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(122,'METANOIA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(123,'MIRACULUS SERVIÇOS EDITORIAIS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(124,'MRN EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(125,'MUSA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(126,'MYRRHA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(127,'NANABOOKS EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(128,'NUMA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(129,'ODYSSEUS EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(130,'OFICINA RAQUEL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(131,'ORGANISMO EDITORA LTDA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(132,'OURO SOBRE AZUL DESIGN E EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(133,'ÔZÉ EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(134,'P55 EDIÇÃO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(135,'PACHAMAMA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(136,'PALAVRAS PROJETOS EDITORIAIS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(137,'PALLAS EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(138,'PALLAS MINI',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(139,'PARALELO 13S - RODAPÉ EVENTOS E COMÉRCIO DE LIVROS LTDA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(140,'PARIS DE HISTÓRIAS EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(141,'PAULUS EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(142,'PINAKOTHEKE ARTES',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(143,'PRIMAVERA EDITORIAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(144,'QUASE OITO EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(145,'QUILOMBHOJE LITEARTURA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(146,'QUINA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(147,'RELICÁRIO EDIÇÕES',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(148,'SABERES E LETRAS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(149,'SAÍRA EDITORIAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(150,'SELO EMÍLIA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(151,'SOLISLUNA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(152,'SUINARA EDITORA E DISTRIBUIDORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(153,'TERRA REDONDA EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(154,'TIBI LIVROS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(155,'TRIOLECA CASA EDITORIAL',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(156,'UBU EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(157,'UNICORN BOOKS',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(158,'VERMELHO MARINHO',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(159,'VIA LITTERARUM EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(160,'W4 EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6),(161,'ZAPT EDITORA',1,'2025-06-16 12:16:21','2025-06-16 12:16:21',6,6);
+/*!40000 ALTER TABLE `editora_livro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `escolaridade`
+--
+
+DROP TABLE IF EXISTS `escolaridade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `escolaridade` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `escolaridade` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `escolaridade`
+--
+
+LOCK TABLES `escolaridade` WRITE;
+/*!40000 ALTER TABLE `escolaridade` DISABLE KEYS */;
+INSERT INTO `escolaridade` VALUES (1,'SEM ESCOLARIDADE'),(2,'ENSINO FUNDAMENTAL INCOMPLETO'),(3,'ENSINO FUNDAMENTAL COMPLETO'),(4,'ENSINO MÉDIO INCOMPLETO'),(5,'ENSINO MÉDIO COMPLETO'),(6,'ENSINO SUPERIOR INCOMPLETO'),(7,'ENSINO SUPERIOR COMPLETO');
+/*!40000 ALTER TABLE `escolaridade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `genero_livro`
 --
 
@@ -23,11 +134,11 @@ DROP TABLE IF EXISTS `genero_livro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `genero_livro` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `genero_livro` varchar(255) DEFAULT NULL,
   `subgenero_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,10 +159,10 @@ DROP TABLE IF EXISTS `idioma_livro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `idioma_livro` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idioma_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +176,48 @@ INSERT INTO `idioma_livro` VALUES (1,'PORTUGUÊS'),(2,'INGLÊS'),(3,'ALEMÃO'),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `leitores`
+--
+
+DROP TABLE IF EXISTS `leitores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `leitores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cpf_leitor` varchar(255) DEFAULT NULL,
+  `nome_leitor` varchar(255) DEFAULT NULL,
+  `data_nascimento_leitor` date DEFAULT NULL,
+  `telefone_leitor` varchar(20) DEFAULT NULL,
+  `sexo_leitor_id` int(11) DEFAULT NULL,
+  `cor_leitor_id` int(11) DEFAULT NULL,
+  `escolaridade_leitor_id` int(11) DEFAULT NULL,
+  `cep_leitor` varchar(10) DEFAULT NULL,
+  `rua_leitor` varchar(255) DEFAULT NULL,
+  `numero_leitor` varchar(255) DEFAULT NULL,
+  `bairro_leitor` varchar(255) DEFAULT NULL,
+  `ponto_de_referencia_leitor` text DEFAULT NULL,
+  `email_leitor` varchar(255) DEFAULT NULL,
+  `rede_social_leitor` varchar(255) DEFAULT NULL,
+  `foto_leitor` varchar(255) DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `usuario_cadastro_id` int(11) DEFAULT NULL,
+  `usuario_modificacao_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `leitores`
+--
+
+LOCK TABLES `leitores` WRITE;
+/*!40000 ALTER TABLE `leitores` DISABLE KEYS */;
+INSERT INTO `leitores` VALUES (1,'06255214559',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2025-06-09 09:03:20','2025-06-09 09:03:20',NULL,NULL),(3,'13643181051','Fulano de Tal','1990-01-01','71999999999',NULL,1,7,'42710140','Rua Felicia Cardoso dos Santos','99','Buraquinho','Foz dos joanes','alguem@gmail.com','@algo.aqui','fotoLeitor_d4c88910f8897c1015bef13cd3857bab.jpg','2025-06-10 09:12:27','2025-06-10 09:12:27',6,6);
+/*!40000 ALTER TABLE `leitores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `livros`
 --
 
@@ -72,26 +225,27 @@ DROP TABLE IF EXISTS `livros`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `livros` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo_livro` varchar(255) DEFAULT NULL,
   `autor_livro` varchar(255) DEFAULT NULL,
-  `genero_livro_id` int DEFAULT NULL,
-  `sinopse_livro` text,
+  `genero_livro_id` int(11) DEFAULT NULL,
+  `sinopse_livro` text DEFAULT NULL,
   `editora_livro` varchar(255) DEFAULT NULL,
-  `ano_livro` int DEFAULT NULL,
-  `pais_livro_id` int DEFAULT NULL,
-  `idioma_livro_id` int DEFAULT NULL,
-  `tipo_procedencia_livro_id` int DEFAULT NULL,
+  `ano_livro` int(11) DEFAULT NULL,
+  `pais_livro_id` int(11) DEFAULT NULL,
+  `idioma_livro_id` int(11) DEFAULT NULL,
+  `tipo_procedencia_livro_id` int(11) DEFAULT NULL,
   `procedencia_livro` varchar(255) DEFAULT NULL,
-  `quantidade_livro` int DEFAULT NULL,
+  `data_doacao_compra_livro` date DEFAULT NULL,
+  `quantidade_livro` int(11) DEFAULT NULL,
   `localizacao_livro` varchar(255) DEFAULT NULL,
-  `foto_capa_livro` text,
-  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
-  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `usuario_cadastro_id` int DEFAULT NULL,
-  `usuario_modificacao_id` int DEFAULT NULL,
+  `foto_capa_livro` text DEFAULT NULL,
+  `cadastrado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `usuario_cadastro_id` int(11) DEFAULT NULL,
+  `usuario_modificacao_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +254,7 @@ CREATE TABLE `livros` (
 
 LOCK TABLES `livros` WRITE;
 /*!40000 ALTER TABLE `livros` DISABLE KEYS */;
-INSERT INTO `livros` VALUES (1,'titulo teste','autor teste',2,'algo sobre o livro','editora teste',2025,1,1,2,'Sempre',3,'terceira de cima para baixo','fotoLivro_4d51c3576465768c4d22798747af4647.jpg','2025-06-04 17:57:42','2025-06-04 18:00:36',6,6);
+INSERT INTO `livros` VALUES (1,'titulo teste','autor teste',2,'algo sobre o livro','editora teste',2025,1,1,2,'Sempre',NULL,3,'terceira de cima para baixo','fotoLivro_4d51c3576465768c4d22798747af4647.jpg','2025-06-04 17:57:42','2025-06-04 18:00:36',6,6),(2,'sdfsdf','sdfsd',1,'asdfasd','sdf',123,1,1,1,'asas','2025-06-15',22,'adsfadfs',NULL,'2025-06-05 13:50:46','2025-06-16 10:20:36',6,6),(3,'teste imagem','asddsa',1,'asfasfssa','asdsa',14412,1,1,1,'asdas',NULL,23,'daf','fotoLivro_504e545f5d3977c4ccdfd5bf7c1ebc2c.jpg','2025-06-05 14:22:03','2025-06-05 14:22:03',6,6),(4,'vbvvb','kjk',1,'utkutf','vvbv',67,1,1,2,'jhtj',NULL,5,'nm','fotoLivro_60e510f4aef8473cc6ea9df0a8ff48ba.jpg','2025-06-05 14:24:30','2025-06-05 14:24:30',6,6);
 /*!40000 ALTER TABLE `livros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,10 +266,10 @@ DROP TABLE IF EXISTS `pais_livro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pais_livro` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `pais_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,10 +290,10 @@ DROP TABLE IF EXISTS `tipo_procedencia_livro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipo_procedencia_livro` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_procedencia_livro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,10 +314,10 @@ DROP TABLE IF EXISTS `tipo_usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipo_usuario` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_usuario` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,28 +338,28 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(200) NOT NULL,
   `telefone` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `login` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `status` int DEFAULT NULL,
-  `tipo_usuario_id` int NOT NULL,
-  `unidade_id` int NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `tipo_usuario_id` int(11) NOT NULL,
+  `unidade_id` int(11) NOT NULL,
   `data_inicio` datetime DEFAULT NULL,
   `data_fim` datetime DEFAULT NULL,
   `ultimo_login` datetime DEFAULT NULL,
-  `flag_primeiro_acesso` int DEFAULT '0',
-  `cadastrado_em` datetime DEFAULT CURRENT_TIMESTAMP,
-  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `usuario_cadastro_id` int DEFAULT NULL,
-  `usuario_modificacao_id` int DEFAULT NULL,
+  `flag_primeiro_acesso` int(11) DEFAULT 0,
+  `cadastrado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `usuario_cadastro_id` int(11) DEFAULT NULL,
+  `usuario_modificacao_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `telefone_UNIQUE` (`telefone`),
   UNIQUE KEY `login_UNIQUE` (`login`),
   UNIQUE KEY `senha_UNIQUE` (`senha`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +368,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (6,'testando de novo','32564864','email@email.com','testando.novo','$2y$10$oSjRM6TVbaOKuBQE5EndX.jns0oqdsDeb1aG6v9/aAGSgQbzgoEWK',1,1,1,'2024-10-09 00:00:00','2026-10-25 00:00:00','2025-06-04 11:11:34',1,'2024-10-08 09:59:38','2025-06-04 11:11:34',1,1);
+INSERT INTO `usuarios` VALUES (6,'testando de novo','32564864','email@email.com','testando.novo','$2y$10$oSjRM6TVbaOKuBQE5EndX.jns0oqdsDeb1aG6v9/aAGSgQbzgoEWK',1,1,1,'2024-10-09 00:00:00','2026-10-25 00:00:00','2025-06-16 10:06:37',1,'2024-10-08 09:59:38','2025-06-16 10:06:37',1,1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -227,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-04 23:05:42
+-- Dump completed on 2025-06-16 14:36:37
