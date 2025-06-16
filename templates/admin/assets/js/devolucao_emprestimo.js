@@ -45,6 +45,7 @@ $('#btn_emp_dev').on("click", '#btn_emprestimo', function (event) {
 });
 
 function executar_pesquisa_leitor(variavel, e) {
+    var url = $('#url').val();
     var cpf = variavel.val().replace(/[^0-9]/g, '');
     cpf = cpf.replace(/[0-9]{12}$/, cpf.slice(0, -1));
     if (cpf.length != 11) {
@@ -89,7 +90,7 @@ function executar_pesquisa_leitor(variavel, e) {
                 data: { cpf: novoCpf },
                 dataType: 'json',
                 success: function (result) {
-                    console.log(result)
+                    
                     if (result == null) {
                         Swal.fire({
                             title: "CPF não cadastrado, deseja iniciar o cadastro?",
@@ -111,19 +112,21 @@ function executar_pesquisa_leitor(variavel, e) {
                         $('#btn_emp_dev').children().remove();
                         html = '';
                         if (result[0]['check'] == 'invalido') {
-                            html += `<button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                            html += `<button type="button" class="btn btn-success fs-4" data-bs-toggle="modal"
                             data-bs-target="#ModalDadosPessoaisCompletos">Realizar Devolução
                             </button>`;
                         } else {
-                            html += `<button type="button" class="btn btn-warning" id="btn_emprestimo" data-leitor_id="${result[0]['id']}">Realizar Emprestimo
+                            html += `<button type="button" class="btn btn-success fs-4" id="btn_emprestimo" data-leitor_id="${result[0]['id']}">Realizar Emprestimo
                             </button>`;
                         }
+                        var imagem = url + 'uploads/leitores/' + result[0]['foto_leitor'];
                         $('#modalPesquisaLeitor').find('#leitor_id').val(result[0]['id']);
+                        $('#modalPesquisaLeitor').find('#foto_leitor_pesquisa').attr('src', imagem);
                         $('#modalPesquisaLeitor').find('#cpf_leitor_pesquisa').val(result[0]['cpf_leitor']);
                         $('#modalPesquisaLeitor').find('#nome_leitor_pesquisa').val(result[0]['nome_leitor']);
-                        $('#modalPesquisaLeitor').find('#telefone_leitor_pesquisa').val(result[0]['telefone_leitor']);
-                        $('#modalPesquisaLeitor').find('#data_nascimento_leitor_pesquisa').val(result[0]['data_nascimento_leitor']);
-                        $('#modalPesquisaLeitor').find('#email_leitor_pesquisa').val(result[0]['email_leitor']);
+                        // $('#modalPesquisaLeitor').find('#telefone_leitor_pesquisa').val(result[0]['telefone_leitor']);
+                        // $('#modalPesquisaLeitor').find('#data_nascimento_leitor_pesquisa').val(result[0]['data_nascimento_leitor']);
+                        // $('#modalPesquisaLeitor').find('#email_leitor_pesquisa').val(result[0]['email_leitor']);
                         $('#btn_emp_dev').append(html);
                         $('#modalPesquisaLeitor').modal('show');
                     }

@@ -66,7 +66,15 @@
                             <div class="col-md-7">
                               <div class="mb-3">
                                 <label for="editora_livro" class="form-label">Editora</label>
-                                <input type="text" name="editora_livro" class="form-control">
+                                <select id="editora_livro_id" name="editora_livro_id" class="form-control" required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for editora_livro in editoras_livro %}
+                                  <option value="{{editora_livro.id}}">
+                                    {{editora_livro.editora_livro }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
                               </div>
                             </div>
                           </div>
@@ -127,7 +135,7 @@
                       <div class="col-sm-12 card border-2">
                         <div class="card-body">
                           <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                               <div class="mb-3">
                                 <label for="tipo_procedencia_livro_id" class="form-label">Tipo de Procedência</label>
                                 <select id="tipo_procedencia_livro_id" name="tipo_procedencia_livro_id"
@@ -142,10 +150,16 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                               <div class="mb-3">
-                                <label for="procedencia_livro" class="form-label">Local de Procedência</label>
+                                <label for="procedencia_livro" class="form-label">Empresa/Instituição</label>
                                 <input type="text" name="procedencia_livro" class="form-control">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="data_doacao_compra_livro" class="form-label">Data Doação/Compra</label>
+                                <input type="date" name="data_doacao_compra_livro" class="form-control">
                               </div>
                             </div>
                           </div>

@@ -45,7 +45,8 @@
                         <td>{{livro.titulo_livro}}</td>
                         <td>{{livro.autor_livro}}</td>
                         <td>{{livro.localizacao_livro}}</td>
-                        <td>{{livro.quantidade_livro}}</td>
+                        <td>{{livro.quantidade_livro - livro.quantidade_emprestada}} de {{livro.quantidade_livro}}
+                            disponíveis</td>
                         <td>{{livro.ano_livro}}</td>
                         <td>{{livro.idioma_livro.idioma_livro}}</td>
                         <td>

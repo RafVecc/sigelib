@@ -2,6 +2,7 @@
 
 namespace sistema\Controller\Admin;
 
+use sistema\Modelo\EditoraModelo;
 use sistema\Modelo\GeneroLivroModelo;
 use sistema\Modelo\IdiomaLivroModelo;
 use sistema\Modelo\LivroModelo;
@@ -29,6 +30,7 @@ class AdminLivros extends AdminController
         $generos_livro = new GeneroLivroModelo();
         $idiomas_livro = new IdiomaLivroModelo();
         $paises_livro = new PaisLivroModelo();
+        $editoras_livro = new EditoraModelo();
         $tipos_procedencia_livro = new TipoProcedenciaLivro();
 
         echo $this->template->renderizar('livros/listar.html', [
@@ -36,6 +38,7 @@ class AdminLivros extends AdminController
             'generos_livro' => $generos_livro->busca()->resultado(true),
             'idiomas_livro' => $idiomas_livro->busca()->resultado(true),
             'paises_livro' => $paises_livro->busca()->resultado(true),
+            'editoras_livro' => $editoras_livro->busca()->resultado(true),
             'tipos_procedencia_livro' => $tipos_procedencia_livro->busca()->resultado(true),
         ]);
     }
@@ -69,6 +72,7 @@ class AdminLivros extends AdminController
                 $livro->quantidade_livro = isset($dados['quantidade_livro']) && !empty($dados['quantidade_livro']) ? $dados['quantidade_livro'] : NULL;
                 $livro->tipo_procedencia_livro_id = isset($dados['tipo_procedencia_livro_id']) && !empty($dados['tipo_procedencia_livro_id']) ? $dados['tipo_procedencia_livro_id'] : NULL;
                 $livro->procedencia_livro = isset($dados['procedencia_livro']) && !empty($dados['procedencia_livro']) ? $dados['procedencia_livro'] : NULL;
+                $livro->data_doacao_compra_livro = isset($dados['data_doacao_compra_livro']) && !empty($dados['data_doacao_compra_livro']) ? $dados['data_doacao_compra_livro'] : NULL;
                 $livro->localizacao_livro = isset($dados['localizacao_livro']) && !empty($dados['localizacao_livro']) ? $dados['localizacao_livro'] : NULL;
                 $livro->sinopse_livro = isset($dados['sinopse_livro']) && !empty($dados['sinopse_livro']) ? $dados['sinopse_livro'] : NULL;
 
@@ -147,6 +151,7 @@ class AdminLivros extends AdminController
                 $livro->quantidade_livro = isset($dados['quantidade_livro_editar']) && !empty($dados['quantidade_livro_editar']) ? $dados['quantidade_livro_editar'] : NULL;
                 $livro->tipo_procedencia_livro_id = isset($dados['tipo_procedencia_livro_editar_id']) && !empty($dados['tipo_procedencia_livro_editar_id']) ? $dados['tipo_procedencia_livro_editar_id'] : NULL;
                 $livro->procedencia_livro = isset($dados['procedencia_livro_editar']) && !empty($dados['procedencia_livro_editar']) ? $dados['procedencia_livro_editar'] : NULL;
+                $livro->data_doacao_compra_livro = isset($dados['data_doacao_compra_livro_editar']) && !empty($dados['data_doacao_compra_livro_editar']) ? $dados['data_doacao_compra_livro_editar'] : NULL;
                 $livro->localizacao_livro = isset($dados['localizacao_livro_editar']) && !empty($dados['localizacao_livro_editar']) ? $dados['localizacao_livro_editar'] : NULL;
                 $livro->sinopse_livro = isset($dados['sinopse_livro_editar']) && !empty($dados['sinopse_livro_editar']) ? $dados['sinopse_livro_editar'] : NULL;
                 $foto_antiga = $livro->foto_capa_livro;

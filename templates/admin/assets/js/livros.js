@@ -62,6 +62,7 @@ $('.valorizarLivro').on("click", function () {
             $('#quantidade_livro_editar').val(data[0]['quantidade_livro'])
             $('#tipo_procedencia_livro_editar_id').val(data[0]['tipo_procedencia_livro_id'])
             $('#procedencia_livro_editar').val(data[0]['procedencia_livro'])
+            $('#data_doacao_compra_livro_editar').val(data[0]['data_doacao_compra_livro'])
             $('#localizacao_livro_editar').val(data[0]['localizacao_livro'])
             $('#sinopse_livro_editar').val(data[0]['sinopse_livro'])
             
