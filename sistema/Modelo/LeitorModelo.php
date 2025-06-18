@@ -75,6 +75,14 @@ class LeitorModelo extends Modelo
         return null;
     }
 
+    public function livro_emprestado()
+    {
+        if ($this->id) {
+            return (new ControleLivroModelo())->busca("leitor_id = {$this->id} and data_efetiva is null")->total();
+        }
+        return null;
+    }
+
     public function salvar(): bool
     {
         return parent::salvar();

@@ -28,6 +28,12 @@
             </a>
           </li>
           <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/leitores/listar')}}" tooltip="tooltip"
+              title="Cadastrar Leitores">
+              LEITORES
+            </a>
+          </li>
+          <li class="li-secundaria">
             <a class="dropdown-item a-secundaria" href="{{url('admin/editoras/listar')}}" tooltip="tooltip"
               title="Cadastrar Editoras">
               EDITORAS
@@ -104,7 +110,6 @@
           {% endif %}
         </ul>
       </li> #}
-      <li class="li-principal"><a class="a-principal" href="#">PESQUISAR LEITOR</a></li>
       <li class="li-principal"><a class="a-principal"
           href="{{url('admin/devolucao_emprestimo/listar')}}">EMPRESTIMO/DEVOLUÇÃO</a></li>
       <li class="li-principal"><a class="a-principal" href="#">INDICADORES</a></li>

@@ -27,11 +27,13 @@ class AdminLeitores extends AdminController
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
         }
+        $leitores = new LeitorModelo();
         $cor_racas = new CorRacaModelo();
         $escolaridades = new EscolaridadeModelo();
         echo $this->template->renderizar('leitores/listar.html', [
             'cor_racas' => $cor_racas->busca()->resultado(true),
             'escolaridades' => $escolaridades->busca()->resultado(true),
+            'leitores' => $leitores->busca()->resultado(true),
         ]);
     }
 
