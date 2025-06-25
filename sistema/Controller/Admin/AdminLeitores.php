@@ -41,7 +41,8 @@ class AdminLeitores extends AdminController
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        $leitor = (new LeitorModelo())->busca("cpf_leitor = {$dados['cpf_leitor']}")->resultado();
+        $leitor = (new LeitorModelo())->buscaPorId($dados['leitor_id']);
+        
         echo $this->template->renderizar('leitores/fichaLeitor.html', [
             'leitor' => $leitor
         ]);
@@ -132,7 +133,7 @@ class AdminLeitores extends AdminController
 
     public function editar(): void
     {
-        //Só permitir que Administrador entren na tela de editar livros
+        //Só permitir que Administrador entren na tela de editar leitores
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
@@ -143,67 +144,73 @@ class AdminLeitores extends AdminController
             //checa os dados 
             if ($this->validarDados($dados)) {
 
-                $livro = (new LivroModelo())->buscaPorId($dados['livro_id']);
+                $leitor = (new LeitorModelo())->buscaPorId($dados['leitor_id']);
 
-                $livro->usuario_modificacao_id = $this->usuario->id;
-                $livro->titulo_livro = isset($dados['titulo_livro_editar']) && !empty($dados['titulo_livro_editar']) ? $dados['titulo_livro_editar'] : NULL;
-                $livro->genero_livro_id = isset($dados['genero_livro_editar_id']) && !empty($dados['genero_livro_editar_id']) ? $dados['genero_livro_editar_id'] : NULL;
-                $livro->editora_livro = isset($dados['editora_livro_editar']) && !empty($dados['editora_livro_editar']) ? $dados['editora_livro_editar'] : NULL;
-                $livro->autor_livro = isset($dados['autor_livro_editar']) && !empty($dados['autor_livro_editar']) ? $dados['autor_livro_editar'] : NULL;
-                $livro->ano_livro = isset($dados['ano_livro_editar']) && !empty($dados['ano_livro_editar']) ? $dados['ano_livro_editar'] : NULL;
-                $livro->pais_livro_id = isset($dados['pais_livro_editar_id']) && !empty($dados['pais_livro_editar_id']) ? $dados['pais_livro_editar_id'] : NULL;
-                $livro->idioma_livro_id = isset($dados['idioma_livro_editar_id']) && !empty($dados['idioma_livro_editar_id']) ? $dados['idioma_livro_editar_id'] : NULL;
-                $livro->quantidade_livro = isset($dados['quantidade_livro_editar']) && !empty($dados['quantidade_livro_editar']) ? $dados['quantidade_livro_editar'] : NULL;
-                $livro->tipo_procedencia_livro_id = isset($dados['tipo_procedencia_livro_editar_id']) && !empty($dados['tipo_procedencia_livro_editar_id']) ? $dados['tipo_procedencia_livro_editar_id'] : NULL;
-                $livro->procedencia_livro = isset($dados['procedencia_livro_editar']) && !empty($dados['procedencia_livro_editar']) ? $dados['procedencia_livro_editar'] : NULL;
-                $livro->localizacao_livro = isset($dados['localizacao_livro_editar']) && !empty($dados['localizacao_livro_editar']) ? $dados['localizacao_livro_editar'] : NULL;
-                $livro->sinopse_livro = isset($dados['sinopse_livro_editar']) && !empty($dados['sinopse_livro_editar']) ? $dados['sinopse_livro_editar'] : NULL;
-                $foto_antiga = $livro->foto_capa_livro;
+                $leitor->usuario_modificacao_id = $this->usuario->id;
+                $leitor->cpf_leitor = isset($dados['cpf_leitor_editar']) && !empty($dados['cpf_leitor_editar']) ? $dados['cpf_leitor_editar'] : NULL;
+                $leitor->nome_leitor = isset($dados['nome_leitor_editar']) && !empty($dados['nome_leitor_editar']) ? $dados['nome_leitor_editar'] : NULL;
+                $leitor->data_nascimento_leitor = isset($dados['data_nascimento_leitor_editar']) && !empty($dados['data_nascimento_leitor_editar']) ? $dados['data_nascimento_leitor_editar'] : NULL;
+                $leitor->telefone_leitor = isset($dados['telefone_leitor_editar']) && !empty($dados['telefone_leitor_editar']) ? $dados['telefone_leitor_editar'] : NULL;
+                $leitor->sexo_leitor_id = isset($dados['sexo_leitor_editar_id']) && !empty($dados['sexo_leitor_editar_id']) ? $dados['sexo_leitor_editar_id'] : NULL;
+                $leitor->cor_leitor_id = isset($dados['cor_leitor_editar_id']) && !empty($dados['cor_leitor_editar_id']) ? $dados['cor_leitor_editar_id'] : NULL;
+                $leitor->escolaridade_leitor_id = isset($dados['escolaridade_leitor_editar_id']) && !empty($dados['escolaridade_leitor_editar_id']) ? $dados['escolaridade_leitor_editar_id'] : NULL;
+                $leitor->cep_leitor = isset($dados['cep_leitor_editar']) && !empty($dados['cep_leitor_editar']) ? $dados['cep_leitor_editar'] : NULL;
+                $leitor->rua_leitor = isset($dados['rua_leitor_editar']) && !empty($dados['rua_leitor_editar']) ? $dados['rua_leitor_editar'] : NULL;
+                $leitor->numero_leitor = isset($dados['numero_leitor_editar']) && !empty($dados['numero_leitor_editar']) ? $dados['numero_leitor_editar'] : NULL;
+                $leitor->bairro_leitor = isset($dados['bairro_leitor_editar']) && !empty($dados['bairro_leitor_editar']) ? $dados['bairro_leitor_editar'] : NULL;
+                $leitor->ponto_de_referencia_leitor = isset($dados['ponto_de_referencia_leitor_editar']) && !empty($dados['ponto_de_referencia_leitor_editar']) ? $dados['ponto_de_referencia_leitor_editar'] : NULL;
+                $leitor->email_leitor = isset($dados['email_leitor_editar']) && !empty($dados['email_leitor_editar']) ? $dados['email_leitor_editar'] : NULL;
+                $leitor->rede_social_leitor = isset($dados['rede_social_leitor_editar']) && !empty($dados['rede_social_leitor_editar']) ? $dados['rede_social_leitor_editar'] : NULL;
+                $foto_antiga = $leitor->foto_leitor;
 
-                if ($_FILES['foto_capa_livro_editar']['error'] == 0) {
-                    $upload = new Upload($_FILES['foto_capa_livro_editar'], 'pt_BR');
+                if ($_FILES['foto_leitor_editar']['error'] == 0) {
+                    $upload = new Upload($_FILES['foto_leitor_editar'], 'pt_BR');
                     if ($upload->uploaded) {
                         if (in_array($upload->file_src_name_ext, ['png', 'jpg', 'jpeg'])) {
 
                             $foto_token = Helpers::gerarToken();
-                            $titulo = $upload->file_new_name_body = 'fotoLivro_' . $foto_token;
-                            $upload->jpeg_quality = 80;
+                            $titulo = $upload->file_new_name_body = 'fotoLeitor_' . $foto_token;
+                            // $upload->jpeg_quality = 80;
+                            // $upload->jpeg_size = 2000000;
                             $upload->image_convert = 'jpg';
-                            $upload->process('uploads/livros/');
-                            $livro->foto_capa_livro = $titulo . '.jpg';
+                            $upload->image_resize         = true;
+                            $upload->image_x              = 500;
+                            $upload->image_ratio_y        = true;
+                            $upload->process('uploads/leitores/');
+                            $leitor->foto_leitor = $titulo . '.jpg';
                             if (!$upload->processed) {
                                 Conexao::getInstancia()->rollBack();
                                 $this->mensagem->alerta('Erro de Processamento!')->flash();
-                                Helpers::redirecionar('admin/livros/listar');
+                                Helpers::redirecionar('admin/leitores/listar');
                             }
                             if (isset($foto_antiga)) {
-                                unlink('uploads/livros/' . $foto_antiga);
+                                unlink('uploads/leitores/' . $foto_antiga);
                             }
                         } else {
                             Conexao::getInstancia()->rollBack();
                             $this->mensagem->alerta('Formato de imagem não permitido!')->flash();
-                            Helpers::redirecionar('admin/livros/listar');
+                            Helpers::redirecionar('admin/leitores/listar');
                         }
                     } else {
                         Conexao::getInstancia()->rollBack();
                         $this->mensagem->alerta('Erro de Upload!')->flash();
-                        Helpers::redirecionar('admin/livros/listar');
+                        Helpers::redirecionar('admin/leitores/listar');
                     }
                 }
 
-                if ($livro->salvar()) {
+                if ($leitor->salvar()) {
                     Conexao::getInstancia()->commit();
-                    $this->mensagem->sucesso('Livro editado com sucesso')->flash();
-                    Helpers::redirecionar('admin/livros/listar');
+                    $this->mensagem->sucesso('Leitor editado com sucesso')->flash();
+                    Helpers::redirecionar('admin/leitores/listar');
                 } else {
                     Conexao::getInstancia()->rollBack();
-                    $this->mensagem->erro($livro->erro())->flash();
-                    Helpers::redirecionar('admin/livros/listar');
+                    $this->mensagem->erro($leitor->erro())->flash();
+                    Helpers::redirecionar('admin/leitores/listar');
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
                 $this->mensagem->erro($this->validarDados($dados))->flash();
-                Helpers::redirecionar('admin/livros/listar');
+                Helpers::redirecionar('admin/leitores/listar');
             }
         }
     }
@@ -261,12 +268,12 @@ class AdminLeitores extends AdminController
         return true;
     }
 
-    public function valorizarLivro()
+    public function valorizarLeitor()
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $valorizar_livro = (new LivroModelo())->busca("id = {$dados['id']}")->resultado(false, true);
+        $valorizar_leitor = (new LeitorModelo())->busca("id = {$dados['id']}")->resultado(false, true);
 
-        return json_encode($valorizar_livro);
+        return json_encode($valorizar_leitor);
     }
 
     public function checarCpf()

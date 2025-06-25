@@ -58,6 +58,11 @@
                                 data-bs-target="#ModalEditarLeitor" data-id="{{leitor.id}}">
                                 <i class="fa-solid fa-pen m-1"></i> Editar
                             </button>
+                            <form method="post" action="{{url('admin/leitores/fichaLeitor')}}" class="formFichaLeitor">
+                                <input type="hidden" name="leitor_id" value="{{leitor.id}}">
+                                <button type="button" class="btn btn-info me-2 btnFichaLeitor"
+                                    value="">Ficha Leitor</button>
+                            </form>
                         </td>
                     </tr>
                     {%endfor%}

@@ -12,7 +12,7 @@
           <div class="card-body">
             <form method="post" action="{{url('admin/leitores/editar')}}" id="editarLeitor"
               enctype="multipart/form-data">
-
+              <input type="hidden" name="leitor_id" id="leitor_id" class="form-control">
               <h5 class="modal-title fw-bold" id="exampleModalLabel">Editar Leitor</h5>
               <div class="row">
                 <div class="col-lg-11-3qtr card border-2 shadow-sm mt-2 mb-3 me-4 ms-4">
@@ -32,7 +32,7 @@
                               <div class="mb-3">
                                 <label for="foto_leitor_editar" class="form-label">Foto Leitor</label>
                                 <input type="file" name="foto_leitor_editar" id="foto_leitor_editar" class="form-control"
-                                  onchange="previewCadastro()">
+                                  onchange="previewEditar()">
                               </div>
                             </div>
                           </div>
@@ -52,13 +52,13 @@
                             <div class="col-md-8">
                               <div class="mb-3">
                                 <label for="nome_leitor_editar" class="form-label">Nome</label>
-                                <input type="text" name="nome_leitor_editar" class="form-control" required>
+                                <input type="text" name="nome_leitor_editar" id="nome_leitor_editar" class="form-control" required>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="data_nascimento_leitor_editar" class="form-label">Data Nascimento</label>
-                                <input type="date" name="data_nascimento_leitor_editar" class="form-control" required>
+                                <input type="date" name="data_nascimento_leitor_editar" id="data_nascimento_leitor_editar" class="form-control" required>
                               </div>
                             </div>
                           </div>
@@ -66,13 +66,13 @@
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="telefone_leitor_editar" class="form-label">Telefone</label>
-                                <input type="text" name="telefone_leitor_editar" class="form-control" required>
+                                <input type="text" name="telefone_leitor_editar" id="telefone_leitor_editar" class="form-control" required>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="pais_leitor_editar_id" class="form-label">Sexo</label>
-                                <select id="pais_leitor_editar_id" name="pais_leitor_editar_id" class="form-control" required>
+                                <label for="sexo_leitor_editar_id" class="form-label">Sexo</label>
+                                <select id="sexo_leitor_editar_id" name="sexo_leitor_editar_id" class="form-control" required>
                                   <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione</option>
                                   <option value="1"><span class="flag-icon flag-icon-gr"></span>MASCULINO</option>
                                   <option value="2"><span class="flag-icon flag-icon-gr"></span>FEMININO</option>
@@ -112,7 +112,7 @@
                             <div class="col-md-8">
                               <div class="mb-3">
                                 <label for="email_leitor_editar" class="form-label">E-mail</label>
-                                <input type="text" name="email_leitor_editar" class="form-control" required>
+                                <input type="text" name="email_leitor_editar" id="email_leitor_editar" class="form-control" required>
                               </div>
                             </div>
                           </div>
@@ -120,7 +120,7 @@
                             <div class="col-md-8">
                               <div class="mb-3">
                                 <label for="rede_social_leitor_editar" class="form-label">Rede Social</label>
-                                <input type="text" name="rede_social_leitor_editar" class="form-control">
+                                <input type="text" name="rede_social_leitor_editar" id="rede_social_leitor_editar" class="form-control">
                               </div>
                             </div>
                           </div>
@@ -190,7 +190,7 @@
   </div>
 </div>
 <script>
-  function previewCadastro() {
+  function previewEditar() {
 
     var uploadField = document.getElementById("foto_leitor_editar");
     if (uploadField.files[0].size > 8097152) {

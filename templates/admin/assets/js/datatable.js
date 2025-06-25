@@ -443,6 +443,7 @@ $(document).ready(function () {
         columnDefs: [
             {
                 targets: [-1],
+                className: 'dt-nowrap d-flex justify-content-evenly',
                 orderable: false
             },
             {

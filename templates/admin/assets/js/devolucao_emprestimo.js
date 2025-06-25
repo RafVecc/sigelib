@@ -103,6 +103,7 @@ function executar_pesquisa_leitor(variavel, e) {
                             if (result2.isConfirmed) {
                                 $('#ModalCadastrarLeitor').modal('show');
                                 $('#ModalCadastrarLeitor').find('#cpf_leitor').val(novoCpf);
+                                $('#ModalCadastrarLeitor').find('#cpf_leitor').attr('readonly', true)
                             } else {
                                 $('#pesquisaLeitor').find('#cpf').val('');
                             }

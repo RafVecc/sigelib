@@ -7,6 +7,11 @@
                 Dashboard
             </a>
         </li>
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/leitores/listar')}}">
+                Lista de Leitores
+            </a>
+        </li>
         <li class="breadcrumb-item active" aria-current="page">
             Ficha do Leitor
         </li>
@@ -34,8 +39,7 @@
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label for="cpf_leitor" class="form-label">CPF</label>
-                        <input class="form-control cpf_leitor" type="text" value="{{leitor.cpf_leitor}}"
-                            readonly>
+                        <input class="form-control cpf_leitor" type="text" value="{{leitor.cpf_leitor}}" readonly>
                     </div>
                 </div>
                 <div class="col-sm-8">

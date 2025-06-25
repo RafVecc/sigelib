@@ -38,37 +38,45 @@ $('.editarLeitor').on("click", function (event) {
 
 });
 
-// $('.valorizarLivro').on("click", function () {
-//     var url = $('#url').val();
-//     var id = $(this).attr('data-id')
+$('.btnFichaLeitor').on("click", function (event) {
 
-//     $.ajax({
-//         type: 'POST',
-//         url: url + 'admin/livros/valorizarLivro',
-//         data: { id: id },
-//         dataType: 'json',
+    // $('.formFichaLeitor').submit()
+    $(this).closest('.formFichaLeitor').submit()
 
-//         success: function (data) {
-//             var imagem = url + 'uploads/livros/' + data[0]['foto_capa_livro']
-//             $('#livro_id').val(data[0]['id'])
-//             $('#foto_capa_livro_editar').attr('src', imagem)
-//             $('#titulo_livro_editar').val(data[0]['titulo_livro'])
-//             $('#genero_livro_editar_id').val(data[0]['genero_livro_id'])
-//             $('#editora_livro_editar').val(data[0]['editora_livro'])
-//             $('#ano_livro_editar').val(data[0]['ano_livro'])
-//             $('#pais_livro_editar_id').val(data[0]['pais_livro_id'])
-//             $('#idioma_livro_editar_id').val(data[0]['idioma_livro_id'])
-//             $('#autor_livro_editar').val(data[0]['autor_livro'])
-//             $('#quantidade_livro_editar').val(data[0]['quantidade_livro'])
-//             $('#tipo_procedencia_livro_editar_id').val(data[0]['tipo_procedencia_livro_id'])
-//             $('#procedencia_livro_editar').val(data[0]['procedencia_livro'])
-//             $('#localizacao_livro_editar').val(data[0]['localizacao_livro'])
-//             $('#sinopse_livro_editar').val(data[0]['sinopse_livro'])
+});
 
+$('.valorizarLeitor').on("click", function () {
+    var url = $('#url').val();
+    var id = $(this).attr('data-id')
 
-//         }
-//     })
-// })
+    $.ajax({
+        type: 'POST',
+        url: url + 'admin/leitores/valorizarLeitor',
+        data: { id: id },
+        dataType: 'json',
+
+        success: function (data) {
+            var imagem = url + 'uploads/leitores/' + data[0]['foto_leitor']
+            $('#leitor_id').val(data[0]['id'])
+            $('#imagem_leitor_editar').attr('src', imagem)
+            $('#cpf_leitor_editar').val(data[0]['cpf_leitor'])
+            $('#nome_leitor_editar').val(data[0]['nome_leitor'])
+            $('#data_nascimento_leitor_editar').val(data[0]['data_nascimento_leitor'])
+            $('#telefone_leitor_editar').val(data[0]['telefone_leitor'])
+            $('#sexo_leitor_editar_id').val(data[0]['sexo_leitor_id'])
+            $('#cor_leitor_editar_id').val(data[0]['cor_leitor_id'])
+            $('#escolaridade_leitor_editar_id').val(data[0]['escolaridade_leitor_id'])
+            $('#email_leitor_editar').val(data[0]['email_leitor'])
+            $('#rede_social_leitor_editar').val(data[0]['rede_social_leitor'])
+            $('#cep_leitor_editar').val(data[0]['cep_leitor'])
+            $('#rua_leitor_editar').val(data[0]['rua_leitor'])
+            $('#bairro_leitor_editar').val(data[0]['bairro_leitor'])
+            $('#numero_leitor_editar').val(data[0]['numero_leitor'])
+            $('#ponto_de_referencia_leitor_editar').val(data[0]['ponto_de_referencia_leitor'])
+
+        }
+    })
+})
 
 $(document).ready(function () {
 
