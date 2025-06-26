@@ -66,9 +66,17 @@
                             </div>
                             <div class="col-md-7">
                               <div class="mb-3">
-                                <label for="editora_livro_editar" class="form-label">Editora</label>
-                                <input type="text" name="editora_livro_editar" id="editora_livro_editar"
-                                  class="form-control">
+                                <label for="editora_livro_editar_id" class="form-label">Editora</label>
+                                <select id="editora_livro_editar_id" name="editora_livro_editar_id" class="form-control"
+                                  required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for editora_livro in editoras_livro %}
+                                  <option value="{{editora_livro.id}}">
+                                    {{editora_livro.editora_livro }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
                               </div>
                             </div>
                           </div>
@@ -151,16 +159,17 @@
                             </div>
                             <div class="col-md-5">
                               <div class="mb-3">
-                                <label for="procedencia_livro_editar" class="form-label">Local de Procedência</label>
+                                <label for="procedencia_livro_editar" class="form-label">Fornecedor/Instituição Doadora</label>
                                 <input type="text" name="procedencia_livro_editar" id="procedencia_livro_editar"
                                   class="form-control">
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="data_doacao_compra_livro_editar" class="form-label">Data Doação/Compra</label>
-                                <input type="date" name="data_doacao_compra_livro_editar" id="data_doacao_compra_livro_editar"
-                                  class="form-control">
+                                <label for="data_doacao_compra_livro_editar" class="form-label">Data
+                                  Doação/Compra</label>
+                                <input type="date" name="data_doacao_compra_livro_editar"
+                                  id="data_doacao_compra_livro_editar" class="form-control">
                               </div>
                             </div>
                           </div>

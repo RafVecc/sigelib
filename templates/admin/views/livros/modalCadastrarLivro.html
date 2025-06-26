@@ -32,7 +32,7 @@
                               <div class="mb-3">
                                 <label for="foto_capa_livro" class="form-label">Foto Capa</label>
                                 <input type="file" name="foto_capa_livro" id="foto_capa_livro" class="form-control"
-                                  onchange="previewCadastro()">
+                                  onchange="previewCadastro()" required>
                               </div>
                             </div>
                           </div>
@@ -82,7 +82,7 @@
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="ano_livro" class="form-label">Ano</label>
-                                <input type="text" name="ano_livro" class="form-control">
+                                <input type="text"  name="ano_livro" class="form-control" required>
                               </div>
                             </div>
                             <div class="col-md-4">
@@ -118,13 +118,13 @@
                             <div class="col-md-8">
                               <div class="mb-3">
                                 <label for="autor_livro" class="form-label">Autor</label>
-                                <input type="text" name="autor_livro" class="form-control">
+                                <input type="text" name="autor_livro" class="form-control" required>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="quantidade_livro" class="form-label">Quantidade</label>
-                                <input type="text" name="quantidade_livro" class="form-control">
+                                <input type="text" pattern="[0-9]"  name="quantidade_livro" class="form-control" required>
                               </div>
                             </div>
                           </div>
@@ -152,14 +152,14 @@
                             </div>
                             <div class="col-md-5">
                               <div class="mb-3">
-                                <label for="procedencia_livro" class="form-label">Empresa/Instituição</label>
-                                <input type="text" name="procedencia_livro" class="form-control">
+                                <label for="procedencia_livro" class="form-label">Fornecedor/Instituição Doadora</label>
+                                <input type="text" name="procedencia_livro" class="form-control" required>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="data_doacao_compra_livro" class="form-label">Data Doação/Compra</label>
-                                <input type="date" name="data_doacao_compra_livro" class="form-control">
+                                <input type="date" name="data_doacao_compra_livro" class="form-control" required>
                               </div>
                             </div>
                           </div>
@@ -167,7 +167,7 @@
                             <div class="col-md-12">
                               <div class="mb-3">
                                 <label for="localizacao_livro" class="form-label">Prateleira</label>
-                                <input type="text" name="localizacao_livro" class="form-control">
+                                <input type="text" name="localizacao_livro" class="form-control" required>
                               </div>
                             </div>
                           </div>
@@ -175,8 +175,8 @@
                             <div class="col-md-12">
                               <div class="mb-3">
                                 <label for="sinopse_livro" class="form-label">Sinopse</label>
-                                <textarea id="sinopse_livro" name="sinopse_livro" class="form-control"
-                                  rows="3"></textarea>
+                                <textarea id="sinopse_livro" name="sinopse_livro" class="form-control" rows="3"
+                                  required></textarea>
                               </div>
                             </div>
                           </div>
@@ -204,7 +204,6 @@
   function previewCadastro() {
 
     var uploadField = document.getElementById("foto_capa_livro");
-    console.log(uploadField)
     if (uploadField.files[0].size > 8097152) {
       // alert("File is too big!");
       Swal.fire({

@@ -25,7 +25,7 @@ Tarefas a fazer!!
   - Verificar campos que aceitam apenas números e os que aceitam apenas letras
 
 * Fazer a pesquisa de leitores
-  - Pesquisar por cpf, nome e adicionar na lista botão para a ficha do leitor
+  - Pesquisar por cpf, nome e adicionar na lista botão para a ficha do leitor [OK]
   - Adicionar histórico de empréstimos/devoluções
   - Adicionar Eventualmente suspensões
 

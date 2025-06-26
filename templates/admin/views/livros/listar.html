@@ -33,7 +33,9 @@
                         <th>Titulo</th>
                         <th>Autor</th>
                         <th>Prateleira</th>
-                        <th>Quantidade</th>
+                        <th>QTD</th>
+                        <th>EMP</th>
+                        <th>Saldo</th>
                         <th>Ano</th>
                         <th>Idioma</th>
                         <th>Ações</th>
@@ -45,8 +47,9 @@
                         <td>{{livro.titulo_livro}}</td>
                         <td>{{livro.autor_livro}}</td>
                         <td>{{livro.localizacao_livro}}</td>
-                        <td>{{livro.quantidade_livro - livro.quantidade_emprestada}} de {{livro.quantidade_livro}}
-                            disponíveis</td>
+                        <td>{{livro.quantidade_livro}}</td>
+                        <td>{{livro.quantidade_emprestada}}</td>
+                        <td>{{livro.quantidade_livro - livro.quantidade_emprestada}}</td>
                         <td>{{livro.ano_livro}}</td>
                         <td>{{livro.idioma_livro.idioma_livro}}</td>
                         <td>

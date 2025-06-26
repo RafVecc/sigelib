@@ -423,12 +423,14 @@ $(document).ready(function () {
         columnDefs: [
             {
                 targets: [-1],
+                className: 'dt-center',
                 orderable: false
             },
             {
-                className: 'dt-center',
+                className: 'dt-head-center dt-body-left',
                 targets: ['_all']
             }
+            
         ],
         order: [[0, 'asc']],
         "language": {
@@ -447,7 +449,7 @@ $(document).ready(function () {
                 orderable: false
             },
             {
-                className: 'dt-center',
+                className: 'dt-head-center dt-body-left',
                 targets: ['_all']
             }
         ],
@@ -467,7 +469,7 @@ $(document).ready(function () {
                 orderable: false
             },
             {
-                className: 'dt-center',
+                className: 'dt-head-center dt-body-left',
                 targets: ['_all']
             }
         ],
@@ -487,7 +489,7 @@ $(document).ready(function () {
                 orderable: false
             },
             {
-                className: 'dt-center',
+                className: 'dt-head-center dt-body-left',
                 targets: ['_all']
             }
         ],
@@ -497,32 +499,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#tabelaUnidades').DataTable({
-        paging: false,
-        order: [[0, 'asc']],
-        columnDefs: [
-
-            {
-                className: 'dt-center',
-                targets: [0, 1, 2, 3, 4, 5]
-            },
-
-        ],
-
-    });
-
-    $('#tabelaVagasUnidades').DataTable({
-        paging: false,
-        order: [[0, 'asc']],
-        columnDefs: [
-
-            {
-                className: 'dt-center',
-                targets: [0, 1, 2, 3, 4, 5, 6]
-            },
-
-        ],
-
-    });
+  
 
 });
