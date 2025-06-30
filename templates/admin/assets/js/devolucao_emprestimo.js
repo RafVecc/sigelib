@@ -119,6 +119,18 @@ function executar_pesquisa_leitor(variavel, e) {
                             $("#info_emp").addClass('d-none');
                             $("#observacao_emprestimo").attr('required', false);
                             $(".label_emp_dev").html('Informações Devolução')
+                            var data_efetiva = moment(new Date()); //todays date
+                            var data_prevista = moment(result[0]['data_prevista']);
+                           
+                            var dias = data_efetiva.diff(data_prevista, 'days');
+                        
+                            
+                            if(dias > 0){
+                                var label_dias = `<label for="label_aviso_atraso" class="form-label text-danger">A devolução está com ${dias} dias de atraso!</label>`;
+                            }else{
+                                var label_dias = `<label for="label_aviso_atraso" class="form-label text-success">A devolução está no prazo!</label>`;
+                            }
+                           
                             html += `<div class="row mb-3">
                                         <div class="col-lg-12 card border-2 shadow-sm">
                                             <div class="card-body">
@@ -168,8 +180,8 @@ function executar_pesquisa_leitor(variavel, e) {
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-5">
-                                                                    <div class="mb-3">
-                                                                    <label for="data_efetiva_devolucao_livro" class="form-label">Data Efetiva</label>
+                                                                    <div class="my-4 ms-5">
+                                                                    ${label_dias}
                                                                     </div>
                                                                 </div>
                                                             </div>
