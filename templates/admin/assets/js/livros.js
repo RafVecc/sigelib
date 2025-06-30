@@ -100,5 +100,15 @@ function validarCampos(elementos) {
         }
     }
 
+    if (elementos[0].name == 'quantidade_livro') {
+        if (!$.isNumeric(elementos.val())) {
+            elementos.addClass('is-invalid');
+            elementos[0].setCustomValidity('Quantidade deve ser um número!')
+            elementos[0].reportValidity()
+            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
+            return false
+        }
+    }
+
     return true
 }

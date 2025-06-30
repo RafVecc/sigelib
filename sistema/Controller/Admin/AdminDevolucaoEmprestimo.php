@@ -30,44 +30,11 @@ class AdminDevolucaoEmprestimo extends AdminController
         }
         $cor_racas = new CorRacaModelo();
         $escolaridades = new EscolaridadeModelo();
+        $livros = new LivroModelo();
         echo $this->template->renderizar('devolucao_emprestimo/listar.html', [
             'cor_racas' => $cor_racas->busca()->resultado(true),
             'escolaridades' => $escolaridades->busca()->resultado(true),
-        ]);
-    }
-
-    public function emprestimo(): void
-    {
-        //Só permitir que Administrador entren na tela de listar usuarios
-        if ($this->usuario->tipo_usuario_id != 1) {
-            $this->mensagem->erro("Sem premissão de acesso")->flash();
-            Helpers::redirecionar('admin/');
-        }
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $livros = new LivroModelo();
-        $leitor = new LeitorModelo();
-        $generos_livro = new GeneroLivroModelo();
-        $idiomas_livro = new IdiomaLivroModelo();
-        $paises_livro = new PaisLivroModelo();
-        $tipos_procedencia_livro = new TipoProcedenciaLivro();
-
-        echo $this->template->renderizar('devolucao_emprestimo/emprestimo.html', [
             'livros' => $livros->busca()->resultado(true),
-            'leitor' => $leitor->buscaPorId($dados['leitor_id']),
-            'generos_livro' => $generos_livro->busca()->resultado(true),
-            'idiomas_livro' => $idiomas_livro->busca()->resultado(true),
-            'paises_livro' => $paises_livro->busca()->resultado(true),
-            'tipos_procedencia_livro' => $tipos_procedencia_livro->busca()->resultado(true),
-        ]);
-    }
-
-    public function fichaLeitor(): void
-    {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-        $leitor = (new LeitorModelo())->busca("cpf_leitor = {$dados['cpf_leitor']}")->resultado();
-        echo $this->template->renderizar('leitores/fichaLeitor.html', [
-            'leitor' => $leitor
         ]);
     }
 
@@ -80,7 +47,7 @@ class AdminDevolucaoEmprestimo extends AdminController
         }
 
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        
+
         if (isset($dados)) {
             Conexao::getInstancia()->beginTransaction();
             //checa os dados
@@ -90,8 +57,8 @@ class AdminDevolucaoEmprestimo extends AdminController
 
                 $emprestimo->usuario_cadastro_id = $this->usuario->id;
                 $emprestimo->usuario_modificacao_id = $this->usuario->id;
-                $emprestimo->livro_id = isset($dados['livro_id_emprestimo']) && !empty($dados['livro_id_emprestimo']) ? $dados['livro_id_emprestimo'] : NULL;
-                $emprestimo->leitor_id = isset($dados['leitor_id_emprestimo']) && !empty($dados['leitor_id_emprestimo']) ? $dados['leitor_id_emprestimo'] : NULL;
+                $emprestimo->livro_id = isset($dados['emp_dev_id']) && !empty($dados['emp_dev_id']) ? $dados['emp_dev_id'] : NULL;
+                $emprestimo->leitor_id = isset($dados['leitor_id']) && !empty($dados['leitor_id']) ? $dados['leitor_id'] : NULL;
                 $emprestimo->data_emprestimo = isset($dados['data_emprestimo']) && !empty($dados['data_emprestimo']) ? $dados['data_emprestimo'] : NULL;
                 $emprestimo->data_prevista = isset($dados['data_prevista']) && !empty($dados['data_prevista']) ? $dados['data_prevista'] : NULL;
                 $emprestimo->observacao_emprestimo = isset($dados['observacao_emprestimo']) && !empty($dados['observacao_emprestimo']) ? $dados['observacao_emprestimo'] : NULL;
@@ -115,78 +82,37 @@ class AdminDevolucaoEmprestimo extends AdminController
 
     public function editar(): void
     {
-        //Só permitir que Administrador entren na tela de editar livros
+        //Só permitir que Administrador entren na tela de editar emprestimos
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
         }
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        // var_dump($dados);die;
         if (isset($dados)) {
             Conexao::getInstancia()->beginTransaction();
             //checa os dados 
             if ($this->validarDados($dados)) {
 
-                $livro = (new LivroModelo())->buscaPorId($dados['livro_id']);
+                $devolucao = (new ControleLivroModelo())->buscaPorId($dados['emp_dev_id']);
 
-                $livro->usuario_modificacao_id = $this->usuario->id;
-                $livro->titulo_livro = isset($dados['titulo_livro_editar']) && !empty($dados['titulo_livro_editar']) ? $dados['titulo_livro_editar'] : NULL;
-                $livro->genero_livro_id = isset($dados['genero_livro_editar_id']) && !empty($dados['genero_livro_editar_id']) ? $dados['genero_livro_editar_id'] : NULL;
-                $livro->editora_livro = isset($dados['editora_livro_editar']) && !empty($dados['editora_livro_editar']) ? $dados['editora_livro_editar'] : NULL;
-                $livro->autor_livro = isset($dados['autor_livro_editar']) && !empty($dados['autor_livro_editar']) ? $dados['autor_livro_editar'] : NULL;
-                $livro->ano_livro = isset($dados['ano_livro_editar']) && !empty($dados['ano_livro_editar']) ? $dados['ano_livro_editar'] : NULL;
-                $livro->pais_livro_id = isset($dados['pais_livro_editar_id']) && !empty($dados['pais_livro_editar_id']) ? $dados['pais_livro_editar_id'] : NULL;
-                $livro->idioma_livro_id = isset($dados['idioma_livro_editar_id']) && !empty($dados['idioma_livro_editar_id']) ? $dados['idioma_livro_editar_id'] : NULL;
-                $livro->quantidade_livro = isset($dados['quantidade_livro_editar']) && !empty($dados['quantidade_livro_editar']) ? $dados['quantidade_livro_editar'] : NULL;
-                $livro->tipo_procedencia_livro_id = isset($dados['tipo_procedencia_livro_editar_id']) && !empty($dados['tipo_procedencia_livro_editar_id']) ? $dados['tipo_procedencia_livro_editar_id'] : NULL;
-                $livro->procedencia_livro = isset($dados['procedencia_livro_editar']) && !empty($dados['procedencia_livro_editar']) ? $dados['procedencia_livro_editar'] : NULL;
-                $livro->localizacao_livro = isset($dados['localizacao_livro_editar']) && !empty($dados['localizacao_livro_editar']) ? $dados['localizacao_livro_editar'] : NULL;
-                $livro->sinopse_livro = isset($dados['sinopse_livro_editar']) && !empty($dados['sinopse_livro_editar']) ? $dados['sinopse_livro_editar'] : NULL;
-                $foto_antiga = $livro->foto_capa_livro;
+                $devolucao->usuario_modificacao_id = $this->usuario->id;
+                $devolucao->data_efetiva = isset($dados['data_efetiva_devolucao_livro']) && !empty($dados['data_efetiva_devolucao_livro']) ? $dados['data_efetiva_devolucao_livro'] : NULL;
+                $devolucao->observacao_devolucao = isset($dados['observacao_devolucao_livro']) && !empty($dados['observacao_devolucao_livro']) ? $dados['observacao_devolucao_livro'] : NULL;
 
-                if ($_FILES['foto_capa_livro_editar']['error'] == 0) {
-                    $upload = new Upload($_FILES['foto_capa_livro_editar'], 'pt_BR');
-                    if ($upload->uploaded) {
-                        if (in_array($upload->file_src_name_ext, ['png', 'jpg', 'jpeg'])) {
-
-                            $foto_token = Helpers::gerarToken();
-                            $titulo = $upload->file_new_name_body = 'fotoLivro_' . $foto_token;
-                            $upload->jpeg_quality = 80;
-                            $upload->image_convert = 'jpg';
-                            $upload->process('uploads/livros/');
-                            $livro->foto_capa_livro = $titulo . '.jpg';
-                            if (!$upload->processed) {
-                                Conexao::getInstancia()->rollBack();
-                                $this->mensagem->alerta('Erro de Processamento!')->flash();
-                                Helpers::redirecionar('admin/livros/listar');
-                            }
-                            if (isset($foto_antiga)) {
-                                unlink('uploads/livros/' . $foto_antiga);
-                            }
-                        } else {
-                            Conexao::getInstancia()->rollBack();
-                            $this->mensagem->alerta('Formato de imagem não permitido!')->flash();
-                            Helpers::redirecionar('admin/livros/listar');
-                        }
-                    } else {
-                        Conexao::getInstancia()->rollBack();
-                        $this->mensagem->alerta('Erro de Upload!')->flash();
-                        Helpers::redirecionar('admin/livros/listar');
-                    }
-                }
-
-                if ($livro->salvar()) {
+                if ($devolucao->salvar()) {
                     Conexao::getInstancia()->commit();
-                    $this->mensagem->sucesso('Livro editado com sucesso')->flash();
-                    Helpers::redirecionar('admin/livros/listar');
+                    $this->mensagem->sucesso('Devolução realizada com sucesso')->flash();
+                    Helpers::redirecionar('admin/devolucao_emprestimo/listar');
                 } else {
                     Conexao::getInstancia()->rollBack();
-                    $this->mensagem->erro($livro->erro())->flash();
-                    Helpers::redirecionar('admin/livros/listar');
+                    $this->mensagem->erro($devolucao->erro())->flash();
+                    Helpers::redirecionar('admin/devolucao_emprestimo/listar');
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
                 $this->mensagem->erro($this->validarDados($dados))->flash();
-                Helpers::redirecionar('admin/livros/listar');
+                Helpers::redirecionar('admin/devolucao_emprestimo/listar');
             }
         }
     }
@@ -257,10 +183,24 @@ class AdminDevolucaoEmprestimo extends AdminController
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $leitor_cpf = (new LeitorModelo())->busca("cpf_leitor = {$dados['cpf']}")->resultado(false, true);
         if (isset($leitor_cpf)) {
-            $check_leitor = (new ControleLivroModelo())->busca("leitor_id = {$leitor_cpf[0]['id']} and data_efetiva is null")->resultado(true);
+            $check_leitor = (new ControleLivroModelo())->busca("leitor_id = {$leitor_cpf[0]['id']} and data_efetiva is null")->resultado();
             if (isset($check_leitor)) {
+                $livro = (new LivroModelo())->busca("id = {$check_leitor->livro_id}")->resultado(false, true);
+                $controle_livro = (new ControleLivroModelo())->busca("id = {$check_leitor->id}")->resultado(false, true);
+                $leitor_cpf[0]['data_emprestimo'] = $controle_livro[0]['data_emprestimo'];
+                $leitor_cpf[0]['data_prevista'] = $controle_livro[0]['data_prevista'];
+                $leitor_cpf[0]['observacao_emprestimo'] = $controle_livro[0]['observacao_emprestimo'];
+                $leitor_cpf[0]['controle_id'] = $controle_livro[0]['id'];
+                $leitor_cpf[0]['titulo_livro'] = $livro[0]['titulo_livro'];
+                $leitor_cpf[0]['foto_capa_livro'] = $livro[0]['foto_capa_livro'];
                 $leitor_cpf[0]['check'] = 'invalido';
             } else {
+                $livro = (new LivroModelo())->busca(
+                    "",
+                    "",
+                    "*, (select count(id) as total_emp from controle_livros where livros.id = controle_livros.livro_id and data_efetiva is null) as total_emp, (select idioma_livro from idioma_livro where livros.idioma_livro_id = idioma_livro.id) as idioma_livro"
+                )->resultado(false, true);
+                $leitor_cpf[0]['emp_dev'] = $livro;
                 $leitor_cpf[0]['check'] = 'valido';
             }
             return json_encode($leitor_cpf);

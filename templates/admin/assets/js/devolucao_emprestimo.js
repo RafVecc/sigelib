@@ -1,47 +1,49 @@
-$('.emprestarLivro').on("click", function (event) {
+
+$('#lista_emp_dev').on("click", ".btn_emp, .btn_dev", function (event) {
+    if ($(this).hasClass('btn_emp')) {
+        var title = 'Deseja finalizar o empréstimo desse livro?'
+        $("#form_emp_dev").attr('action', "cadastrar");
+    } else if ($(this).hasClass('btn_dev')) {
+        var title = 'Deseja finalizar a devolução desse livro?'
+        $("#form_emp_dev").attr('action', "editar");
+    }
+
+    $("#emp_dev_id").val($(this).attr('data-id'));
 
     event.preventDefault();
 
-    Swal.fire({
-        title: "Deseja finalizar o empréstimo desse livro?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, emprestar!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $('#emprestarLivro').submit()
+    var emptyCount = 0;
+    $("#form_emp_dev").find('input[required], select[required], textarea[required]').each(function (index, element) {
+        var element = $(element);
+
+        if (element.val() === '') {
+            emptyCount++;
+            element.addClass('is-invalid');
+            $("#modalPesquisaLeitor").scrollTo('.is-invalid');
+        } else {
+
+            if (!validarCampos(element)) {
+                emptyCount++;
+            } else {
+                element.removeClass('is-invalid');
+            }
         }
     });
-
-
-});
-
-$('.editarLeitor').on("click", function (event) {
-
-    event.preventDefault();
-
-    Swal.fire({
-        title: "Deseja finalizar a edição desse leitor?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, editar!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $('#editarLeitor').submit()
-        }
-    });
-
-
-});
-
-$('#btn_emp_dev').on("click", '#btn_emprestimo', function (event) {
-    $("#form_amp_dev").attr('action', "emprestimo");
-    $('#form_amp_dev').submit()
-
+    if (emptyCount == 0) {
+        Swal.fire({
+            title: title,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form_emp_dev').submit()
+            }
+        });
+    }
 });
 
 function executar_pesquisa_leitor(variavel, e) {
@@ -90,7 +92,7 @@ function executar_pesquisa_leitor(variavel, e) {
                 data: { cpf: novoCpf },
                 dataType: 'json',
                 success: function (result) {
-                    
+
                     if (result == null) {
                         Swal.fire({
                             title: "CPF não cadastrado, deseja iniciar o cadastro?",
@@ -110,15 +112,154 @@ function executar_pesquisa_leitor(variavel, e) {
                         });
 
                     } else {
-                        $('#btn_emp_dev').children().remove();
+                        console.log(result[0])
+                        $('#lista_emp_dev').children().remove();
                         html = '';
                         if (result[0]['check'] == 'invalido') {
-                            html += `<button type="button" class="btn btn-success fs-4" data-bs-toggle="modal"
-                            data-bs-target="#ModalDadosPessoaisCompletos">Realizar Devolução
-                            </button>`;
+                            $("#info_emp").addClass('d-none');
+                            $("#observacao_emprestimo").attr('required', false);
+                            $(".label_emp_dev").html('Informações Devolução')
+                            html += `<div class="row mb-3">
+                                        <div class="col-lg-12 card border-2 shadow-sm">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-3 card border-2 shadow-sm mb-2 ms-2">
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 card border-2 shadow-sm mb-3">
+                                                            <div class="card-body">
+                                                                <img src='${url + 'uploads/livros/' + result[0]['foto_capa_livro']}' alt="" id="imagem_devolucao_livro">
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 card border-2 shadow-sm mb-2 ms-2">
+                                                        <div class="card-body d-flex flex-column justify-content-between">
+                                                        <div>
+                                                            <div class="row">
+                                                                <div class="col-sm-9">
+                                                                    <div class="mb-3">
+                                                                    <label for="titulo_devolucao_livro" class="form-label">Título</label>
+                                                                    <input class="form-control" id="titulo_devolucao_livro" type="text" value="${result[0]['titulo_livro']}"
+                                                                        readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
+                                                                    <div class="mb-3">
+                                                                    <label for="data_emprestimo_devolucao_livro" class="form-label">Data Empréstimo</label>
+                                                                    <input class="form-control" type="date" id="data_emprestimo_devolucao_livro" value="${result[0]['data_emprestimo']}" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <div class="mb-3">
+                                                                    <label for="data_prevista_devolucao_livro" class="form-label">Data Prevista</label>
+                                                                    <input class="form-control" type="date" id="data_prevista_devolucao_livro" value="${result[0]['data_prevista']}" readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-5">
+                                                                    <div class="mb-3">
+                                                                    <label for="data_efetiva_devolucao_livro" class="form-label">Data Efetiva</label>
+                                                                    <input class="form-control" type="date" id="data_efetiva_devolucao_livro" name="data_efetiva_devolucao_livro" value="${moment().format("YYYY-MM-DD")}" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-5">
+                                                                    <div class="mb-3">
+                                                                    <label for="data_efetiva_devolucao_livro" class="form-label">Data Efetiva</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 card border-2 shadow-sm">
+                                                        <div class="card-body d-flex flex-column justify-content-between">
+                                                        <div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="mb-3">
+                                                                    <label for="observacao_emprestimo_devolucao_livro" class="form-label">Observação de
+                                                                        Empréstimo</label>
+                                                                    <textarea class="form-control" readonly>${result[0]['observacao_emprestimo']}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="mb-3">
+                                                                    <label for="observacao_devolucao_livro" class="form-label">Observação de
+                                                                        Devolução</label>
+                                                                    <textarea name="observacao_devolucao_livro" class="form-control" required></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3">
+                                            <button type="button" class="btn btn-success btn_dev" data-id="${result[0]['controle_id']}">
+                                            Concluir
+                                        </button>
+                                        </div>
+                                    </div>`;
                         } else {
-                            html += `<button type="button" class="btn btn-success fs-4" id="btn_emprestimo" data-leitor_id="${result[0]['id']}">Realizar Emprestimo
-                            </button>`;
+                            $("#info_emp").removeClass('d-none');
+                            $("#observacao_emprestimo").attr('required', true);
+                            $(".label_emp_dev").html('Informações Empréstimo')
+                            html_emp_dev = '';
+                            $.each(result[0]['emp_dev'], function (key, value) {
+
+                                html_emp_dev += `
+                                <tr>
+                                    <td>${value['titulo_livro']}</td>
+                                    <td>${value['autor_livro']}</td>
+                                    <td>${value['localizacao_livro']}</td>
+                                    <td>${value['quantidade_livro']}</td>
+                                    <td>${value['total_emp']}</td>
+                                    <td>${value['quantidade_livro'] - value['total_emp']}</td>
+                                    <td>${value['ano_livro']}</td>
+                                    <td>${value['idioma_livro']}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn_emp" data-id="${value['id']}">
+                                            Selecionar
+                                        </button>
+                                    </td>
+                                </tr>`;
+                            });
+                            html += `
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="tabelaLivros" url="{{url()}}" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                        <th>Titulo</th>
+                                        <th>Autor</th>
+                                        <th>Prateleira</th>
+                                        <th>QTD</th>
+                                        <th>EMP</th>
+                                        <th>Saldo</th>
+                                        <th>Ano</th>
+                                        <th>Idioma</th>
+                                        <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`+
+                                html_emp_dev
+                                + `</tbody>
+                                    </table>
+                                </div>
+                            </div>`;
                         }
                         var imagem = url + 'uploads/leitores/' + result[0]['foto_leitor'];
                         $('#modalPesquisaLeitor').find('#leitor_id').val(result[0]['id']);
@@ -128,7 +269,7 @@ function executar_pesquisa_leitor(variavel, e) {
                         // $('#modalPesquisaLeitor').find('#telefone_leitor_pesquisa').val(result[0]['telefone_leitor']);
                         // $('#modalPesquisaLeitor').find('#data_nascimento_leitor_pesquisa').val(result[0]['data_nascimento_leitor']);
                         // $('#modalPesquisaLeitor').find('#email_leitor_pesquisa').val(result[0]['email_leitor']);
-                        $('#btn_emp_dev').append(html);
+                        $('#lista_emp_dev').append(html);
                         $('#modalPesquisaLeitor').modal('show');
                     }
                 }
@@ -138,6 +279,11 @@ function executar_pesquisa_leitor(variavel, e) {
         }
     }
 
+}
+
+function validarCampos(elementos) {
+
+    return true
 }
 
 $("#pesquisaLeitor").find('#cpf').on("input", function (e) {
@@ -151,33 +297,3 @@ $(".pesquisaLeitor").on("click", function (e) {
     executar_pesquisa_leitor(variavel, e)
 }
 );
-
-$('.valorizarEmprestimo').on("click", function () {
-    var url = $('#url').val();
-    var id = $(this).attr('data-livro_id')
-
-    $.ajax({
-        type: 'POST',
-        url: url + 'admin/livros/valorizarLivro',
-        data: { id: id },
-        dataType: 'json',
-
-        success: function (data) {
-            var imagem = url + 'uploads/livros/' + data[0]['foto_capa_livro']
-            $('#livro_id_emprestimo').val(data[0]['id'])
-            $('#foto_capa_livro_emprestimo').attr('src', imagem)
-            $('#titulo_livro_emprestimo').val(data[0]['titulo_livro'])
-            $('#genero_livro_emprestimo_id').val(data[0]['genero_livro_id'])
-            $('#editora_livro_emprestimo').val(data[0]['editora_livro'])
-            $('#ano_livro_emprestimo').val(data[0]['ano_livro'])
-            $('#pais_livro_emprestimo_id').val(data[0]['pais_livro_id'])
-            $('#idioma_livro_emprestimo_id').val(data[0]['idioma_livro_id'])
-            $('#autor_livro_emprestimo').val(data[0]['autor_livro'])
-            $('#quantidade_livro_emprestimo').val(data[0]['quantidade_livro'])
-            $('#tipo_procedencia_livro_emprestimo_id').val(data[0]['tipo_procedencia_livro_id'])
-            $('#procedencia_livro_emprestimo').val(data[0]['procedencia_livro'])
-            $('#localizacao_livro_emprestimo').val(data[0]['localizacao_livro'])
-            $('#sinopse_livro_emprestimo').val(data[0]['sinopse_livro'])
-        }
-    })
-})
