@@ -51,7 +51,7 @@ class AdminDevolucaoEmprestimo extends AdminController
         if (isset($dados)) {
             Conexao::getInstancia()->beginTransaction();
             //checa os dados
-            if ($this->validarDados($dados)) {
+            if ($this->validarDados($dados)['check']) {
 
                 $emprestimo = new ControleLivroModelo();
 
@@ -74,7 +74,7 @@ class AdminDevolucaoEmprestimo extends AdminController
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
-                $this->mensagem->erro($this->validarDados($dados))->flash();
+                $this->mensagem->erro($this->validarDados($dados)['mensagem'])->flash();
                 Helpers::redirecionar('admin/devolucao_emprestimo/listar');
             }
         }
@@ -92,7 +92,7 @@ class AdminDevolucaoEmprestimo extends AdminController
         if (isset($dados)) {
             Conexao::getInstancia()->beginTransaction();
             //checa os dados 
-            if ($this->validarDados($dados)) {
+            if ($this->validarDados($dados)['check']) {
 
                 $devolucao = (new ControleLivroModelo())->buscaPorId($dados['emp_dev_id']);
 
@@ -111,7 +111,7 @@ class AdminDevolucaoEmprestimo extends AdminController
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
-                $this->mensagem->erro($this->validarDados($dados))->flash();
+                $this->mensagem->erro($this->validarDados($dados)['mensagem'])->flash();
                 Helpers::redirecionar('admin/devolucao_emprestimo/listar');
             }
         }
@@ -165,9 +165,16 @@ class AdminDevolucaoEmprestimo extends AdminController
         //         }
         //     }
         // }
+        if (isset($dados['emp_dev_id']) && isset($dados['emp_dev'])) { 
 
-        // return ['check' => true, 'mensagem' => ''];
-        return true;
+            $livro = (new LivroModelo())->buscaPorId($dados['emp_dev_id']);
+            $total_emp = (new ControleLivroModelo())->busca("livro_id = {$dados['emp_dev_id']} and data_efetiva is null")->total();
+
+            if($livro->quantidade_livro - $total_emp <= 0){
+                return ['check' => false, 'mensagem' => 'Livro indisponível!'];
+            }
+        }
+        return ['check' => true, 'mensagem' => ''];
     }
 
     public function valorizarLivro()

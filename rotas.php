@@ -62,38 +62,38 @@ try {
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/valorizarEspaco', 'AdminEspacos@valorizarEspaco');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'espacos/statusEspaco', 'AdminEspacos@statusEspaco');
 
-          //ADMIN LIVROS
-          SimpleRouter::get(URL_ADMIN . 'livros/listar', 'AdminLivros@listar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/cadastrar', 'AdminLivros@cadastrar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/editar', 'AdminLivros@editar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/valorizarLivro', 'AdminLivros@valorizarLivro');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/statusLivro', 'AdminLivros@statusLivro');
+        //ADMIN LIVROS
+        SimpleRouter::get(URL_ADMIN . 'livros/listar', 'AdminLivros@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/cadastrar', 'AdminLivros@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/editar', 'AdminLivros@editar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/valorizarLivro', 'AdminLivros@valorizarLivro');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'livros/statusLivro', 'AdminLivros@statusLivro');
 
-          //ADMIN EDITORAS
-          SimpleRouter::get(URL_ADMIN . 'editoras/listar', 'AdminEditoras@listar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/cadastrar', 'AdminEditoras@cadastrar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/editar', 'AdminEditoras@editar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/valorizarEditora', 'AdminEditoras@valorizarEditora');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/statusEditora', 'AdminEditoras@statusEditora');
+        //ADMIN EDITORAS
+        SimpleRouter::get(URL_ADMIN . 'editoras/listar', 'AdminEditoras@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/cadastrar', 'AdminEditoras@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/editar', 'AdminEditoras@editar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/valorizarEditora', 'AdminEditoras@valorizarEditora');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/statusEditora', 'AdminEditoras@statusEditora');
 
-          //ADMIN LEITORES
-          SimpleRouter::get(URL_ADMIN . 'leitores/listar', 'AdminLeitores@listar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/cadastrar', 'AdminLeitores@cadastrar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/editar', 'AdminLeitores@editar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/valorizarLeitor', 'AdminLeitores@valorizarLeitor');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/statusLeitor', 'AdminLeitores@statusLeitor');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/checarCpf', 'AdminLeitores@checarCpf');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/fichaLeitor', 'AdminLeitores@fichaLeitor');
+        //ADMIN LEITORES
+        SimpleRouter::get(URL_ADMIN . 'leitores/listar', 'AdminLeitores@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/cadastrar', 'AdminLeitores@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/editar', 'AdminLeitores@editar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/valorizarLeitor', 'AdminLeitores@valorizarLeitor');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/statusLeitor', 'AdminLeitores@statusLeitor');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/checarCpf', 'AdminLeitores@checarCpf');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/fichaLeitor', 'AdminLeitores@fichaLeitor');
 
-          //ADMIN EMPRESTIMOS E DEVOLUÇÕES
-          SimpleRouter::get(URL_ADMIN . 'devolucao_emprestimo/listar', 'AdminDevolucaoEmprestimo@listar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/cadastrar', 'AdminDevolucaoEmprestimo@cadastrar');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/editar', 'AdminDevolucaoEmprestimo@editar');
+        //ADMIN EMPRESTIMOS E DEVOLUÇÕES
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/listar', 'AdminDevolucaoEmprestimo@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/cadastrar', 'AdminDevolucaoEmprestimo@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/editar', 'AdminDevolucaoEmprestimo@editar');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/valorizarLivro', 'AdminDevolucaoEmprestimo@valorizarLivro');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/statusLivro', 'AdminDevolucaoEmprestimo@statusLivro');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/emprestimo', 'AdminDevolucaoEmprestimo@emprestimo');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/checarCpf', 'AdminDevolucaoEmprestimo@checarCpf');
-          SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/fichaLeitor', 'AdminDevolucaoEmprestimo@fichaLeitor');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/emprestimo', 'AdminDevolucaoEmprestimo@emprestimo');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/checarCpf', 'AdminDevolucaoEmprestimo@checarCpf');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'devolucao_emprestimo/fichaLeitor', 'AdminDevolucaoEmprestimo@fichaLeitor');
 
         //   //ADMIN CURSOS
         //   SimpleRouter::get(URL_ADMIN . 'cursos/listar', 'AdminCursos@listar');
@@ -112,7 +112,7 @@ try {
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/editar', 'AdminTeste@editar');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/valorizarEspaco', 'AdminTeste@valorizarEspaco');
         //   SimpleRouter::match(['get', 'post'], URL_ADMIN . 'teste/statusEspaco', 'AdminTeste@statusEspaco');
-        
+
     });
     SimpleRouter::start();
 } catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $ex) {

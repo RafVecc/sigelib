@@ -12,7 +12,7 @@ $('.cadastrarLivro').on("click", function (event) {
             $("#ModalCadastrarLivro").scrollTo('.is-invalid');
         } else {
 
-            if (!validarCampos(element)) {
+            if (!validarCamposLivros(element)) {
                 emptyCount++;
             } else {
                 element.removeClass('is-invalid');
@@ -26,7 +26,8 @@ $('.cadastrarLivro').on("click", function (event) {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Sim, cadastrar!"
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não"
         }).then((result) => {
             if (result.isConfirmed) {
                 $('#cadastrarLivro').submit()
@@ -45,7 +46,8 @@ $('.editarLivro').on("click", function (event) {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, editar!"
+        confirmButtonText: "Sim",
+        cancelButtonText: "Não"
     }).then((result) => {
         if (result.isConfirmed) {
             $('#editarLivro').submit()
@@ -88,12 +90,18 @@ $('.valorizarLivro').on("click", function () {
     })
 })
 
-function validarCampos(elementos) {
-
+function validarCamposLivros(elementos) {
     if (elementos[0].name == 'ano_livro') {
+        var ano_atual = moment(new Date()).format('YYYY');
         if (elementos.val().length != 4) {
             elementos.addClass('is-invalid');
             elementos[0].setCustomValidity('Ano deve ter 4 dígitos!')
+            elementos[0].reportValidity()
+            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
+            return false
+        } else if (elementos.val() > ano_atual) {
+            elementos.addClass('is-invalid');
+            elementos[0].setCustomValidity('Ano não pode ser maior que ano atual!')
             elementos[0].reportValidity()
             $("#ModalCadastrarLivro").scrollTo('.is-invalid');
             return false
@@ -104,6 +112,18 @@ function validarCampos(elementos) {
         if (!$.isNumeric(elementos.val())) {
             elementos.addClass('is-invalid');
             elementos[0].setCustomValidity('Quantidade deve ser um número!')
+            elementos[0].reportValidity()
+            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
+            return false
+        }
+    }
+
+    if (elementos[0].name == 'data_doacao_compra_livro') {
+        var hoje = moment(new Date()).format('YYYY-MM-DD');
+        var data_doacao_compra_livro = moment(elementos.val()).format('YYYY-MM-DD');
+        if (data_doacao_compra_livro > hoje) {
+            elementos.addClass('is-invalid');
+            elementos[0].setCustomValidity('Data de doação ou compra não pode ser maior que a data atual!')
             elementos[0].reportValidity()
             $("#ModalCadastrarLivro").scrollTo('.is-invalid');
             return false

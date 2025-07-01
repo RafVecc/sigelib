@@ -22,7 +22,7 @@ $('#lista_emp_dev').on("click", ".btn_emp, .btn_dev", function (event) {
             $("#modalPesquisaLeitor").scrollTo('.is-invalid');
         } else {
 
-            if (!validarCampos(element)) {
+            if (!validarCamposEmpDev(element)) {
                 emptyCount++;
             } else {
                 element.removeClass('is-invalid');
@@ -100,7 +100,8 @@ function executar_pesquisa_leitor(variavel, e) {
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",
                             cancelButtonColor: "#d33",
-                            confirmButtonText: "Sim, cadastrar!"
+                            confirmButtonText: "Sim",
+                            cancelButtonText: "Não"
                         }).then((result2) => {
                             if (result2.isConfirmed) {
                                 $('#ModalCadastrarLeitor').modal('show');
@@ -121,20 +122,21 @@ function executar_pesquisa_leitor(variavel, e) {
                             $(".label_emp_dev").html('Informações Devolução')
                             var data_efetiva = moment(new Date()); //todays date
                             var data_prevista = moment(result[0]['data_prevista']);
-                           
+
                             var dias = data_efetiva.diff(data_prevista, 'days');
-                        
-                            
-                            if(dias > 0){
+
+
+                            if (dias > 0) {
                                 var label_dias = `<label for="label_aviso_atraso" class="form-label text-danger">A devolução está com ${dias} dias de atraso!</label>`;
-                            }else{
+                            } else {
                                 var label_dias = `<label for="label_aviso_atraso" class="form-label text-success">A devolução está no prazo!</label>`;
                             }
-                           
+
                             html += `<div class="row mb-3">
                                         <div class="col-lg-12 card border-2 shadow-sm">
                                             <div class="card-body">
                                                 <div class="row">
+                                                    <input type="hidden" name="dev_check" value="1" required>
                                                     <div class="col-lg-3 card border-2 shadow-sm mb-2 ms-2">
                                                         <div class="card-body">
                                                         <div class="row">
@@ -220,9 +222,11 @@ function executar_pesquisa_leitor(variavel, e) {
                                     </div>
                                     <div class="row">
                                         <div class="mb-3">
-                                            <button type="button" class="btn btn-success btn_dev" data-id="${result[0]['controle_id']}">
+                                            <button type="button" class="btn btn-success btn_dev me-2" data-id="${result[0]['controle_id']}">
                                             Concluir
-                                        </button>
+                                        </button><button
+                                        type="button" class="btn btn-warning" onClick="window.location.reload();">
+                                        Cancelar </button>
                                         </div>
                                     </div>`;
                         } else {
@@ -231,6 +235,20 @@ function executar_pesquisa_leitor(variavel, e) {
                             $(".label_emp_dev").html('Informações Empréstimo')
                             html_emp_dev = '';
                             $.each(result[0]['emp_dev'], function (key, value) {
+                                if (value['quantidade_livro'] - value['total_emp'] <= 0) {
+                                    var html_btn = `
+                                                <button type="button" class="btn btn-secondary" disable>
+                                                    Selecionar
+                                                </button>
+                                                `;
+                                } else {
+
+                                    var html_btn = `
+                                                <button type="button" class="btn btn-success btn_emp" data-id="${value['id']}">
+                                                    Selecionar
+                                                </button>
+                                                `;
+                                }
 
                                 html_emp_dev += `
                                 <tr>
@@ -243,14 +261,13 @@ function executar_pesquisa_leitor(variavel, e) {
                                     <td>${value['ano_livro']}</td>
                                     <td>${value['idioma_livro']}</td>
                                     <td>
-                                        <button type="button" class="btn btn-success btn_emp" data-id="${value['id']}">
-                                            Selecionar
-                                        </button>
+                                        ${html_btn}
                                     </td>
                                 </tr>`;
                             });
                             html += `
                             <div class="card-body">
+                                <input type="hidden" name="emp_check" value="1" required>
                                 <div class="table-responsive">
                                     <table id="tabelaLivros" url="{{url()}}" class="table table-striped" style="width:100%">
                                     <thead>
@@ -271,7 +288,15 @@ function executar_pesquisa_leitor(variavel, e) {
                                 + `</tbody>
                                     </table>
                                 </div>
-                            </div>`;
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                <button
+                                type="button" class="btn btn-warning" onClick="window.location.reload();">
+                                Cancelar </button>
+                                </div>
+                            </div>
+                            `;
                         }
                         var imagem = url + 'uploads/leitores/' + result[0]['foto_leitor'];
                         $('#modalPesquisaLeitor').find('#leitor_id').val(result[0]['id']);
@@ -282,6 +307,27 @@ function executar_pesquisa_leitor(variavel, e) {
                         // $('#modalPesquisaLeitor').find('#data_nascimento_leitor_pesquisa').val(result[0]['data_nascimento_leitor']);
                         // $('#modalPesquisaLeitor').find('#email_leitor_pesquisa').val(result[0]['email_leitor']);
                         $('#lista_emp_dev').append(html);
+
+                        $('#tabelaLivros').DataTable({
+
+                            columnDefs: [
+                                {
+                                    targets: [-1],
+                                    className: 'dt-center',
+                                    orderable: false
+                                },
+                                {
+                                    className: 'dt-head-center dt-body-left',
+                                    targets: ['_all']
+                                }
+
+                            ],
+                            order: [[0, 'asc']],
+                            "language": {
+                                "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+                            }
+                        });
+
                         $('#modalPesquisaLeitor').modal('show');
                     }
                 }
@@ -293,7 +339,7 @@ function executar_pesquisa_leitor(variavel, e) {
 
 }
 
-function validarCampos(elementos) {
+function validarCamposEmpDev(elementos) {
 
     return true
 }

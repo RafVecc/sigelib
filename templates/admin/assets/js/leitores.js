@@ -8,7 +8,8 @@ $('.cadastrarLeitor').on("click", function (event) {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, cadastrar!"
+        confirmButtonText: "Sim",
+        cancelButtonText: "Não"
     }).then((result) => {
         if (result.isConfirmed) {
             $('#cadastrarLeitor').submit()
@@ -28,7 +29,8 @@ $('.editarLeitor').on("click", function (event) {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, editar!"
+        confirmButtonText: "Sim",
+        cancelButtonText: "Não"
     }).then((result) => {
         if (result.isConfirmed) {
             $('#editarLeitor').submit()
@@ -81,14 +83,14 @@ $('.valorizarLeitor').on("click", function () {
 $(document).ready(function () {
 
     $("#ModalCadastrarLeitor").find('#cep_leitor').on("input", function (e) {
-        console.log('algo')
+
         var cep = $(this).val().replace(/[^0-9]/g, '');
         cep = cep.replace(/[0-9]{9}$/, cep.slice(0, -1));
         if (cep.length != 8) {
 
         } else {
 
-            let url = 'http://viacep.com.br/ws/' + cep + '/json/';
+            let url = 'https://viacep.com.br/ws/' + cep + '/json/';
 
             let xmlHttp = new XMLHttpRequest();
 
@@ -112,3 +114,68 @@ $(document).ready(function () {
 
     });
 });
+
+$("#cadastrarLeitor").find("#cpf_leitor").on("input", function (e) {
+    var cpf = $(this).val().replace(/[^0-9]/g, '');
+    cpf = cpf.replace(/[0-9]{12}$/, cpf.slice(0, -1));
+    if (cpf.length != 11) {
+
+    } else {
+
+        var novoCpf = cpf.replace(/[^\d]/g, '')
+        if (novoCpf.match(/(\d)\1{10}/)) {
+            Swal.fire({
+                icon: "error",
+                title: "CPF Não Válido!",
+                text: 'Esse CPF não é válido, por favor informe um CPF existente!',
+
+            }).then(() => {
+                $("#cadastrarLeitor").find("#cpf_leitor").val('')
+            })
+        } else {
+            var contador = 0
+            for (t = 9; t < 11; t++) {
+                for (d = 0, c = 0; c < t; c++) {
+                    d += novoCpf[c] * ((t + 1) - c);
+                }
+                d = ((10 * d) % 11) % 10;
+                if (novoCpf[c] != d) {
+                    contador++
+                    Swal.fire({
+                        icon: "error",
+                        title: "CPF Não Válido!",
+                        text: 'Esse CPF não é válido, por favor informe um CPF existente!',
+
+                    }).then(() => {
+                        $("#cadastrarLeitor").find("#cpf_leitor").val('')
+                    })
+                }
+            }
+        }
+        if (contador == 0) {
+            $.ajax({
+                type: "POST",
+                url: "checarCpf",
+                data: { cpf: cpf },
+                success: function (result) {
+                    if (result.trim() == '') {
+
+                    } else {
+                        Swal.fire({
+                            title: "CPF Encontrado!",
+                            text: "CPF não pode ser repetido!",
+                            icon: "warning",
+                            showConfirmButton: true
+                        }).then((resposta) => {
+                            $("#cadastrarLeitor").find("#cpf_leitor").val('');
+                        });
+                    }
+                }
+            });
+
+            e.preventDefault();
+        }
+    }
+
+}
+);
