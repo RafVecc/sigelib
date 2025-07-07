@@ -12,7 +12,7 @@ $('.cadastrarLivro').on("click", function (event) {
             $("#ModalCadastrarLivro").scrollTo('.is-invalid');
         } else {
 
-            if (!validarCamposLivros(element)) {
+            if (!validarCampos(element)) {
                 emptyCount++;
             } else {
                 element.removeClass('is-invalid');
@@ -68,6 +68,35 @@ $('.valorizarLivro').on("click", function () {
         dataType: 'json',
 
         success: function (data) {
+            if (data[0]['check'] == 'invalido') {
+                $('#titulo_livro_editar').attr('disabled', true)
+                $('#genero_livro_editar_id').attr('disabled', true)
+                $('#editora_livro_editar_id').attr('disabled', true)
+                $('#ano_livro_editar').attr('disabled', true)
+                $('#pais_livro_editar_id').attr('disabled', true)
+                $('#idioma_livro_editar_id').attr('disabled', true)
+                $('#autor_livro_editar').attr('disabled', true)
+                $('#quantidade_livro_editar').attr('disabled', true)
+                $('#tipo_procedencia_livro_editar_id').attr('disabled', true)
+                $('#procedencia_livro_editar').attr('disabled', true)
+                $('#data_doacao_compra_livro_editar').attr('disabled', true)
+                $('#sinopse_livro_editar').attr('disabled', true)
+                $('#img_capa_livro_editar').attr('disabled', true)
+            } else {
+                $('#titulo_livro_editar').attr('disabled', false)
+                $('#genero_livro_editar_id').attr('disabled', false)
+                $('#editora_livro_editar_id').attr('disabled', false)
+                $('#ano_livro_editar').attr('disabled', false)
+                $('#pais_livro_editar_id').attr('disabled', false)
+                $('#idioma_livro_editar_id').attr('disabled', false)
+                $('#autor_livro_editar').attr('disabled', false)
+                $('#quantidade_livro_editar').attr('disabled', false)
+                $('#tipo_procedencia_livro_editar_id').attr('disabled', false)
+                $('#procedencia_livro_editar').attr('disabled', false)
+                $('#data_doacao_compra_livro_editar').attr('disabled', false)
+                $('#sinopse_livro_editar').attr('disabled', false)
+                $('#img_capa_livro_editar').attr('disabled', false)
+            }
             var imagem = url + 'uploads/livros/' + data[0]['foto_capa_livro']
             $('#livro_id').val(data[0]['id'])
             $('#foto_capa_livro_editar').attr('src', imagem)
@@ -89,46 +118,3 @@ $('.valorizarLivro').on("click", function () {
         }
     })
 })
-
-function validarCamposLivros(elementos) {
-    if (elementos[0].name == 'ano_livro') {
-        var ano_atual = moment(new Date()).format('YYYY');
-        if (elementos.val().length != 4) {
-            elementos.addClass('is-invalid');
-            elementos[0].setCustomValidity('Ano deve ter 4 dígitos!')
-            elementos[0].reportValidity()
-            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
-            return false
-        } else if (elementos.val() > ano_atual) {
-            elementos.addClass('is-invalid');
-            elementos[0].setCustomValidity('Ano não pode ser maior que ano atual!')
-            elementos[0].reportValidity()
-            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
-            return false
-        }
-    }
-
-    if (elementos[0].name == 'quantidade_livro') {
-        if (!$.isNumeric(elementos.val())) {
-            elementos.addClass('is-invalid');
-            elementos[0].setCustomValidity('Quantidade deve ser um número!')
-            elementos[0].reportValidity()
-            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
-            return false
-        }
-    }
-
-    if (elementos[0].name == 'data_doacao_compra_livro') {
-        var hoje = moment(new Date()).format('YYYY-MM-DD');
-        var data_doacao_compra_livro = moment(elementos.val()).format('YYYY-MM-DD');
-        if (data_doacao_compra_livro > hoje) {
-            elementos.addClass('is-invalid');
-            elementos[0].setCustomValidity('Data de doação ou compra não pode ser maior que a data atual!')
-            elementos[0].reportValidity()
-            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
-            return false
-        }
-    }
-
-    return true
-}

@@ -2,6 +2,7 @@
 
 namespace sistema\Controller\Admin;
 
+use sistema\Modelo\ControleLivroModelo;
 use sistema\Modelo\EditoraModelo;
 use sistema\Modelo\GeneroLivroModelo;
 use sistema\Modelo\IdiomaLivroModelo;
@@ -261,21 +262,14 @@ class AdminLivros extends AdminController
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $valorizar_livro = (new LivroModelo())->busca("id = {$dados['id']}")->resultado(false, true);
+        $check_emp = (new ControleLivroModelo())->busca("livro_id = {$dados['id']}")->total();
+        if ($check_emp > 0) {
+            $valorizar_livro[0]['check'] = 'invalido';
+        } else {
+            $valorizar_livro[0]['check'] = 'valido';
+        }
 
         return json_encode($valorizar_livro);
-    }
-
-    public function checarCpf()
-    {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-        $aluno_cpf = (new AlunoModelo())->busca("cpf = {$dados['cpf']}", "", "id")->resultado();
-
-        if (isset($aluno_cpf)) {
-            return $aluno_cpf->id;
-        } else {
-            return null;
-        }
     }
 
     // public function statusAluno()

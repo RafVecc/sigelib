@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade modal-xl" id="modalPesquisaLeitor" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" data-bs-focus="false">
   <div class="modal-dialog modal_maior">
     <div class="modal-content">
       <div class="modal-header">
@@ -54,45 +54,13 @@
                     </div>
                     <h4 class="modal-title fw-bold label_emp_dev" id="exampleModalLabel"></h4>
                     <div class="row" id="info_emp">
-                      <div class="col-lg-12 card border-2 shadow-sm">
-                        <div class="card-body">
-                          <div class="row">
+                      <input class="form-control" type="hidden" value='{{ "now"|date("Y-m-d", "America/Bahia") }}'
+                        name="data_emprestimo" id="data_emprestimo" readonly required>
+                      <input class="form-control" type="hidden"
+                        value='{{ "now"|date_modify("+15 day")|date("Y-m-d", "America/Bahia") }}' name="data_prevista"
+                        id="data_prevista" readonly required>
+                      <input name="observacao_emprestimo" id="observacao_emprestimo" type="hidden" class="form-control">
 
-                            <div class="col-lg-12 card border-2 shadow-sm">
-                              <div class="card-body">
-                                <div class="row">
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="data_emprestimo" class="form-label">Data Empréstimo</label>
-                                      <input class="form-control" type="date"
-                                        value='{{ "now"|date("Y-m-d", "America/Bahia") }}' name="data_emprestimo"
-                                        readonly required>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="mb-3">
-                                      <label for="" class="form-label">Data Previsão de
-                                        Devolução</label>
-                                      <input class="form-control" type="date"
-                                        value='{{ "now"|date_modify("+15 day")|date("Y-m-d", "America/Bahia") }}'
-                                        name="data_prevista" readonly required>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-sm-12">
-                                    <div class="mb-3">
-                                      <label for="observacao_emprestimo" class="form-label">Observação de
-                                        Empréstimo</label>
-                                      <textarea name="observacao_emprestimo" id="observacao_emprestimo" class="form-control" required></textarea>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                     <div class="row" id="lista_emp_dev">
 

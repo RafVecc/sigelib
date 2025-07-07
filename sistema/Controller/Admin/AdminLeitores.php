@@ -67,10 +67,10 @@ class AdminLeitores extends AdminController
 
                 $leitor->usuario_cadastro_id = $this->usuario->id;
                 $leitor->usuario_modificacao_id = $this->usuario->id;
-                $leitor->cpf_leitor = isset($dados['cpf_leitor']) && !empty($dados['cpf_leitor']) ? $dados['cpf_leitor'] : NULL;
+                $leitor->cpf_leitor = isset($dados['cpf_leitor']) && !empty($dados['cpf_leitor']) ? Helpers::limparNumero($dados['cpf_leitor']) : NULL;
                 $leitor->nome_leitor = isset($dados['nome_leitor']) && !empty($dados['nome_leitor']) ? $dados['nome_leitor'] : NULL;
                 $leitor->data_nascimento_leitor = isset($dados['data_nascimento_leitor']) && !empty($dados['data_nascimento_leitor']) ? $dados['data_nascimento_leitor'] : NULL;
-                $leitor->telefone_leitor = isset($dados['telefone_leitor']) && !empty($dados['telefone_leitor']) ? $dados['telefone_leitor'] : NULL;
+                $leitor->telefone_leitor = isset($dados['telefone_leitor']) && !empty($dados['telefone_leitor']) ? Helpers::limparNumero($dados['telefone_leitor']) : NULL;
                 $leitor->sexo_leitor_id = isset($dados['sexo_leitor_id']) && !empty($dados['sexo_leitor_id']) ? $dados['sexo_leitor_id'] : NULL;
                 $leitor->cor_leitor_id = isset($dados['cor_leitor_id']) && !empty($dados['cor_leitor_id']) ? $dados['cor_leitor_id'] : NULL;
                 $leitor->escolaridade_leitor_id = isset($dados['escolaridade_leitor_id']) && !empty($dados['escolaridade_leitor_id']) ? $dados['escolaridade_leitor_id'] : NULL;

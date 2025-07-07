@@ -47,7 +47,6 @@ class AdminDevolucaoEmprestimo extends AdminController
         }
 
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
         if (isset($dados)) {
             Conexao::getInstancia()->beginTransaction();
             //checa os dados

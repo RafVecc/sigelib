@@ -2,6 +2,8 @@
 $('#lista_emp_dev').on("click", ".btn_emp, .btn_dev", function (event) {
     if ($(this).hasClass('btn_emp')) {
         var title = 'Deseja finalizar o empréstimo desse livro?'
+        var data_emprestimo = $('#data_emprestimo').val()
+        var data_prevista = $('#data_prevista').val()
         $("#form_emp_dev").attr('action', "cadastrar");
     } else if ($(this).hasClass('btn_dev')) {
         var title = 'Deseja finalizar a devolução desse livro?'
@@ -30,19 +32,49 @@ $('#lista_emp_dev').on("click", ".btn_emp, .btn_dev", function (event) {
         }
     });
     if (emptyCount == 0) {
-        Swal.fire({
-            title: title,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sim",
-            cancelButtonText: "Não",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $('#form_emp_dev').submit()
-            }
-        });
+        if ($(this).hasClass('btn_dev')) {
+            Swal.fire({
+                title: title,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#form_emp_dev').submit()
+                }
+            });
+        } else if ($(this).hasClass('btn_emp')) {
+
+            Swal.fire({
+                title: title,
+                icon: "warning",
+                html: `<label for="data_emprestimo" class="form-label">Data Empréstimo: ${moment(data_emprestimo).format('DD/MM/YYYY')}</label>` +
+                    `<label for="data_prevista" class="form-label">Data Previsão de Devolução: ${moment(data_prevista).format('DD/MM/YYYY')}</label>` +
+                    '<h4 class="swal2-title" id="swal2-title" style="display: block;">Observação de Empréstimo</h4>' +
+                    '<textarea id="swal2-textarea" placeholder="Observação..." name="restricoes" class="swal2-textarea" style="width: 80%; display: flex;"></textarea>',
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+                preConfirm: () => {
+                    var texto = document.getElementsByClassName("swal2-textarea");
+                    var valor = texto[0].value;
+                    if (valor.length != 0) {
+                        $('#observacao_emprestimo').val(valor)
+                    } else {
+                        Swal.showValidationMessage('Preencha os campos acima!')
+                    }
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#form_emp_dev').submit()
+                }
+            });
+        }
     }
 });
 
@@ -113,12 +145,11 @@ function executar_pesquisa_leitor(variavel, e) {
                         });
 
                     } else {
-                        console.log(result[0])
+
                         $('#lista_emp_dev').children().remove();
                         html = '';
                         if (result[0]['check'] == 'invalido') {
                             $("#info_emp").addClass('d-none');
-                            $("#observacao_emprestimo").attr('required', false);
                             $(".label_emp_dev").html('Informações Devolução')
                             var data_efetiva = moment(new Date()); //todays date
                             var data_prevista = moment(result[0]['data_prevista']);
@@ -231,7 +262,6 @@ function executar_pesquisa_leitor(variavel, e) {
                                     </div>`;
                         } else {
                             $("#info_emp").removeClass('d-none');
-                            $("#observacao_emprestimo").attr('required', true);
                             $(".label_emp_dev").html('Informações Empréstimo')
                             html_emp_dev = '';
                             $.each(result[0]['emp_dev'], function (key, value) {

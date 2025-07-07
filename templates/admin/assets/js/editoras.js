@@ -2,20 +2,39 @@ $('.cadastrarEditora').on("click", function (event) {
 
     event.preventDefault();
 
-    Swal.fire({
-        title: "Deseja finalizar o cadastro dessa editora?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, cadastrar!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $('#cadastrarEditora').submit()
+    var emptyCount = 0;
+    $("#cadastrarEditora").find('input[required], select[required], textarea[required]').each(function (index, element) {
+        var element = $(element);
+
+        if (element.val() === '') {
+            emptyCount++;
+            element.addClass('is-invalid');
+            $("#ModalCadastrarEditora").scrollTo('.is-invalid');
+        } else {
+
+            if (!validarCampos(element)) {
+                emptyCount++;
+            } else {
+                element.removeClass('is-invalid');
+            }
         }
     });
+    if (emptyCount == 0) {
 
+        Swal.fire({
+            title: "Deseja finalizar o cadastro dessa editora?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim, cadastrar!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#cadastrarEditora').submit()
+            }
+        });
 
+    }
 });
 
 $('.editarEditora').on("click", function (event) {

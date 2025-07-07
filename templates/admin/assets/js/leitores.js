@@ -2,20 +2,39 @@ $('.cadastrarLeitor').on("click", function (event) {
 
     event.preventDefault();
 
-    Swal.fire({
-        title: "Deseja finalizar o cadastro desse leitor?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sim",
-        cancelButtonText: "Não"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $('#cadastrarLeitor').submit()
+    var emptyCount = 0;
+    $("#cadastrarLeitor").find('input[required], select[required], textarea[required]').each(function (index, element) {
+        var element = $(element);
+
+        if (element.val() === '') {
+            emptyCount++;
+            element.addClass('is-invalid');
+            $("#ModalCadastrarLeitor").scrollTo('.is-invalid');
+        } else {
+
+            if (!validarCampos(element)) {
+                emptyCount++;
+            } else {
+                element.removeClass('is-invalid');
+            }
         }
     });
+    if (emptyCount == 0) {
 
+        Swal.fire({
+            title: "Deseja finalizar o cadastro desse leitor?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#cadastrarLeitor').submit()
+            }
+        });
+    }
 
 });
 
@@ -179,3 +198,10 @@ $("#cadastrarLeitor").find("#cpf_leitor").on("input", function (e) {
 
 }
 );
+
+
+$(document).ready(function () {
+    $('#cpf_leitor').mask('000.000.000-00', {reverse: false});
+    $('#telefone_leitor').mask('(00) 00000-0000', {reverse: false});
+    $('#cep_leitor').mask('00000-000', {reverse: false});
+});
