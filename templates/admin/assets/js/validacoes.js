@@ -1,4 +1,13 @@
 function validarCampos(elementos) {
+    if (elementos[0].name == 'cpf_leitor') {
+        if (elementos.val().length != 14) {
+            elementos.addClass('is-invalid');
+            elementos[0].setCustomValidity('CPF deve ter 11 dígitos!')
+            elementos[0].reportValidity()
+            $("#ModalCadastrarLeitor").scrollTo('.is-invalid');
+            return false
+        }
+    }
 
     if (elementos[0].name == 'data_nascimento_leitor') {
 
@@ -10,7 +19,7 @@ function validarCampos(elementos) {
             elementos.addClass('is-invalid');
             elementos[0].setCustomValidity('Leitor precisa ser maior de idade!')
             elementos[0].reportValidity()
-            $("#ModalCadastrarLivro").scrollTo('.is-invalid');
+            $("#ModalCadastrarLeitor").scrollTo('.is-invalid');
             return false
         }
     }
@@ -56,3 +65,23 @@ function validarCampos(elementos) {
 
     return true
 }
+
+$(document).ready(function () {
+
+    $("form").find("input, select, textarea").on("input", function () {
+        // console.log("Input value changed:", $(this).val());
+        // console.log("Input name:", $(this).attr("name"));
+
+        if ($(this).attr("validacao_tipo") == 'number') {
+            var variavel = $(this).val().replace(/[^0-9]/g, '');
+            if ($(this).attr("validacao_qtd")) {
+                var pattern = `[0-9]{${parseInt($(this).attr("validacao_qtd")) + 1}}$`;
+                var re = new RegExp(`\\b${pattern}\\b`, "");
+                variavel = variavel.replace(re, variavel.slice(0, -1));
+            }
+            $(this).val(variavel);
+        }
+
+    });
+
+});

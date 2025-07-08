@@ -24,7 +24,7 @@ $('#lista_emp_dev').on("click", ".btn_emp, .btn_dev", function (event) {
             $("#modalPesquisaLeitor").scrollTo('.is-invalid');
         } else {
 
-            if (!validarCamposEmpDev(element)) {
+            if (!validarCampos(element)) {
                 emptyCount++;
             } else {
                 element.removeClass('is-invalid');
@@ -137,7 +137,7 @@ function executar_pesquisa_leitor(variavel, e) {
                         }).then((result2) => {
                             if (result2.isConfirmed) {
                                 $('#ModalCadastrarLeitor').modal('show');
-                                $('#ModalCadastrarLeitor').find('#cpf_leitor').val(novoCpf);
+                                $('#ModalCadastrarLeitor').find('#cpf_leitor').val(novoCpf).trigger("input");
                                 $('#ModalCadastrarLeitor').find('#cpf_leitor').attr('readonly', true)
                             } else {
                                 $('#pesquisaLeitor').find('#cpf').val('');
@@ -331,7 +331,7 @@ function executar_pesquisa_leitor(variavel, e) {
                         var imagem = url + 'uploads/leitores/' + result[0]['foto_leitor'];
                         $('#modalPesquisaLeitor').find('#leitor_id').val(result[0]['id']);
                         $('#modalPesquisaLeitor').find('#foto_leitor_pesquisa').attr('src', imagem);
-                        $('#modalPesquisaLeitor').find('#cpf_leitor_pesquisa').val(result[0]['cpf_leitor']);
+                        $('#modalPesquisaLeitor').find('#cpf_leitor_pesquisa').val(result[0]['cpf_leitor']).trigger("input");
                         $('#modalPesquisaLeitor').find('#nome_leitor_pesquisa').val(result[0]['nome_leitor']);
                         // $('#modalPesquisaLeitor').find('#telefone_leitor_pesquisa').val(result[0]['telefone_leitor']);
                         // $('#modalPesquisaLeitor').find('#data_nascimento_leitor_pesquisa').val(result[0]['data_nascimento_leitor']);
@@ -367,11 +367,6 @@ function executar_pesquisa_leitor(variavel, e) {
         }
     }
 
-}
-
-function validarCamposEmpDev(elementos) {
-
-    return true
 }
 
 $("#pesquisaLeitor").find('#cpf').on("input", function (e) {

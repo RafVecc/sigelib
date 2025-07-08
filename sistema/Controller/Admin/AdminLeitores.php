@@ -282,9 +282,9 @@ class AdminLeitores extends AdminController
         $leitor_cpf = (new LeitorModelo())->busca("cpf_leitor = {$dados['cpf']}", "", "id")->resultado();
 
         if (isset($leitor_cpf)) {
-            return $leitor_cpf->id;
+            return json_encode($leitor_cpf->id);
         } else {
-            return null;
+            return json_encode(null);
         }
     }
 

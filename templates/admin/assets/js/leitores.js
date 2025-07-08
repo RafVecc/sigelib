@@ -80,21 +80,20 @@ $('.valorizarLeitor').on("click", function () {
             var imagem = url + 'uploads/leitores/' + data[0]['foto_leitor']
             $('#leitor_id').val(data[0]['id'])
             $('#imagem_leitor_editar').attr('src', imagem)
-            $('#cpf_leitor_editar').val(data[0]['cpf_leitor'])
+            $('#cpf_leitor_editar').val(data[0]['cpf_leitor']).trigger("input")
             $('#nome_leitor_editar').val(data[0]['nome_leitor'])
             $('#data_nascimento_leitor_editar').val(data[0]['data_nascimento_leitor'])
-            $('#telefone_leitor_editar').val(data[0]['telefone_leitor'])
+            $('#telefone_leitor_editar').val(data[0]['telefone_leitor']).trigger("input")
             $('#sexo_leitor_editar_id').val(data[0]['sexo_leitor_id'])
             $('#cor_leitor_editar_id').val(data[0]['cor_leitor_id'])
             $('#escolaridade_leitor_editar_id').val(data[0]['escolaridade_leitor_id'])
             $('#email_leitor_editar').val(data[0]['email_leitor'])
             $('#rede_social_leitor_editar').val(data[0]['rede_social_leitor'])
-            $('#cep_leitor_editar').val(data[0]['cep_leitor'])
+            $('#cep_leitor_editar').val(data[0]['cep_leitor']).trigger("input")
             $('#rua_leitor_editar').val(data[0]['rua_leitor'])
             $('#bairro_leitor_editar').val(data[0]['bairro_leitor'])
             $('#numero_leitor_editar').val(data[0]['numero_leitor'])
             $('#ponto_de_referencia_leitor_editar').val(data[0]['ponto_de_referencia_leitor'])
-
         }
     })
 })
@@ -176,8 +175,10 @@ $("#cadastrarLeitor").find("#cpf_leitor").on("input", function (e) {
                 type: "POST",
                 url: "checarCpf",
                 data: { cpf: cpf },
+                dataType: 'json',
                 success: function (result) {
-                    if (result.trim() == '') {
+                    console.log(result)
+                    if (result == null) {
 
                     } else {
                         Swal.fire({
@@ -198,10 +199,3 @@ $("#cadastrarLeitor").find("#cpf_leitor").on("input", function (e) {
 
 }
 );
-
-
-$(document).ready(function () {
-    $('#cpf_leitor').mask('000.000.000-00', {reverse: false});
-    $('#telefone_leitor').mask('(00) 00000-0000', {reverse: false});
-    $('#cep_leitor').mask('00000-000', {reverse: false});
-});
