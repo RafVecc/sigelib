@@ -193,15 +193,24 @@
   function previewCadastro() {
 
     var uploadField = document.getElementById("foto_leitor");
+    var fname = uploadField.files[0].name;
+    
     if (uploadField.files[0].size > 8097152) {
-      // alert("File is too big!");
       Swal.fire({
         title: "Alerta!",
         text: "A imagem escolhida está acima do limite permitido (8Mb)!",
         icon: "warning"
       });
       uploadField.value = "";
-    } else {
+    } else if (!['png', 'jpeg', 'jpg'].includes(fname.slice((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1))) {
+      Swal.fire({
+        title: "Alerta!",
+        text: "A imagem não tem um formato permitido!",
+        icon: "warning"
+      });
+      uploadField.value = "";
+    }
+    else {
       imgLogo.src = URL.createObjectURL(event.target.files[0]);
     }
 

@@ -16,7 +16,7 @@ use sistema\Modelo\TipoUsuarioModelo;
 
 
 
-class AdminEditoras extends AdminController
+class AdminGenerosLivro extends AdminController
 {
 
     public function listar(): void
@@ -30,18 +30,16 @@ class AdminEditoras extends AdminController
             Helpers::redirecionar('admin/sair');
         }
 
-        $editoras = new EditoraModelo();
-        $paises_livro = new PaisLivroModelo();
+        $generos_livro = new GeneroLivroModelo();
 
-        echo $this->template->renderizar('editoras/listar.html', [
-            'editoras' => $editoras->busca()->resultado(true),
-            'paises_livro' => $paises_livro->busca()->resultado(true),
+        echo $this->template->renderizar('generos_livro/listar.html', [
+            'generos_livro' => $generos_livro->busca()->resultado(true),
         ]);
     }
 
     public function cadastrar(): void
     {
-        //Só permitir que Administrador entren na tela de cadastrar editoras
+        //Só permitir que Administrador entren na tela de cadastrar genero do livro
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
@@ -57,33 +55,32 @@ class AdminEditoras extends AdminController
             //checa os dados 
             if ($this->validarDados($dados)) {
 
-                $editora = new EditoraModelo();
+                $generos_livro = new GeneroLivroModelo();
 
-                $editora->usuario_cadastro_id = $this->usuario->id;
-                $editora->usuario_modificacao_id = $this->usuario->id;
-                $editora->editora_livro = isset($dados['editora_livro']) && !empty($dados['editora_livro']) ? $dados['editora_livro'] : NULL;
-                $editora->pais_editora_livro_id = isset($dados['pais_editora_livro_id']) && !empty($dados['pais_editora_livro_id']) ? $dados['pais_editora_livro_id'] : NULL;
+                $generos_livro->usuario_cadastro_id = $this->usuario->id;
+                $generos_livro->usuario_modificacao_id = $this->usuario->id;
+                $generos_livro->genero_livro = isset($dados['genero_livro']) && !empty($dados['genero_livro']) ? $dados['genero_livro'] : NULL;
 
-                if ($editora->salvar()) {
+                if ($generos_livro->salvar()) {
                     Conexao::getInstancia()->commit();
-                    $this->mensagem->sucesso('Editora cadastrada com sucesso')->flash();
-                    Helpers::redirecionar('admin/editoras/listar');
+                    $this->mensagem->sucesso('Tipo do Livro cadastrado com sucesso')->flash();
+                    Helpers::redirecionar('admin/generos_livro/listar');
                 } else {
                     Conexao::getInstancia()->rollBack();
-                    $this->mensagem->erro($editora->erro())->flash();
-                    Helpers::redirecionar('admin/editoras/listar');
+                    $this->mensagem->erro($generos_livro->erro())->flash();
+                    Helpers::redirecionar('admin/generos_livro/listar');
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
                 $this->mensagem->erro($this->validarDados($dados))->flash();
-                Helpers::redirecionar('admin/editoras/listar');
+                Helpers::redirecionar('admin/generos_livro/listar');
             }
         }
     }
 
     public function editar(): void
     {
-        //Só permitir que Administrador entren na tela de editar editoras
+        //Só permitir que Administrador entren na tela de editar genero do livro
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
@@ -97,25 +94,24 @@ class AdminEditoras extends AdminController
             //checa os dados 
             if ($this->validarDados($dados)) {
 
-                $editora = (new EditoraModelo())->buscaPorId($dados['editora_id']);
+                $generos_livro = (new EditoraModelo())->buscaPorId($dados['genero_livro_id']);
 
-                $editora->usuario_modificacao_id = $this->usuario->id;
-                $editora->editora_livro = isset($dados['editora_livro_editar']) && !empty($dados['editora_livro_editar']) ? $dados['editora_livro_editar'] : NULL;
-                $editora->pais_editora_livro_id = isset($dados['pais_editora_livro_editar_id']) && !empty($dados['pais_editora_livro_editar_id']) ? $dados['pais_editora_livro_editar_id'] : NULL;
+                $generos_livro->usuario_modificacao_id = $this->usuario->id;
+                $generos_livro->genero_livro = isset($dados['genero_livro_editar']) && !empty($dados['genero_livro_editar']) ? $dados['genero_livro_editar'] : NULL;
 
-                if ($editora->salvar()) {
+                if ($generos_livro->salvar()) {
                     Conexao::getInstancia()->commit();
-                    $this->mensagem->sucesso('Editora editada com sucesso')->flash();
-                    Helpers::redirecionar('admin/editoras/listar');
+                    $this->mensagem->sucesso('Tipo do Livro editado com sucesso')->flash();
+                    Helpers::redirecionar('admin/generos_livro/listar');
                 } else {
                     Conexao::getInstancia()->rollBack();
-                    $this->mensagem->erro($editora->erro())->flash();
-                    Helpers::redirecionar('admin/editoras/listar');
+                    $this->mensagem->erro($generos_livro->erro())->flash();
+                    Helpers::redirecionar('admin/generos_livro/listar');
                 }
             } else {
                 Conexao::getInstancia()->rollBack();
                 $this->mensagem->erro($this->validarDados($dados))->flash();
-                Helpers::redirecionar('admin/editoras/listar');
+                Helpers::redirecionar('admin/generos_livro/listar');
             }
         }
     }
@@ -173,12 +169,12 @@ class AdminEditoras extends AdminController
         return true;
     }
 
-    public function valorizarEditora()
+    public function valorizarGeneroLivro()
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $valorizar_editora = (new EditoraModelo())->busca("id = {$dados['id']}")->resultado(false, true);
+        $valorizar_genero_livro = (new GeneroLivroModelo())->busca("id = {$dados['id']}")->resultado(false, true);
 
-        return json_encode($valorizar_editora);
+        return json_encode($valorizar_genero_livro);
     }
 
     // public function statusAluno()

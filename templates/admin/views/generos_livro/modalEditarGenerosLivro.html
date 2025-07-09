@@ -1,0 +1,51 @@
+<!-- Modal -->
+<div class="modal fade modal-xl" id="ModalEditarGenerosLivro" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal_maior">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tipos do Livro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <form method="post" action="{{url('admin/generos_livro/editar')}}" id="editarGenerosLivro"
+              enctype="multipart/form-data">
+              <input type="hidden" name="genero_livro_id" id="genero_livro_id" class="form-control">
+              <h5 class="modal-title fw-bold" id="exampleModalLabel">Editar Tipo do Livro</h5>
+              <div class="row">
+                <div class="col-lg-11-3qtr card border-2 shadow-sm mt-2 mb-3 me-4 ms-4">
+                  <div class="card-body">
+                    <div class="row mb-3">
+                      <div class="col-sm-12 card border-2">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="mb-3">
+                                <label for="genero_livro_editar" class="form-label">Tipo do Livro</label>
+                                <input type="text" name="genero_livro_editar" id="genero_livro_editar"
+                                  class="form-control">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <button type="button" class="btn btn-dark me-2 editarGenerosLivro" value="">Editar</button><button
+                      type="button" class="btn btn-warning" onClick="window.location.reload();">
+                      Cancelar </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

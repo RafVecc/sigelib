@@ -26,6 +26,9 @@ class AdminLivros extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
         $livros = new LivroModelo();
         $generos_livro = new GeneroLivroModelo();
@@ -50,6 +53,9 @@ class AdminLivros extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
         // phpinfo();
         // die;
@@ -132,6 +138,9 @@ class AdminLivros extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {

@@ -82,7 +82,8 @@
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="ano_livro" class="form-label">Ano</label>
-                                <input type="text"  name="ano_livro" class="form-control" validacao_tipo="number" validacao_qtd="4" required>
+                                <input type="text" name="ano_livro" class="form-control" validacao_tipo="number"
+                                  validacao_qtd="4" required>
                               </div>
                             </div>
                             <div class="col-md-4">
@@ -124,7 +125,8 @@
                             <div class="col-md-4">
                               <div class="mb-3">
                                 <label for="quantidade_livro" class="form-label">Quantidade</label>
-                                <input type="text" pattern="[0-9]"  name="quantidade_livro" class="form-control" validacao_tipo="number" required>
+                                <input type="text" pattern="[0-9]" name="quantidade_livro" class="form-control"
+                                  validacao_tipo="number" required>
                               </div>
                             </div>
                           </div>
@@ -204,15 +206,24 @@
   function previewCadastro() {
 
     var uploadField = document.getElementById("foto_capa_livro");
+    var fname = uploadField.files[0].name;
+    
     if (uploadField.files[0].size > 8097152) {
-      // alert("File is too big!");
       Swal.fire({
         title: "Alerta!",
         text: "A imagem escolhida está acima do limite permitido (8Mb)!",
         icon: "warning"
       });
       uploadField.value = "";
-    } else {
+    } else if (!['png', 'jpeg', 'jpg'].includes(fname.slice((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1))) {
+      Swal.fire({
+        title: "Alerta!",
+        text: "A imagem não tem um formato permitido!",
+        icon: "warning"
+      });
+      uploadField.value = "";
+    }
+    else {
       imgLogo.src = URL.createObjectURL(event.target.files[0]);
     }
 

@@ -19,15 +19,18 @@ class AdminUsuarios extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
         $usuario = new UsuarioModelo();
         $tipo_usuarios = (new TipoUsuarioModelo())->busca()->resultado(true);
-        $unidades = (new UnidadeModelo())->busca()->resultado(true);
+        // $unidades = (new UnidadeModelo())->busca()->resultado(true);
 
         echo $this->template->renderizar('usuarios/listar.html', [
             'usuarios' => $usuario->busca()->resultado(true),
             'tipo_usuarios' => $tipo_usuarios,
-            'unidades' => $unidades,
+            // 'unidades' => $unidades,
             'total' => [
                 'usuarios' => $usuario->busca('tipo_usuario_id != 1')->total(),
                 'usuariosAtivo' => $usuario->busca('status = 1 AND tipo_usuario_id != 1')->total(),
@@ -45,6 +48,9 @@ class AdminUsuarios extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
@@ -63,7 +69,7 @@ class AdminUsuarios extends AdminController
                 $usuario->senha = Helpers::gerarSenha('123456');
                 $usuario->status = '1';
                 $usuario->tipo_usuario_id = isset($dados['tipo_usuario_id']) && !empty($dados['tipo_usuario_id']) ? $dados['tipo_usuario_id'] : NULL;
-                $usuario->unidade_id = isset($dados['unidade_id']) && !empty($dados['unidade_id']) ? $dados['unidade_id'] : NULL;
+                // $usuario->unidade_id = isset($dados['unidade_id']) && !empty($dados['unidade_id']) ? $dados['unidade_id'] : NULL;
                 $usuario->data_inicio = isset($dados['data_inicio']) && !empty($dados['data_inicio']) ? $dados['data_inicio'] : (new \DateTime())->format('Y-m-d');
                 $usuario->data_fim = isset($dados['data_fim']) && !empty($dados['data_fim']) ? $dados['data_fim'] : NULL;
 
@@ -90,6 +96,9 @@ class AdminUsuarios extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
 
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);

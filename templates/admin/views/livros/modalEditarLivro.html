@@ -217,6 +217,9 @@
   function previewCadastroEditar() {
 
     var uploadField = document.getElementById("img_capa_livro_editar");
+
+    var fname = uploadField.files[0].name;
+    
     if (uploadField.files[0].size > 8097152) {
       Swal.fire({
         title: "Alerta!",
@@ -224,7 +227,15 @@
         icon: "warning"
       });
       uploadField.value = "";
-    } else {
+    } else if (!['png', 'jpeg', 'jpg'].includes(fname.slice((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1))) {
+      Swal.fire({
+        title: "Alerta!",
+        text: "A imagem não tem um formato permitido!",
+        icon: "warning"
+      });
+      uploadField.value = "";
+    }
+    else {
       foto_capa_livro_editar.src = URL.createObjectURL(event.target.files[0]);
     }
 

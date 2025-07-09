@@ -41,9 +41,9 @@
                 <tbody>
                     {% for leitor in leitores %}
                     <tr>
-                        <td>{{leitor.cpf_leitor}}</td>
+                        <td>{{leitor.cpf_leitor[:3]}}.{{leitor.cpf_leitor[3:3]}}.{{leitor.cpf_leitor[6:3]}}-{{leitor.cpf_leitor[9:]}}</td>
                         <td>{{leitor.nome_leitor}}</td>
-                        <td>{{leitor.telefone_leitor}}</td>
+                        <td>({{ leitor.telefone_leitor[:2] }}) {{ leitor.telefone_leitor[2:5] }} – {{ leitor.telefone_leitor[7:]}}</td>
                         <td>{{leitor.email_leitor}}</td>
                         <td>
                             {% if leitor.livro_emprestado >= 1 %}

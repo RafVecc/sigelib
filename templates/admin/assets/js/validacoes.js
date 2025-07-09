@@ -8,6 +8,15 @@ function validarCampos(elementos) {
             return false
         }
     }
+    if (elementos[0].name == 'telefone_leitor') {
+        if (elementos.val().length != 15) {
+            elementos.addClass('is-invalid');
+            elementos[0].setCustomValidity('Telefone deve ter 11 dígitos com o DDD!')
+            elementos[0].reportValidity()
+            $("#ModalCadastrarLeitor").scrollTo('.is-invalid');
+            return false
+        }
+    }
 
     if (elementos[0].name == 'data_nascimento_leitor') {
 

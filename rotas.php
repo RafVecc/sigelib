@@ -76,6 +76,13 @@ try {
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/valorizarEditora', 'AdminEditoras@valorizarEditora');
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'editoras/statusEditora', 'AdminEditoras@statusEditora');
 
+        //ADMIN GENEROS LIVRO
+        SimpleRouter::get(URL_ADMIN . 'generos_livro/listar', 'AdminGenerosLivro@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'generos_livro/cadastrar', 'AdminGenerosLivro@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'generos_livro/editar', 'AdminGenerosLivro@editar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'generos_livro/valorizarGeneroLivro', 'AdminGenerosLivro@valorizarGeneroLivro');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'generos_livro/statusGeneroLivro', 'AdminGenerosLivro@statusGeneroLivro');
+
         //ADMIN LEITORES
         SimpleRouter::get(URL_ADMIN . 'leitores/listar', 'AdminLeitores@listar');
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'leitores/cadastrar', 'AdminLeitores@cadastrar');

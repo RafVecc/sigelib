@@ -27,6 +27,9 @@ class AdminDevolucaoEmprestimo extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
         $cor_racas = new CorRacaModelo();
         $escolaridades = new EscolaridadeModelo();
@@ -44,6 +47,9 @@ class AdminDevolucaoEmprestimo extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
 
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -85,6 +91,9 @@ class AdminDevolucaoEmprestimo extends AdminController
         if ($this->usuario->tipo_usuario_id != 1) {
             $this->mensagem->erro("Sem premissão de acesso")->flash();
             Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         // var_dump($dados);die;
@@ -164,12 +173,12 @@ class AdminDevolucaoEmprestimo extends AdminController
         //         }
         //     }
         // }
-        if (isset($dados['emp_dev_id']) && isset($dados['emp_dev'])) { 
+        if (isset($dados['emp_dev_id']) && isset($dados['emp_dev'])) {
 
             $livro = (new LivroModelo())->buscaPorId($dados['emp_dev_id']);
             $total_emp = (new ControleLivroModelo())->busca("livro_id = {$dados['emp_dev_id']} and data_efetiva is null")->total();
 
-            if($livro->quantidade_livro - $total_emp <= 0){
+            if ($livro->quantidade_livro - $total_emp <= 0) {
                 return ['check' => false, 'mensagem' => 'Livro indisponível!'];
             }
         }
