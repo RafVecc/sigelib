@@ -1,0 +1,59 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Lista de Atrasos
+        </li>
+    </ol>
+</nav>
+</div>
+</div>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tabelaAtrasos" url="{{url()}}" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nome Leitor</th>
+                        <th>Título Livro</th>
+                        <th>Data Empréstimo</th>
+                        <th>Data Prevista</th>
+                        <th>Dias em Atraso</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lista_atraso in lista_atrasos %}
+                    <tr>
+                        <td>{{lista_atraso.nome_leitor}}</td>
+                        <td>{{lista_atraso.titulo_livro}}</td>
+                        <td>{{lista_atraso.data_emprestimo|date("d/m/Y")}}</td>
+                        <td>{{lista_atraso.data_prevista|date("d/m/Y")}}</td>
+                        <td>{{(date().diff(date(lista_atraso.data_prevista))).days}}</td>
+                        <td>
+                            <form method="post" action="{{url('admin/leitores/fichaLeitor')}}" class="formFichaLeitor">
+                                <input type="hidden" name="leitor_id" value="{{lista_atraso.leitor_id}}">
+                                <button type="button" class="btn btn-info me-2 btnFichaLeitor"
+                                    value="">Ficha Leitor</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

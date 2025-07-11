@@ -13,7 +13,19 @@
       <span></span>
     </label>
     <ul class="ul-principal">
-      <li class="active li-principal"><a class="a-principal" href="{{url('admin/dashboard')}}">CONSULTAS</a>
+      <li class="li-principal btn-group">
+        <button type="button" class="btn dropdown-toggle btn-principal" data-bs-toggle="dropdown"
+          data-bs-display="static" aria-expanded="false">
+          CONSULTAS
+        </button>
+        <ul class="dropdown-menu ul-secundaria">
+          <li class="li-secundaria">
+            <a class="dropdown-item a-secundaria" href="{{url('admin/consultas/listarAtrasos')}}" tooltip="tooltip"
+              title="Consultar Atrasos">
+              LISTA DE ATRASOS
+            </a>
+          </li>
+        </ul>
       </li>
       <li class="li-principal btn-group">
         <button type="button" class="btn dropdown-toggle btn-principal" data-bs-toggle="dropdown"

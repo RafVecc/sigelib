@@ -87,6 +87,9 @@ $('.valorizarLeitor').on("click", function () {
             $('#sexo_leitor_editar_id').val(data[0]['sexo_leitor_id'])
             $('#cor_leitor_editar_id').val(data[0]['cor_leitor_id'])
             $('#escolaridade_leitor_editar_id').val(data[0]['escolaridade_leitor_id'])
+            $('#genero_sexual_leitor_editar_id').val(data[0]['genero_sexual_leitor_id'])
+            $('#orientacao_sexual_leitor_editar_id').val(data[0]['orientacao_sexual_leitor_id'])
+            $('#analfabeto_editar_id').val(data[0]['analfabeto_id'])
             $('#email_leitor_editar').val(data[0]['email_leitor'])
             $('#rede_social_leitor_editar').val(data[0]['rede_social_leitor'])
             $('#cep_leitor_editar').val(data[0]['cep_leitor']).trigger("input")
@@ -108,26 +111,27 @@ $(document).ready(function () {
 
         } else {
 
-            let url = 'https://viacep.com.br/ws/' + cep + '/json/';
+            $("#ModalCadastrarLeitor").find('#rua_leitor').val('Procurando...');
+            $("#ModalCadastrarLeitor").find('#bairro_leitor').val('Procurando...');
 
-            let xmlHttp = new XMLHttpRequest();
+            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
-            xmlHttp.open('GET', url);
+                if (!("erro" in dados)) {
+                    //Atualiza os campos com os valores da consulta.
+                    $("#ModalCadastrarLeitor").find('#rua_leitor').val(dados.logradouro);
+                    $("#ModalCadastrarLeitor").find('#bairro_leitor').val(dados.bairro);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "CEP Não Encontrado!",
+                        text: 'Esse CEP não foi encontrado, tente novamente ou digite um CEP novo!',
 
-
-            xmlHttp.onreadystatechange = () => {
-
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-
-                    let dadosJSONtext = xmlHttp.responseText;
-                    let dadosJSONObs = JSON.parse(dadosJSONtext);
-                    console.log(dadosJSONObs)
-                    $("#ModalCadastrarLeitor").find('#rua_leitor').val(dadosJSONObs.logradouro);
-                    $("#ModalCadastrarLeitor").find('#bairro_leitor').val(dadosJSONObs.bairro);
-
+                    }).then(() => {
+                        $("#ModalCadastrarLeitor").find('#rua_leitor').val('');
+                        $("#ModalCadastrarLeitor").find('#bairro_leitor').val('');
+                    })
                 }
-            }
-            xmlHttp.send();
+            });
         }
 
     });

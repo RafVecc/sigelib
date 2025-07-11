@@ -8,6 +8,7 @@
   <main>
     <div class="bloco_conteudo">
       {% if dashboard %}
+      <input type="hidden" id="flag_notificacao" value="true">
       <div class="d-flex justify-content-end ">
 
         <strong>
@@ -50,11 +51,7 @@
           {% endif %}
           {% block conteudo %}
 
-          {# <h5 class="mb-3">Dashboard <small class="saudacao text-muted"> - {{saudacao()}},
-              {{usuario().nome}}.
-              Seu
-              último login foi em {{usuario().ultimo_login |date('d/m/Y')}} às {{usuario().ultimo_login
-              |date('H:i')}}</small></h5> #}
+
 
 
           {{ flash() }}
@@ -575,7 +572,7 @@
                   </div>
 
                 </div>
-                #} 
+                #}
                 {% endblock %}
               </div>
   </main>

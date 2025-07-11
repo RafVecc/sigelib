@@ -30,9 +30,10 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="foto_leitor_editar" class="form-label">Foto Leitor</label>
-                                <input type="file" name="foto_leitor_editar" id="foto_leitor_editar" class="form-control"
-                                  onchange="previewEditar()">
+                                <label for="foto_leitor_editar" class="form-label">Foto Leitor <span
+                                    class="text-danger">*</span></label>
+                                <input type="file" name="foto_leitor_editar" id="foto_leitor_editar"
+                                  class="form-control" onchange="previewEditar()" required>
                               </div>
                             </div>
                           </div>
@@ -43,36 +44,46 @@
                           <div class="row">
                             <div class="col-md-5">
                               <div class="mb-3">
-                                <label for="cpf_leitor_editar" class="form-label">CPF</label>
-                                <input type="text" name="cpf_leitor_editar" id="cpf_leitor_editar" class="form-control cpf_leitor" readonly>
+                                <label for="cpf_leitor_editar" class="form-label">CPF <span
+                                    class="text-danger">*</span></label>
+                                <input type="text" name="cpf_leitor_editar" id="cpf_leitor_editar"
+                                  class="form-control cpf_leitor" readonly>
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-8">
                               <div class="mb-3">
-                                <label for="nome_leitor_editar" class="form-label">Nome</label>
-                                <input type="text" name="nome_leitor_editar" id="nome_leitor_editar" class="form-control" required>
+                                <label for="nome_leitor_editar" class="form-label">Nome <span
+                                    class="text-danger">*</span></label>
+                                <input type="text" name="nome_leitor_editar" id="nome_leitor_editar"
+                                  class="form-control" required>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="data_nascimento_leitor_editar" class="form-label">Data Nascimento</label>
-                                <input type="date" name="data_nascimento_leitor_editar" id="data_nascimento_leitor_editar" class="form-control" required>
+                                <label for="data_nascimento_leitor_editar" class="form-label">Data Nascimento <span
+                                    class="text-danger">*</span></label>
+                                <input type="date" name="data_nascimento_leitor_editar"
+                                  id="data_nascimento_leitor_editar" class="form-control" required>
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="telefone_leitor_editar" class="form-label">Telefone</label>
-                                <input type="text" name="telefone_leitor_editar" id="telefone_leitor_editar" class="form-control telefone_leitor" required>
+                                <label for="telefone_leitor_editar" class="form-label">Telefone <span
+                                    class="text-danger">*</span></label>
+                                <input type="text" name="telefone_leitor_editar" id="telefone_leitor_editar"
+                                  class="form-control telefone_leitor" required>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="sexo_leitor_editar_id" class="form-label">Sexo</label>
-                                <select id="sexo_leitor_editar_id" name="sexo_leitor_editar_id" class="form-control" required>
+                                <label for="sexo_leitor_editar_id" class="form-label">Sexo <span
+                                    class="text-danger">*</span></label>
+                                <select id="sexo_leitor_editar_id" name="sexo_leitor_editar_id" class="form-control"
+                                  required>
                                   <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione</option>
                                   <option value="1"><span class="flag-icon flag-icon-gr"></span>MASCULINO</option>
                                   <option value="2"><span class="flag-icon flag-icon-gr"></span>FEMININO</option>
@@ -81,8 +92,10 @@
                             </div>
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="cor_leitor_editar_id" class="form-label">Cor/Raça</label>
-                                <select id="cor_leitor_editar_id" name="cor_leitor_editar_id" class="form-control" required>
+                                <label for="cor_leitor_editar_id" class="form-label">Cor/Raça <span
+                                    class="text-danger">*</span></label>
+                                <select id="cor_leitor_editar_id" name="cor_leitor_editar_id" class="form-control"
+                                  required>
                                   <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
                                   </option>
                                   {% for cor_raca in cor_racas %}
@@ -95,10 +108,46 @@
                             </div>
                           </div>
                           <div class="row">
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label for="genero_sexual_leitor_editar_id" class="form-label">Indentidade de
+                                  Gênero</label>
+                                <select id="genero_sexual_leitor_editar_id" name="genero_sexual_leitor_editar_id"
+                                  class="form-control">
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for genero_sexual_leitor in generos_sexual_leitor %}
+                                  <option value="{{genero_sexual_leitor.id}}">
+                                    {{genero_sexual_leitor.genero_sexual_leitor }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                <label for="orientacao_sexual_leitor_editar_id" class="form-label">Orientação
+                                  Sexual</label>
+                                <select id="orientacao_sexual_leitor_editar_id"
+                                  name="orientacao_sexual_leitor_editar_id" class="form-control">
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
+                                  </option>
+                                  {% for orientacao_sexual_leitor in orientacoes_sexual_leitor %}
+                                  <option value="{{orientacao_sexual_leitor.id}}">
+                                    {{orientacao_sexual_leitor.orientacao_sexual_leitor }}
+                                  </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="escolaridade_leitor_editar_id" class="form-label">Escolaridade</label>
-                                <select id="escolaridade_leitor_editar_id" name="escolaridade_leitor_editar_id" class="form-control" required>
+                                <label for="escolaridade_leitor_editar_id" class="form-label">Escolaridade <span
+                                    class="text-danger">*</span></label>
+                                <select id="escolaridade_leitor_editar_id" name="escolaridade_leitor_editar_id"
+                                  class="form-control" required>
                                   <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione
                                   </option>
                                   {% for escolaridade in escolaridades %}
@@ -109,10 +158,25 @@
                                 </select>
                               </div>
                             </div>
+                            <div class="col-md-4">
+                              <div class="mb-3">
+                                <label for="analfabeto_editar_id" class="form-label">Analfabeto? <span
+                                    class="text-danger">*</span></label>
+                                <select id="analfabeto_editar_id" name="analfabeto_editar_id" class="form-control"
+                                  required>
+                                  <option value=""><span class="flag-icon flag-icon-gr"></span>Selecione</option>
+                                  <option value="1"><span class="flag-icon flag-icon-gr"></span>SIM</option>
+                                  <option value="2"><span class="flag-icon flag-icon-gr"></span>NÃO</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
                             <div class="col-md-8">
                               <div class="mb-3">
                                 <label for="email_leitor_editar" class="form-label">E-mail</label>
-                                <input type="text" name="email_leitor_editar" id="email_leitor_editar" class="form-control" required>
+                                <input type="text" name="email_leitor_editar" id="email_leitor_editar"
+                                  class="form-control">
                               </div>
                             </div>
                           </div>
@@ -120,7 +184,8 @@
                             <div class="col-md-8">
                               <div class="mb-3">
                                 <label for="rede_social_leitor_editar" class="form-label">Rede Social</label>
-                                <input type="text" name="rede_social_leitor_editar" id="rede_social_leitor_editar" class="form-control">
+                                <input type="text" name="rede_social_leitor_editar" id="rede_social_leitor_editar"
+                                  class="form-control">
                               </div>
                             </div>
                           </div>
@@ -134,38 +199,45 @@
                             <div class="col-md-5">
                               <div class="mb-3">
                                 <label for="cep_leitor_editar" class="form-label">CEP</label>
-                                <input type="text" name="cep_leitor_editar" id="cep_leitor_editar" class="form-control cep_leitor">
+                                <input type="text" name="cep_leitor_editar" id="cep_leitor_editar"
+                                  class="form-control cep_leitor">
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="rua_leitor_editar" class="form-label">Rua</label>
-                                <input type="text" name="rua_leitor_editar" id="rua_leitor_editar" class="form-control" required>
+                                <label for="rua_leitor_editar" class="form-label">Rua <span
+                                    class="text-danger">*</span></label>
+                                <input type="text" name="rua_leitor_editar" id="rua_leitor_editar" class="form-control"
+                                  required>
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-4">
                               <div class="mb-3">
-                                <label for="bairro_leitor_editar" class="form-label">Bairro</label>
-                                <input type="text" name="bairro_leitor_editar" id="bairro_leitor_editar" class="form-control" required>
+                                <label for="bairro_leitor_editar" class="form-label">Bairro <span
+                                    class="text-danger">*</span></label>
+                                <input type="text" name="bairro_leitor_editar" id="bairro_leitor_editar"
+                                  class="form-control" required>
                               </div>
                             </div>
                             <div class="col-md-3">
                               <div class="mb-3">
                                 <label for="numero_leitor_editar" class="form-label">Número</label>
-                                <input type="text" name="numero_leitor_editar" id="numero_leitor_editar" class="form-control" required>
+                                <input type="text" name="numero_leitor_editar" id="numero_leitor_editar"
+                                  class="form-control">
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mb-3">
-                                <label for="ponto_de_referencia_leitor_editar" class="form-label">Ponto de Referência</label>
-                                <textarea id="ponto_de_referencia_leitor_editar" name="ponto_de_referencia_leitor_editar" class="form-control"
-                                  rows="3"></textarea>
+                                <label for="ponto_de_referencia_leitor_editar" class="form-label">Ponto de
+                                  Referência</label>
+                                <textarea id="ponto_de_referencia_leitor_editar"
+                                  name="ponto_de_referencia_leitor_editar" class="form-control" rows="3"></textarea>
                               </div>
                             </div>
                           </div>
@@ -194,7 +266,7 @@
 
     var uploadField = document.getElementById("foto_leitor_editar");
     var fname = uploadField.files[0].name;
-    
+
     if (uploadField.files[0].size > 8097152) {
       Swal.fire({
         title: "Alerta!",

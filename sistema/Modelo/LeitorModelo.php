@@ -75,6 +75,22 @@ class LeitorModelo extends Modelo
         return null;
     }
 
+    public function genero_sexual_leitor(): ?GeneroSexualLeitorModelo
+    {
+        if ($this->genero_sexual_leitor_id) {
+            return (new GeneroSexualLeitorModelo())->buscaPorId($this->genero_sexual_leitor_id);
+        }
+        return null;
+    }
+
+    public function orientacao_sexual_leitor(): ?OrientacaoSexualLeitorModelo
+    {
+        if ($this->orientacao_sexual_leitor_id) {
+            return (new OrientacaoSexualLeitorModelo())->buscaPorId($this->orientacao_sexual_leitor_id);
+        }
+        return null;
+    }
+
     public function livro_emprestado()
     {
         if ($this->id) {

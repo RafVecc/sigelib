@@ -91,6 +91,22 @@ $(document).ready(function () {
             $(this).val(variavel);
         }
 
+        if ($(this).attr("validacao_tipo") == 'date') {
+            var variavel = $(this).val().split('-');
+            console.log(variavel)
+            var dias = variavel[2]
+            var meses = variavel[1]
+            var anos = variavel[0]
+
+            if (anos.length > 4) {
+                // console.log('algo aqui')
+                anos = anos.replace(/[0-9]{5}$/, anos.slice(0, -1));
+                var ano_corrigido = `${anos}-${meses}-${dias}`
+                // console.log(ano_corrigido)
+                $(this).val(ano_corrigido);
+            }
+        }
+
     });
 
 });

@@ -4,9 +4,11 @@ namespace sistema\Controller\Admin;
 
 use sistema\Nucleo\Sessao;
 use sistema\Nucleo\Helpers;
+use sistema\Nucleo\Conexao;
 use sistema\Modelo\UnidadeModelo;
 use sistema\Modelo\UsuarioModelo;
 use sistema\Modelo\CategoriaModelo;
+use sistema\Modelo\ControleLivroModelo;
 use sistema\Modelo\VagasUnidadeModelo;
 
 
@@ -19,49 +21,58 @@ class AdminDashboard extends AdminController
      */
     public function dashboard(): void
     {
-        // $unidades = new UnidadeModelo();
-        $usuarios = new UsuarioModelo();
-        // $categorias = new CategoriaModelo();
-        // $vagasUnidades = new VagasUnidadeModelo();
-        
-        // $dadosUnidades = [];
-        $vagasPorTipoDeVaga = [];
-        $vagasPorTipoDeVagaUnidade = [];
-        $vagasPorCategoria = [];
-        $totalDeVagas = [];
-        if(($this->usuario->tipo_de_usuario_id == 2 OR  $this->usuario->tipo_de_usuario_id == 1)){
-        // $dadosUnidades = [
-        //     // 'vagasUnidades' => $vagasUnidades->VagasPorUnidade(),
-        //     'unidades' => $unidades->busca()->ordem('id DESC')->resultado(true),
-        //     'total' => $unidades->busca(null,'COUNT(id)','id')->total(),
-        //     'ativo' => $unidades->busca('data_exclusao is null')->total(),
-        //     'inativo' => $unidades->busca('data_exclusao is not null')->total()
-        // ];
 
-        // $vagasPorTipoDeVaga = $vagasUnidades->VagasPorTipoDeVaga();
-        // $vagasPorTipoDeVagaUnidade = $vagasUnidades->VagasPorTipoDeVagaUnidade();
-        // $vagasPorCategoria = $vagasUnidades->VagasPorCategoria();
-        // $totalDeVagas = $vagasUnidades->TotalDeVagas();
+        if ($this->usuario->tipo_usuario_id != 1) {
+            $this->mensagem->erro("Sem premissão de acesso")->flash();
+            Helpers::redirecionar('admin/');
+        } else if ($this->usuario->status != 1) {
+            $this->mensagem->erro("Usuário Inativo!")->flash();
+            Helpers::redirecionar('admin/sair');
         }
 
         echo $this->template->renderizar('dashboard.html', [
 
-            // 'unidades' => $dadosUnidades,
-            'vagasPorTipoDeVaga' => $vagasPorTipoDeVaga,
-            'vagasPorTipoDeVagaUnidade' => $vagasPorTipoDeVagaUnidade,
-            'vagasPorCategoria' => $vagasPorCategoria,
-            'totalDeVagas' => $totalDeVagas,
-            // 'usuarios' => [
-            //     'logins' => $usuarios->busca()->ordem('ultimo_login DESC')->limite(5)->resultado(true),
-            //     'usuarios' => $usuarios->busca('level != 3')->total(),
-            //     'usuariosAtivo' => $usuarios->busca('status = 1 AND level != 3')->total(),
-            //     'usuariosInativo' => $usuarios->busca('status = 0 AND level != 3')->total(),
-            //     'admin' => $usuarios->busca('level = 3')->total(),
-            //     'adminAtivo' => $usuarios->busca('status = 1 AND level = 3')->total(),
-            //     'adminInativo' => $usuarios->busca('status = 0 AND level = 3')->total()
-            // ],
             'dashboard' => true,
         ]);
+    }
+
+    public function checkNotificacao()
+    {
+        $usuario_flag = $this->usuario->flag_notificacao;
+
+        if ($usuario_flag == 0) {
+            return json_encode(true);
+        } else {
+            return json_encode('false');
+        }
+    }
+
+    public function listaAtrasos()
+    {
+        $check_atrasos = (new ControleLivroModelo)->busca(
+            "data_efetiva is null",
+            "",
+            "*, (select nome_leitor from leitores where controle_livros.leitor_id = leitores.id) as nome_leitor, (select titulo_livro from livros where controle_livros.livro_id = livros.id) as titulo_livro"
+        )->resultado(false, true);
+
+        Conexao::getInstancia()->beginTransaction();
+
+        $usuario = (new UsuarioModelo())->buscaPorId($this->usuario->id);
+
+        $usuario->usuario_modificacao_id = $this->usuario->id;
+        $usuario->flag_notificacao = 1;
+
+        if ($usuario->salvar()) {
+            Conexao::getInstancia()->commit();
+        } else {
+            Conexao::getInstancia()->rollBack();
+        }
+
+        if (isset($check_atrasos)) {
+            return json_encode($check_atrasos);
+        } else {
+            return json_encode(null);
+        }
     }
 
     /**
@@ -70,6 +81,19 @@ class AdminDashboard extends AdminController
      */
     public function sair(): void
     {
+        Conexao::getInstancia()->beginTransaction();
+
+        $usuario = (new UsuarioModelo())->buscaPorId($this->usuario->id);
+
+        $usuario->usuario_modificacao_id = $this->usuario->id;
+        $usuario->flag_notificacao = 0;
+
+        if ($usuario->salvar()) {
+            Conexao::getInstancia()->commit();
+        } else {
+            Conexao::getInstancia()->rollBack();
+        }
+
         $sessao = new Sessao();
         $sessao->limpar('usuarioId');
 
@@ -77,5 +101,4 @@ class AdminDashboard extends AdminController
         //Helpers::redirecionar('admin/login');
         Helpers::redirecionar('login');
     }
-
 }

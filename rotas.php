@@ -22,6 +22,8 @@ try {
 
         //DASHBOAD
         SimpleRouter::get(URL_ADMIN . 'dashboard', 'AdminDashboard@dashboard');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'checkNotificacao', 'AdminDashboard@checkNotificacao');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN . 'listaAtrasos', 'AdminDashboard@listaAtrasos');
         SimpleRouter::get(URL_ADMIN . 'sair', 'AdminDashboard@sair');
 
         //ADMIN USUARIOS
@@ -82,6 +84,9 @@ try {
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'generos_livro/editar', 'AdminGenerosLivro@editar');
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'generos_livro/valorizarGeneroLivro', 'AdminGenerosLivro@valorizarGeneroLivro');
         SimpleRouter::match(['get', 'post'], URL_ADMIN . 'generos_livro/statusGeneroLivro', 'AdminGenerosLivro@statusGeneroLivro');
+
+        //ADMIN GENEROS LIVRO
+        SimpleRouter::get(URL_ADMIN . 'consultas/listarAtrasos', 'AdminConsultas@listarAtrasos');
 
         //ADMIN LEITORES
         SimpleRouter::get(URL_ADMIN . 'leitores/listar', 'AdminLeitores@listar');

@@ -53,7 +53,7 @@ $('#lista_emp_dev').on("click", ".btn_emp, .btn_dev", function (event) {
                 icon: "warning",
                 html: `<label for="data_emprestimo" class="form-label">Data Empréstimo: ${moment(data_emprestimo).format('DD/MM/YYYY')}</label>` +
                     `<label for="data_prevista" class="form-label">Data Previsão de Devolução: ${moment(data_prevista).format('DD/MM/YYYY')}</label>` +
-                    '<h4 class="swal2-title" id="swal2-title" style="display: block;">Observação de Empréstimo</h4>' +
+                    '<h4 class="swal2-title" id="swal2-title" style="display: block;">Observação de Empréstimo <span class="text-danger">*</span></h4>' +
                     '<textarea id="swal2-textarea" placeholder="Observação..." name="restricoes" class="swal2-textarea" style="width: 80%; display: flex;"></textarea>',
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -239,7 +239,7 @@ function executar_pesquisa_leitor(variavel, e) {
                                                                 <div class="col-sm-12">
                                                                     <div class="mb-3">
                                                                     <label for="observacao_devolucao_livro" class="form-label">Observação de
-                                                                        Devolução</label>
+                                                                        Devolução <span class="text-danger">*</span></label>
                                                                     <textarea name="observacao_devolucao_livro" class="form-control" required></textarea>
                                                                     </div>
                                                                 </div>

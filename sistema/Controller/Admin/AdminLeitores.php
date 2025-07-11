@@ -5,9 +5,11 @@ namespace sistema\Controller\Admin;
 use sistema\Modelo\CorRacaModelo;
 use sistema\Modelo\EscolaridadeModelo;
 use sistema\Modelo\GeneroLivroModelo;
+use sistema\Modelo\GeneroSexualLeitorModelo;
 use sistema\Modelo\IdiomaLivroModelo;
 use sistema\Modelo\LeitorModelo;
 use sistema\Modelo\LivroModelo;
+use sistema\Modelo\OrientacaoSexualLeitorModelo;
 use sistema\Modelo\PaisLivroModelo;
 use sistema\Modelo\TipoProcedenciaLivro;
 use Verot\Upload\Upload;
@@ -33,10 +35,14 @@ class AdminLeitores extends AdminController
         $leitores = new LeitorModelo();
         $cor_racas = new CorRacaModelo();
         $escolaridades = new EscolaridadeModelo();
+        $generos_sexual_leitor = new GeneroSexualLeitorModelo();
+        $orientacoes_sexual_leitor = new OrientacaoSexualLeitorModelo();
         echo $this->template->renderizar('leitores/listar.html', [
             'cor_racas' => $cor_racas->busca()->resultado(true),
             'escolaridades' => $escolaridades->busca()->resultado(true),
             'leitores' => $leitores->busca()->resultado(true),
+            'generos_sexual_leitor' => $generos_sexual_leitor->busca()->resultado(true),
+            'orientacoes_sexual_leitor' => $orientacoes_sexual_leitor->busca()->resultado(true),
         ]);
     }
 
@@ -45,7 +51,7 @@ class AdminLeitores extends AdminController
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         $leitor = (new LeitorModelo())->buscaPorId($dados['leitor_id']);
-        
+
         echo $this->template->renderizar('leitores/fichaLeitor.html', [
             'leitor' => $leitor
         ]);
@@ -80,7 +86,10 @@ class AdminLeitores extends AdminController
                 $leitor->sexo_leitor_id = isset($dados['sexo_leitor_id']) && !empty($dados['sexo_leitor_id']) ? $dados['sexo_leitor_id'] : NULL;
                 $leitor->cor_leitor_id = isset($dados['cor_leitor_id']) && !empty($dados['cor_leitor_id']) ? $dados['cor_leitor_id'] : NULL;
                 $leitor->escolaridade_leitor_id = isset($dados['escolaridade_leitor_id']) && !empty($dados['escolaridade_leitor_id']) ? $dados['escolaridade_leitor_id'] : NULL;
-                $leitor->cep_leitor = isset($dados['cep_leitor']) && !empty($dados['cep_leitor']) ? $dados['cep_leitor'] : NULL;
+                $leitor->analfabeto_id = isset($dados['analfabeto_id']) && !empty($dados['analfabeto_id']) ? $dados['analfabeto_id'] : NULL;
+                $leitor->genero_sexual_leitor_id = isset($dados['genero_sexual_leitor_id']) && !empty($dados['genero_sexual_leitor_id']) ? $dados['genero_sexual_leitor_id'] : NULL;
+                $leitor->orientacao_sexual_leitor_id = isset($dados['orientacao_sexual_leitor_id']) && !empty($dados['orientacao_sexual_leitor_id']) ? $dados['orientacao_sexual_leitor_id'] : NULL;
+                $leitor->cep_leitor = isset($dados['cep_leitor']) && !empty($dados['cep_leitor']) ? Helpers::limparNumero($dados['cep_leitor']) : NULL;
                 $leitor->rua_leitor = isset($dados['rua_leitor']) && !empty($dados['rua_leitor']) ? $dados['rua_leitor'] : NULL;
                 $leitor->numero_leitor = isset($dados['numero_leitor']) && !empty($dados['numero_leitor']) ? $dados['numero_leitor'] : NULL;
                 $leitor->bairro_leitor = isset($dados['bairro_leitor']) && !empty($dados['bairro_leitor']) ? $dados['bairro_leitor'] : NULL;
@@ -156,14 +165,17 @@ class AdminLeitores extends AdminController
                 $leitor = (new LeitorModelo())->buscaPorId($dados['leitor_id']);
 
                 $leitor->usuario_modificacao_id = $this->usuario->id;
-                $leitor->cpf_leitor = isset($dados['cpf_leitor_editar']) && !empty($dados['cpf_leitor_editar']) ? $dados['cpf_leitor_editar'] : NULL;
+                $leitor->cpf_leitor = isset($dados['cpf_leitor_editar']) && !empty($dados['cpf_leitor_editar']) ? Helpers::limparNumero($dados['cpf_leitor_editar']) : NULL;
                 $leitor->nome_leitor = isset($dados['nome_leitor_editar']) && !empty($dados['nome_leitor_editar']) ? $dados['nome_leitor_editar'] : NULL;
                 $leitor->data_nascimento_leitor = isset($dados['data_nascimento_leitor_editar']) && !empty($dados['data_nascimento_leitor_editar']) ? $dados['data_nascimento_leitor_editar'] : NULL;
-                $leitor->telefone_leitor = isset($dados['telefone_leitor_editar']) && !empty($dados['telefone_leitor_editar']) ? $dados['telefone_leitor_editar'] : NULL;
+                $leitor->telefone_leitor = isset($dados['telefone_leitor_editar']) && !empty($dados['telefone_leitor_editar']) ? Helpers::limparNumero($dados['telefone_leitor_editar']) : NULL;
                 $leitor->sexo_leitor_id = isset($dados['sexo_leitor_editar_id']) && !empty($dados['sexo_leitor_editar_id']) ? $dados['sexo_leitor_editar_id'] : NULL;
                 $leitor->cor_leitor_id = isset($dados['cor_leitor_editar_id']) && !empty($dados['cor_leitor_editar_id']) ? $dados['cor_leitor_editar_id'] : NULL;
                 $leitor->escolaridade_leitor_id = isset($dados['escolaridade_leitor_editar_id']) && !empty($dados['escolaridade_leitor_editar_id']) ? $dados['escolaridade_leitor_editar_id'] : NULL;
-                $leitor->cep_leitor = isset($dados['cep_leitor_editar']) && !empty($dados['cep_leitor_editar']) ? $dados['cep_leitor_editar'] : NULL;
+                $leitor->analfabeto_id = isset($dados['analfabeto_editar_id']) && !empty($dados['analfabeto_editar_id']) ? $dados['analfabeto_editar_id'] : NULL;
+                $leitor->genero_sexual_leitor_id = isset($dados['genero_sexual_leitor_editar_id']) && !empty($dados['genero_sexual_leitor_editar_id']) ? $dados['genero_sexual_leitor_editar_id'] : NULL;
+                $leitor->orientacao_sexual_leitor_id = isset($dados['orientacao_sexual_leitor_editar_id']) && !empty($dados['orientacao_sexual_leitor_editar_id']) ? $dados['orientacao_sexual_leitor_editar_id'] : NULL;
+                $leitor->cep_leitor = isset($dados['cep_leitor_editar']) && !empty($dados['cep_leitor_editar']) ? Helpers::limparNumero($dados['cep_leitor_editar']) : NULL;
                 $leitor->rua_leitor = isset($dados['rua_leitor_editar']) && !empty($dados['rua_leitor_editar']) ? $dados['rua_leitor_editar'] : NULL;
                 $leitor->numero_leitor = isset($dados['numero_leitor_editar']) && !empty($dados['numero_leitor_editar']) ? $dados['numero_leitor_editar'] : NULL;
                 $leitor->bairro_leitor = isset($dados['bairro_leitor_editar']) && !empty($dados['bairro_leitor_editar']) ? $dados['bairro_leitor_editar'] : NULL;
