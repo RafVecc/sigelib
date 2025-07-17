@@ -5,7 +5,7 @@ Options -indexes
 RewriteEngine On
 
 #Define a url base
-RewriteBase /sigelib
+RewriteBase /
 
 php_value upload_max_filesize 50M
 php_value post_max_size 50M

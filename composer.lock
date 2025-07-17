@@ -52,12 +52,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "723529bda1cbc3cf7a819d5fd4303554979172fb"
+                "reference": "fd85c7d22ce456ad8d2a5302d820e3fb75b27ed0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/723529bda1cbc3cf7a819d5fd4303554979172fb",
-                "reference": "723529bda1cbc3cf7a819d5fd4303554979172fb",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/fd85c7d22ce456ad8d2a5302d820e3fb75b27ed0",
+                "reference": "fd85c7d22ce456ad8d2a5302d820e3fb75b27ed0",
                 "shasum": ""
             },
             "require": {
@@ -109,7 +109,7 @@
                 "issues": "https://github.com/dompdf/dompdf/issues",
                 "source": "https://github.com/dompdf/dompdf/tree/master"
             },
-            "time": "2025-01-16T13:04:16+00:00"
+            "time": "2025-06-29T00:11:56+00:00"
         },
         {
             "name": "dompdf/php-font-lib",
@@ -391,12 +391,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "ac30223de5b8b076b4ad70f6a442429508d5a5d6"
+                "reference": "0ff2d3c8ead628df2493537d9f91db962aa47718"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/ac30223de5b8b076b4ad70f6a442429508d5a5d6",
-                "reference": "ac30223de5b8b076b4ad70f6a442429508d5a5d6",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/0ff2d3c8ead628df2493537d9f91db962aa47718",
+                "reference": "0ff2d3c8ead628df2493537d9f91db962aa47718",
                 "shasum": ""
             },
             "require": {
@@ -465,7 +465,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-05T20:13:57+00:00"
+            "time": "2025-06-18T21:02:11+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
@@ -473,12 +473,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/MyIntervals/PHP-CSS-Parser.git",
-                "reference": "c2254ef400f025b8d8033410db648ce48b9a9299"
+                "reference": "d8e916507b88e389e26d4ab03c904a082aa66bb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyIntervals/PHP-CSS-Parser/zipball/c2254ef400f025b8d8033410db648ce48b9a9299",
-                "reference": "c2254ef400f025b8d8033410db648ce48b9a9299",
+                "url": "https://api.github.com/repos/MyIntervals/PHP-CSS-Parser/zipball/d8e916507b88e389e26d4ab03c904a082aa66bb9",
+                "reference": "d8e916507b88e389e26d4ab03c904a082aa66bb9",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +486,8 @@
                 "php": "^5.6.20 || ^7.0.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "5.7.27 || 6.5.14 || 7.5.20 || 8.5.41"
+                "phpunit/phpunit": "5.7.27 || 6.5.14 || 7.5.20 || 8.5.41",
+                "rawr/cross-data-providers": "^2.0.0"
             },
             "suggest": {
                 "ext-mbstring": "for parsing UTF-8 CSS"
@@ -530,7 +531,7 @@
                 "issues": "https://github.com/MyIntervals/PHP-CSS-Parser/issues",
                 "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.x"
             },
-            "time": "2025-02-11T19:02:20+00:00"
+            "time": "2025-07-11T13:20:48+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -582,7 +583,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/main"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0"
             },
             "funding": [
                 {
@@ -662,7 +663,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -744,7 +745,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -764,16 +765,16 @@
         },
         {
             "name": "tecnickcom/tcpdf",
-            "version": "6.8.2",
+            "version": "6.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "f7a781073e1645062f163e058139e2f89355d420"
+                "reference": "ca5b6de294512145db96bcbc94e61696599c391d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/f7a781073e1645062f163e058139e2f89355d420",
-                "reference": "f7a781073e1645062f163e058139e2f89355d420",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/ca5b6de294512145db96bcbc94e61696599c391d",
+                "reference": "ca5b6de294512145db96bcbc94e61696599c391d",
                 "shasum": ""
             },
             "require": {
@@ -786,8 +787,6 @@
                     "config",
                     "include",
                     "tcpdf.php",
-                    "tcpdf_parser.php",
-                    "tcpdf_import.php",
                     "tcpdf_barcodes_1d.php",
                     "tcpdf_barcodes_2d.php",
                     "include/tcpdf_colors.php",
@@ -825,15 +824,15 @@
             ],
             "support": {
                 "issues": "https://github.com/tecnickcom/TCPDF/issues",
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.8.2"
+                "source": "https://github.com/tecnickcom/TCPDF/tree/6.10.0"
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&currency_code=GBP&business=paypal@tecnick.com&item_name=donation%20for%20tcpdf%20project",
+                    "url": "https://www.paypal.com/donate/?hosted_button_id=NZUEC5XS8MFBJ",
                     "type": "custom"
                 }
             ],
-            "time": "2025-01-26T14:03:12+00:00"
+            "time": "2025-05-27T18:02:28+00:00"
         },
         {
             "name": "twig/twig",
@@ -841,12 +840,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "586e3decdd2544ca362e703307f4caa4f08b2cfc"
+                "reference": "1680bba4228c5dc3c9427fe82423300da8a9d487"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/586e3decdd2544ca362e703307f4caa4f08b2cfc",
-                "reference": "586e3decdd2544ca362e703307f4caa4f08b2cfc",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1680bba4228c5dc3c9427fe82423300da8a9d487",
+                "reference": "1680bba4228c5dc3c9427fe82423300da8a9d487",
                 "shasum": ""
             },
             "require": {
@@ -913,7 +912,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-13T08:35:50+00:00"
+            "time": "2025-07-12T13:47:13+00:00"
         },
         {
             "name": "verot/class.upload.php",
@@ -967,18 +966,18 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "pecee/simple-router": 20,
         "digitalnature/php-ref": 20,
-        "verot/class.upload.php": 20,
-        "phpmailer/phpmailer": 20,
         "dompdf/dompdf": 20,
-        "foroco/php-browser-detection": 20
+        "foroco/php-browser-detection": 20,
+        "pecee/simple-router": 20,
+        "phpmailer/phpmailer": 20,
+        "verot/class.upload.php": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

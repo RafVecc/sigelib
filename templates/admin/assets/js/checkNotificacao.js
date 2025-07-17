@@ -41,12 +41,14 @@ $(document).ready(function () {
                                     }
 
                                 });
-
+                                
                                 if (html == '') {
                                     Swal.fire({
                                         icon: "success",
                                         title: "Atrasos!",
                                         text: 'Não existem atrasos registrados até o momento!',
+                                        allowEscapeKey: false,
+                                        allowOutsideClick: false
 
                                     })
                                 } else {
@@ -60,7 +62,9 @@ $(document).ready(function () {
                                         confirmButtonColor: "#3085d6",
                                         cancelButtonColor: "#d33",
                                         confirmButtonText: "Ver Fichas",
-                                        cancelButtonText: "Fechar"
+                                        cancelButtonText: "Fechar",
+                                        allowEscapeKey: false,
+                                        allowOutsideClick: false
                                     }).then((result2) => {
                                         if (result2.isConfirmed) {
                                             window.location.href = url + 'admin/consultas/listarAtrasos';

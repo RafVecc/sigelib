@@ -479,6 +479,26 @@ $(document).ready(function () {
         }
     });
 
+    //TABELA ATRASOS
+
+    $('#tabelaAtrasos').DataTable({
+
+        columnDefs: [
+            {
+                targets: [-1],
+                orderable: false
+            },
+            {
+                className: 'dt-head-center dt-body-left',
+                targets: ['_all']
+            }
+        ],
+        order: [[0, 'asc']],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+        }
+    });
+
     //TABELA EMPRESTIMOS
 
     $('#tabelaEmprestimos').DataTable({
