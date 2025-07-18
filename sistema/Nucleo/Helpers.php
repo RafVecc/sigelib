@@ -37,7 +37,7 @@ class Helpers
      */
     public static function validarSenha(string $senha): bool
     {
-        $pattern = "/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-_.]).{6,})$/";
+        $pattern = "/^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-_.#]).{6,})$/";
         if (preg_match($pattern, $senha)) {
             return true;
         }else{

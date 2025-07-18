@@ -2,7 +2,7 @@
 {% block conteudo %}
 
 <div class="imgTopo">
-  <img class="imgAcolhimento" src="{{url('templates/admin/assets/img/acolhimento.png')}}" alt="">
+  <img class="imgAcolhimento" src="{{url('templates/admin/assets/img/logo_sigelib_curta.png')}}" alt="">
 </div>
 
 <div class="p-3">
@@ -15,7 +15,12 @@
 
         {{ flash() }}
         <div class="alert alert-warning alert-dismissible fade show">A nova senha deve conter ao menos uma letra
-          minúscula, uma letra maiúscula, um número, um caráter especial (.-_) e um mínimo de 6 caracteres.<button
+          minúscula, uma letra maiúscula, um número, um mínimo de 6 caracteres e ao menos um carácter especial dos listados abaixo: 
+          <br><span class="text-danger">. Ponto</span>
+          <br><span class="text-danger">- Traço</span>
+          <br><span class="text-danger">_ Underline</span>
+          <br><span class="text-danger"># Hashtag</span>
+          <button
             type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
         <form action="{{url('redefinirSenha')}}" method="post">
 

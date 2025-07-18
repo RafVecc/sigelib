@@ -59,7 +59,7 @@
                     <tr>
                         <td>{{usuario.nome}}</td>
                         <td>{{usuario.login}}</td>
-                        <td>{{usuario.telefone}}</td>
+                        <td>({{ usuario.telefone[:2] }}) {{ usuario.telefone[2:5] }} – {{ usuario.telefone[7:]}}</td>
                         <td>{{usuario.email}}</td>
                         
                         <td>{{usuario.tipoUsuario.tipo_usuario}}</td>
